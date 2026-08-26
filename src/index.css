@@ -1,0 +1,9 @@
+/* 唯一样式入口（TechStack.md 第 2 节锁定） */
+
+@import "tailwindcss";
+
+/* 系统字体栈（TechStack.md 锁定）——覆盖 Tailwind 默认 font-sans，
+   preflight 会将其应用到 body，全站生效 */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
