@@ -19,7 +19,7 @@
 | 0-3 | 目录结构落地 | 按 TechStack.md 第 4 节创建 `/src/components` `/src/data` `/src/assets`，六个组件与四个数据文件先放空壳 |
 | 0-4 | Git 初始化 | `git init` + 首次 commit（含 .gitignore） |
 | 0-5 | Cloudflare Pages 部署 | 关联仓库，构建命令 `npm run build`，输出目录 `dist`，部署空壳并确认线上可访问 |
-| 0-6 | 域名决策 🚩 | Steven 决定：用 `*.pages.dev` 默认域名先跑，还是绑定自定义域名（决策项，不阻塞 Phase 1） |
+| 0-6 | 域名决策 🚩 | ~~Steven 决定~~ ✅ 已决策（2026-08-26）：暂用 workers.dev 默认域名，Phase 3 完成后切换自定义域名（届时再选域名 + 配 DNS） |
 
 **验收标准：**
 - `npm run dev` 本地可跑，`npm run build` 零报错
@@ -87,6 +87,7 @@
 | 3-5 | 笔迹视觉签名 | 行草笔迹做章节分隔线 / Hero 水印（素材同样来自 3-2 拍摄，需专门拍摄单字/线条素材） |
 | 3-6 | 中文衬线字体 | 引入 Noto Serif SC（仅 Art 板块标题），注意字体文件按需子集化，不得拖垮 Phase 2 拿到的 Lighthouse 分数 |
 | 3-7 | 终版走查 | 全设备走查 + Lighthouse 复测 |
+| 3-8 | 🚩 自定义域名 | 购买域名 + DNS 配置 + 绑定 Cloudflare，替换 workers.dev 子域名（Phase 3 收尾后执行；旧 URL 由 Cloudflare 自动 301，不丢流量） |
 
 **验收标准：**
 - 无占位符残留（素材全部就位）
@@ -101,7 +102,7 @@
 
 | Phase | 状态 | 完成时间 |
 |---|---|---|
-| Phase 0 | 未开始 | — |
+| Phase 0 | ✅ 已完成 | 2026-08-26 |
 | Phase 1 | 未开始 | — |
 | Phase 2 | 未开始 | — |
 | Phase 3 | 未开始 | — |
