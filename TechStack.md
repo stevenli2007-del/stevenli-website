@@ -31,6 +31,7 @@ Frontend (React SPA) → Cloudflare Pages (静态托管)
   /components       # 每个 section 一个组件：Hero.tsx, About.tsx, Projects.tsx, Experience.tsx, Art.tsx, Contact.tsx
   /data             # 内容数据，与展示逻辑分离（见 Database.md）
     site.ts
+    about.ts
     projects.ts
     experience.ts
     artworks.ts

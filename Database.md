@@ -85,13 +85,32 @@ export interface SiteInfo {
 }
 ```
 
-## 6. 通用规则
+## 6. `about.ts`
+
+About 板块内容（PRD 4.2：核心叙事 + 四个自动化例子 + 身份线）。
+
+```ts
+export interface AboutExample {
+  title: string;                // 如 "LinkedIn AI Assistant"
+  effect: string;               // 一句话说明自动化了什么，如 "Automates networking"
+}
+
+export interface AboutInfo {
+  title: string;                // section 标题，如 "About"
+  narrative: string;            // 2-3 行核心叙事
+  examples: AboutExample[];     // 四个自动化例子，并列展示
+  identity: string;             // 身份线，如 "Shenzhen → UC Berkeley 2030, ..."
+}
+```
+
+## 7. 通用规则
 - 所有 `id` 字段用 kebab-case（如 `"linkedin-ai"`），不是 camelCase——因为它可能被用作 HTML anchor / URL slug。
 - 所有其他变量名用 camelCase。
 - 缺失数据用 `null`，不用空字符串 `""`，方便前端统一判断"是否需要显示占位符"。
 - 图片路径统一放在 `/src/assets/`，通过相对路径引用，不用外链图床。
 
-## 7. 变更记录
+## 8. 变更记录
 - 2026-08-25（Bud）：`Project.tagline`、`Project.links.*` 改为可空类型（与示例及第 5 节规则对齐）；新增 `Project.description` 字段（PRD 4.3 卡片需要一段详细描述，原接口装不下）。
 - 2026-08-26（Bud）：`Artwork.src` 改为可空类型（Phase 3 补图前用 null 占位，与第 5 节"缺失数据用 null"规则对齐）。
 - 2026-08-27（Bud）：新增 `site.ts`（SiteInfo：name / tagline），承接 Hero 定位句——Phase 1 验收要求组件 JSX 无硬编码文案，Hero 文案需有数据归属。原第 5/6 节顺延为 6/7。
+- 2026-08-27（Bud）：新增 `about.ts`（AboutInfo / AboutExample），承接 About 板块文案。原第 6/7 节顺延为 7/8。
