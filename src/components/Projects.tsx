@@ -70,7 +70,7 @@ function ProjectCard({ project }: { project: Project }) {
             rel="noreferrer"
             className="text-sm text-[#0071E3] hover:underline"
           >
-            {project.extensionId ? "Chrome Web Store" : "View"}
+            {project.links.extensionId ? "Chrome Web Store" : "View"}
           </a>
         )}
       </div>
