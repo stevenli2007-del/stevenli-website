@@ -16,6 +16,8 @@ export interface Project {
   order: number;                // 展示顺序，1-3
 }
 
+export const projectsTitle = "Projects" // section 标题
+
 const chromeWebStoreUrl = "https://chromewebstore.google.com/detail/jeknmkmekajcbffbfijmmmcakpbbcoa"
 
 export const projects: Project[] = [
