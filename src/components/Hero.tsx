@@ -1,12 +1,18 @@
 import Section from './Section'
+import { siteInfo } from '../data/site'
 
-// Task 1-3 实现正式内容；当前为结构占位
-// Hero 是首屏，不使用统一 section 间距（py 由 1-3 定），但容器宽度仍走 Section
+// Task 1-3 — Hero（PRD 4.1）
+// 定位句 + 极简背景；笔迹水印留到 Phase 3。
+// h1 层级按 Design.md §3：text-5xl md:text-6xl font-semibold tracking-tight leading-tight
 
 export default function Hero() {
   return (
     <Section id="hero" tone="default">
-      <p>Hero</p>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <h1 className="text-center text-5xl font-semibold tracking-tight leading-tight text-[#1D1D1F] md:text-6xl">
+          {siteInfo.tagline}
+        </h1>
+      </div>
     </Section>
   )
 }
