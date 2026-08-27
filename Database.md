@@ -56,7 +56,7 @@ export interface ExperienceEntry {
 ```ts
 export interface Artwork {
   id: string;
-  src: string;                  // /assets/art/xxx.jpg
+  src: string | null;           // /assets/art/xxx.jpg；Phase 3 补图前为 null，前端渲染占位图
   alt: string;
   orientation: "horizontal" | "vertical"; // 横幅 / 条幅
   captionZh?: string;            // 可选中文题跋
@@ -82,3 +82,4 @@ export interface ContactInfo {
 
 ## 6. 变更记录
 - 2026-08-25（Bud）：`Project.tagline`、`Project.links.*` 改为可空类型（与示例及第 5 节规则对齐）；新增 `Project.description` 字段（PRD 4.3 卡片需要一段详细描述，原接口装不下）。
+- 2026-08-26（Bud）：`Artwork.src` 改为可空类型（Phase 3 补图前用 null 占位，与第 5 节"缺失数据用 null"规则对齐）。
