@@ -15,7 +15,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: "zero-one-winter-2022",
     period: "2022 Winter",
-    institution: "Zero-One Academy · Winter Camp",
+    institution: "X-Institute · Winter Camp",
     description:
       "Catch-and-release and superhydrophobicity: structural color in butterfly wings and lotus leaf microstructures. First hands-on experience with an SEM.",
     keywords: ["SEM", "Superhydrophobicity", "Structural Color"],
@@ -24,11 +24,11 @@ export const experience: ExperienceEntry[] = [
   {
     id: "zero-one-summer-2023",
     period: "2023 Summer",
-    institution: "Zero-One Academy · Summer Research Camp",
+    institution: "X-Institute · Summer Research Camp",
     description:
-      "Deep dive into materials science. Launched a research project under Prof. Zhang Wenzeng, which ran through 2025. Named a Star Youth Awardee.",
+      "Deep dive into materials science. Launched a research project under Prof. Zhang Wenzeng, which ran through 2025. Named a Starry Youth Awardee.",
     keywords: ["Materials Science", "Research Project"],
-    badge: "Star Youth Award",
+    badge: "Starry Youth",
     role: "student",
   },
   {
@@ -45,14 +45,14 @@ export const experience: ExperienceEntry[] = [
     period: "2025 Summer",
     institution: "Yale YYGS",
     description:
-      "IST track (Innovation, Science & Technology). The Zero-One research project with Prof. Zhang Wenzeng continued through the end of 2025.",
+      "IST track (Innovation, Science & Technology). The X-Institute research project with Prof. Zhang Wenzeng continued through the end of 2025.",
     keywords: ["IST Track", "Innovation"],
     role: "student",
   },
   {
     id: "zero-one-ta-2026",
     period: "2026 Summer",
-    institution: "Zero-One Academy · Invited Teaching Assistant",
+    institution: "X-Institute · Invited Teaching Assistant",
     description:
       "Invited TA for Prof. Zhao Meng's programmable materials group: programmed and operated EWOD devices, built an automated contact-angle measurement platform, and guided students through the SEM lab visit at Shenzhen University's materials school.",
     keywords: ["EWOD", "Contact-Angle Platform", "SEM"],

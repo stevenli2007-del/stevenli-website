@@ -1,9 +1,11 @@
-// Phase 1 / Task 1-6 实现正式内容；当前为结构占位
+import Section from './Section'
+
+// Task 1-6 实现正式内容；当前为结构占位
 
 export default function Experience() {
   return (
-    <section id="experience">
+    <Section id="experience" tone="default">
       <p>Experience</p>
-    </section>
+    </Section>
   )
 }
