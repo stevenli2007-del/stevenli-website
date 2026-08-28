@@ -11,6 +11,8 @@ export interface ExperienceEntry {
   role: "student" | "invited-ta"; // 用于视觉区分学员 vs 受邀助教
 }
 
+export const experienceTitle = "Experience" // section 标题
+
 export const experience: ExperienceEntry[] = [
   {
     id: "zero-one-winter-2022",
