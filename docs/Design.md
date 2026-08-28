@@ -14,7 +14,7 @@
 | `bg-secondary` | `#F5F5F7` | `bg-[#F5F5F7]` | 交替 section 背景（制造节奏，如 About / Art 用灰底） |
 | `text-primary` | `#1D1D1F` | `text-[#1D1D1F]` | 标题与正文主色 |
 | `text-secondary` | `#6E6E73` | `text-[#6E6E73]` | 次要说明文字 |
-| `text-tertiary` | `#86868B` | `text-[#86868B]` | caption / meta / 时间线年份 |
+| `text-tertiary` | `#59595E` | `text-[#59595E]` | caption / meta / 时间线年份 |
 | `divider` | `#D2D2D7` | `border-[#D2D2D7]` | 分隔线、卡片描边 |
 | `accent` | `#0071E3` | `text-[#0071E3]` | 链接、交互强调（Apple 蓝，全站唯一强调色） |
 
@@ -22,8 +22,8 @@
 
 | 状态 | 底色 | 文字 | Tailwind 写法 |
 |---|---|---|---|
-| `live` | `#34C759` | `#FFFFFF` | `bg-[#34C759] text-white` |
-| `in-development` | `#FF9F0A` | `#FFFFFF` | `bg-[#FF9F0A] text-white` |
+| `live` | `#34C759` | `#1D1D1F` | `bg-[#34C759] text-[#1D1D1F]` |
+| `in-development` | `#FF9F0A` | `#1D1D1F` | `bg-[#FF9F0A] text-[#1D1D1F]` |
 | `published` | `#5E5CE6` | `#FFFFFF` | `bg-[#5E5CE6] text-white` |
 
 徽章统一 `rounded-full px-3 py-0.5 text-xs font-medium`。
@@ -86,10 +86,10 @@ font-family: "Noto Serif SC", serif;
 | 节点机构名 | `font-medium text-[#1D1D1F]` | `font-semibold text-[#1D1D1F]`（更重） |
 
 - 竖线：`w-px bg-[#D2D2D7]` 贯穿节点左侧
-- 年份：`text-sm text-[#86868B]`（caption 层级）
-- badge（星空少年）：复用状态徽章样式，`bg-[#86868B] text-white rounded-full text-xs`
+- 年份：`text-sm text-[#59595E]`（caption 层级）
+- badge（星空少年）：复用状态徽章样式，`bg-[#6E6E73] text-white rounded-full text-xs`
 - 排列：数据正序 2022→2026（Database.md 已锁定，前端不排序）
-- 移动端：节点圆点缩至 `h-2.5 w-2.5`，机构名与描述同列堆叠
+- 移动端：节点圆点缩至 `h-2.5 w-2.5`（桌面 `h-3 w-3`），竖线对应内移；机构名与描述同列堆叠
 
 ---
 

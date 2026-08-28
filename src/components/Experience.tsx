@@ -23,7 +23,7 @@ function TimelineNode({ entry }: { entry: ExperienceEntry }) {
         }`}
       />
 
-      <p className="text-sm text-[#86868B]">{entry.period}</p>
+      <p className="text-sm text-[#59595E]">{entry.period}</p>
 
       <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
         <h3
@@ -34,7 +34,7 @@ function TimelineNode({ entry }: { entry: ExperienceEntry }) {
           {entry.institution}
         </h3>
         {entry.badge && (
-          <span className="rounded-full bg-[#86868B] px-3 py-0.5 text-xs font-medium text-white">
+          <span className="rounded-full bg-[#6E6E73] px-3 py-0.5 text-xs font-medium text-white">
             {entry.badge}
           </span>
         )}
@@ -45,7 +45,7 @@ function TimelineNode({ entry }: { entry: ExperienceEntry }) {
       </p>
 
       {entry.keywords.length > 0 && (
-        <p className="mt-2 text-sm text-[#86868B]">
+        <p className="mt-2 text-sm text-[#59595E]">
           {entry.keywords.join(" · ")}
         </p>
       )}

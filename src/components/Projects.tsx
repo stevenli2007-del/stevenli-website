@@ -7,8 +7,8 @@ import { projects, projectsTitle, type Project } from '../data/projects'
 // 数据顺序即展示顺序（order 1-3），前端不排序。
 
 const statusStyles: Record<Project["status"], string> = {
-  live: "bg-[#34C759] text-white",
-  "in-development": "bg-[#FF9F0A] text-white",
+  live: "bg-[#34C759] text-[#1D1D1F]",
+  "in-development": "bg-[#FF9F0A] text-[#1D1D1F]",
   published: "bg-[#5E5CE6] text-white",
 }
 
@@ -44,7 +44,7 @@ function ProjectCard({ project }: { project: Project }) {
       )}
 
       {project.techStack.length > 0 && (
-        <p className="mt-3 text-sm text-[#86868B]">
+        <p className="mt-3 text-sm text-[#59595E]">
           {project.techStack.join(" · ")}
         </p>
       )}

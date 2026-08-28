@@ -45,7 +45,7 @@ export default function Contact() {
         ) : (
           <span
             aria-disabled="true"
-            className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-[#D2D2D7]/60 px-6 py-3 text-[15px] font-medium text-[#86868B]"
+            className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-[#D2D2D7]/60 px-6 py-3 text-[15px] font-medium text-[#59595E]"
           >
             {LINKEDIN_LABEL} · Coming Soon
           </span>
