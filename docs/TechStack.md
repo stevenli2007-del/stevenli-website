@@ -27,6 +27,13 @@ Frontend (React SPA) → Cloudflare Pages (静态托管)
 
 ## 4. 项目结构（Coder AI 必须遵守，不得自创目录结构）
 ```
+/docs              # 开发宪法与公约（文档层，不参与构建）
+  PRD.md           # 产品需求
+  Roadmap.md       # Phase 规划与任务清单（唯一进度基准）
+  TechStack.md     # 技术契约（本文件）
+  Database.md      # 数据字典（数据层契约）
+  Design.md        # UI 设计规范（Design Tokens）
+  website-outline.md  # 最初的内容大纲
 /src
   /components       # 每个 section 一个组件：Hero.tsx, About.tsx, Projects.tsx, Experience.tsx, Art.tsx, Contact.tsx
   /data             # 内容数据，与展示逻辑分离（见 Database.md）
