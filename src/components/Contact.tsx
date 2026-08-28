@@ -19,7 +19,7 @@ export default function Contact() {
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
         <a
           href={`mailto:${contactInfo.email}`}
-          className="inline-flex items-center rounded-full bg-[#0071E3] px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#0077ED]"
+          className="inline-flex items-center justify-center rounded-full bg-[#0071E3] px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#0077ED]"
         >
           {EMAIL_LABEL} · {contactInfo.email}
         </a>
@@ -28,7 +28,7 @@ export default function Contact() {
           href={contactInfo.github}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
+          className="inline-flex items-center justify-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
         >
           {GITHUB_LABEL}
         </a>
@@ -38,14 +38,14 @@ export default function Contact() {
             href={contactInfo.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
+            className="inline-flex items-center justify-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
           >
             {LINKEDIN_LABEL}
           </a>
         ) : (
           <span
             aria-disabled="true"
-            className="inline-flex cursor-not-allowed items-center rounded-full border border-[#D2D2D7]/60 px-6 py-3 text-[15px] font-medium text-[#86868B]"
+            className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-[#D2D2D7]/60 px-6 py-3 text-[15px] font-medium text-[#86868B]"
           >
             {LINKEDIN_LABEL} · Coming Soon
           </span>
@@ -55,7 +55,7 @@ export default function Contact() {
           href={contactInfo.chromeWebStore}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
+          className="inline-flex items-center justify-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
         >
           {CWS_LABEL}
         </a>

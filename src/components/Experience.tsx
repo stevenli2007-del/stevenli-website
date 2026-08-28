@@ -16,7 +16,7 @@ function TimelineNode({ entry }: { entry: ExperienceEntry }) {
       {/* 节点圆点 */}
       <span
         aria-hidden="true"
-        className={`absolute left-0 top-1.5 h-3 w-3 rounded-full ${
+        className={`absolute left-0 top-2 h-2.5 w-2.5 rounded-full md:top-1.5 md:h-3 md:w-3 ${
           isTA
             ? "bg-[#1D1D1F] ring-2 ring-[#1D1D1F]/10"
             : "border-2 border-[#D2D2D7] bg-white"
@@ -60,7 +60,7 @@ export default function Experience() {
         {experienceTitle}
       </h2>
 
-      <ol className="relative mt-10 space-y-10 before:absolute before:left-[5.5px] before:top-2 before:bottom-2 before:w-px before:bg-[#D2D2D7]">
+      <ol className="relative mt-10 space-y-10 before:absolute before:left-[4.5px] before:top-2 before:bottom-2 before:w-px before:bg-[#D2D2D7] md:before:left-[5.5px]">
         {experience.map((entry) => (
           <TimelineNode key={entry.id} entry={entry} />
         ))}
