@@ -9,6 +9,8 @@ export interface Artwork {
   captionZh?: string;            // 可选中文题跋
 }
 
+export const artworksTitle = "Art" // section 标题
+
 export const artworks: Artwork[] = [
   {
     id: "artwork-1",
