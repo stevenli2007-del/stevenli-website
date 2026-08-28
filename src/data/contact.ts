@@ -8,6 +8,8 @@ export interface ContactInfo {
   chromeWebStore: string;
 }
 
+export const contactTitle = "Get in Touch"
+
 export const contactInfo: ContactInfo = {
   email: "stevenli2007@berkeley.edu",
   github: "https://github.com/stevenli2007-del",
