@@ -15,5 +15,5 @@ export const contactInfo: ContactInfo = {
   github: "https://github.com/stevenli2007-del",
   linkedin: "https://www.linkedin.com/in/youcheng-li-6b3447335/",
   chromeWebStore:
-    "https://chromewebstore.google.com/detail/jeknmkmekajcbffbfijmmmcakpbbcoa",
+    "https://chromewebstore.google.com/detail/linkedin-ai-assistant/jeknmnkekajcbffbfijmnmckakpbkcoa",
 }

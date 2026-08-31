@@ -101,10 +101,13 @@ export interface ContactInfo {
 
 ```ts
 export interface SiteInfo {
-  name: string;                 // 站点标题 / 姓名
+  name: string;                 // Legal name（全名），如 "Youcheng (Steven) Li"
   tagline: string;              // Hero 定位句，如 "Builder · Calligrapher · UC Berkeley 2030"
+  photo: string;                // Hero 头像（Vite import from /assets/）
 }
 ```
+
+> Phase 3 扩展（2026-08-30）：新增 `photo` 字段 + `name` 改为 legal name。
 
 ## 6. `about.ts`
 

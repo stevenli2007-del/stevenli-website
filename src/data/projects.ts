@@ -19,7 +19,7 @@ export interface Project {
 
 export const projectsTitle = "Projects" // section 标题
 
-const chromeWebStoreUrl = "https://chromewebstore.google.com/detail/jeknmkmekajcbffbfijmmmcakpbbcoa"
+const chromeWebStoreUrl = "https://chromewebstore.google.com/detail/linkedin-ai-assistant/jeknmnkekajcbffbfijmnmckakpbkcoa"
 
 export const projects: Project[] = [
   {
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     links: {
       github: "https://github.com/stevenli2007-del/Linkedin-AI-Assistant",
       live: chromeWebStoreUrl,
-      extensionId: "jeknmkmekajcbffbfijmmmcakpbbcoa",
+      extensionId: "jeknmnkekajcbffbfijmnmckakpbkcoa",
     },
     order: 1,
   },
