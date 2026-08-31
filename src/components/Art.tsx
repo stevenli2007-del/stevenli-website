@@ -14,7 +14,7 @@ function ArtworkItem({ artwork }: { artwork: Artwork }) {
           src={artwork.src}
           alt={artwork.alt}
           loading="lazy"
-          className="w-full rounded-xl max-h-[420px] object-cover"
+          className="w-full rounded-xl"
         />
       ) : (
         <div
@@ -44,7 +44,7 @@ export default function Art() {
         {artworksTitle}
       </h2>
 
-      <div className="mt-10 columns-1 gap-5 md:columns-2 lg:columns-3">
+      <div className="mt-10 columns-1 gap-4 md:columns-2">
         {artworks.map((artwork) => (
           <ArtworkItem key={artwork.id} artwork={artwork} />
         ))}

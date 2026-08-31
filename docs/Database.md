@@ -69,7 +69,7 @@ export interface Artwork {
 export interface ContactInfo {
   email: string;
   github: string;
-  linkedin: string | null;      // 待补
+  linkedin: string;             // 已补（Task 3-4，2026-08-30）
   chromeWebStore: string;
 }
 ```
