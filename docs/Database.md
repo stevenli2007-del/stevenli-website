@@ -16,24 +16,45 @@ export interface Project {
     github: string | null;
     live: string | null;       // 如 Chrome Web Store 链接；待补时为 null
     extensionId?: string;      // 仅 Chrome extension 用
+    liveLabel?: string;        // live 链接的显示文案；缺省 "View"
   };
   order: number;                // 展示顺序，1-3
 }
 ```
 
-示例条目（IEEE 论文，占位符字段用 `null`，前端渲染时判断显示"待补"）：
+> Phase 3 Task 3-1 已补全 IEEE 论文字段（2026-08-30），无 `null` 残留。
+
+实际条目（IEEE 论文，Task 3-1 已补全）：
 ```ts
 {
   id: "ieee-paper",
-  title: "IEEE Paper — CdSe Quantum Dots / Si Solar Cells",
+  title: "CdSe Quantum Dots on Si Solar Cells",
   status: "published",
-  tagline: null, // 待补：论文准确题目
-  description: null, // 待补：一段式研究描述
-  techStack: [],
-  links: { github: null, live: null }, // 待补：venue 链接
+  tagline: "IEEE PVSC 2025 · 4th author of 5",
+  description:
+    "“The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: " +
+    "A Hands-on, Project-based Learning” — research conducted at UPenn ESAP 2024 " +
+    "under Dr. Gyuseok L. Kim, published in the 2025 IEEE 53rd Photovoltaic " +
+    "Specialists Conference (PVSC), Montreal, QC, Canada.",
+  techStack: [
+    "CdSe Quantum Dots",
+    "Silicon Photovoltaics",
+    "Bandgap Tuning",
+    "UV-Vis Characterization",
+  ],
+  links: {
+    github: null,
+    live: "https://ieeexplore.ieee.org/document/11133208",
+    liveLabel: "IEEE Xplore",
+  },
   order: 3,
 }
 ```
+
+论文元数据（来源 IEEE Xplore，DOI 10.1109/PVSC59419.2025.11133208）：
+- 作者序：Bowen Hou, Jinwook Chang, Talin Patel, **Youcheng Li（第 4）**, Gyuseok L. Kim
+- Venue：2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC)，Montreal, QC, Canada
+- 会议日期：2025-06-08 ~ 06-13；收录进 Xplore：2025-08-29
 
 ## 2. `experience.ts`
 

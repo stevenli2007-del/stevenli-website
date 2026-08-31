@@ -49,9 +49,12 @@
    - AI-powered framing engine for traditional Chinese calligraphy art — "千年墨韵，一屿可观"
    - Stack: Vite + React + TypeScript + Tailwind + Cloudflare Workers (Hono + D1/R2)
    - GitHub `stevenli2007-del/moyu`
-3. **IEEE Paper**
-   - 2024 ESAP (UPenn) → published 2025.09.03，指导：Dr. Kim Gyuseok，方向：CdSe 量子点 / Si 太阳能电池
-   - **待补**：论文准确题目 / venue / 作者位次（占位符先上线，拿到后替换）
+3. **IEEE Paper** — Published
+   - “The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning”
+   - Venue：2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC)，Montreal, QC, Canada
+   - 作者序：Bowen Hou, Jinwook Chang, Talin Patel, **Youcheng Li（第 4 作者，共 5 人）**, Gyuseok L. Kim
+   - 出处：UPenn ESAP 2024，指导 Dr. Gyuseok L. Kim；DOI 10.1109/PVSC59419.2025.11133208
+   - Link: IEEE Xplore `https://ieeexplore.ieee.org/document/11133208`
 
 ### 4.4 Experience（单条时间线，5 个节点）
 | 时间 | 机构 | 内容 | 关键词/badge |

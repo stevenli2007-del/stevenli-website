@@ -12,6 +12,7 @@ export interface Project {
     github: string | null;
     live: string | null;       // 如 Chrome Web Store 链接；待补时为 null
     extensionId?: string;      // 仅 Chrome extension 用
+    liveLabel?: string;        // live 链接的显示文案；缺省 "View"
   };
   order: number;                // 展示顺序，1-3
 }
@@ -65,15 +66,21 @@ export const projects: Project[] = [
   },
   {
     id: "ieee-paper",
-    title: "IEEE Paper — CdSe Quantum Dots / Si Solar Cells",
+    title: "CdSe Quantum Dots on Si Solar Cells",
     status: "published",
-    tagline: null, // 待补：论文准确题目
+    tagline: "IEEE PVSC 2025 · 4th author of 5",
     description:
-      "Research on CdSe quantum dots / Si solar cells, conducted at UPenn ESAP 2024 under Dr. Kim Gyuseok; published 2025-09-03.",
-    techStack: [],
+      "“The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning” — research conducted at UPenn ESAP 2024 under Dr. Gyuseok L. Kim, published in the 2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC), Montreal, QC, Canada.",
+    techStack: [
+      "CdSe Quantum Dots",
+      "Silicon Photovoltaics",
+      "Bandgap Tuning",
+      "UV-Vis Characterization",
+    ],
     links: {
       github: null,
-      live: null, // 待补：venue 链接
+      live: "https://ieeexplore.ieee.org/document/11133208",
+      liveLabel: "IEEE Xplore",
     },
     order: 3,
   },
