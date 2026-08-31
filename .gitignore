@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # WorkBuddy local workspace data
 .workbuddy/
+
+# Audit artifacts (Lighthouse reports generated at project root)
+*.report.html
+lighthouse-report.html
