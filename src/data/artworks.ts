@@ -36,9 +36,9 @@ export const artworks: Artwork[] = [
   {
     id: "artwork-3",
     src: artwork3Img,
-    alt: "Calligraphy — 傲盡雲蛟 · 龍統九州",
+    alt: "Calligraphy — 龍虎風雨，天下梟雄",
     orientation: "horizontal",
-    captionZh: "傲盡雲蛟 · 龍統九州",
+    captionZh: "龍虎風雨，天下梟雄",
   },
   {
     id: "artwork-4",

@@ -14,7 +14,7 @@ function ArtworkItem({ artwork }: { artwork: Artwork }) {
           src={artwork.src}
           alt={artwork.alt}
           loading="lazy"
-          className="w-full rounded-xl"
+          className="w-full rounded-xl max-h-[420px] object-cover"
         />
       ) : (
         <div
@@ -26,7 +26,10 @@ function ArtworkItem({ artwork }: { artwork: Artwork }) {
         />
       )}
       {artwork.captionZh && (
-        <figcaption className="mt-2 text-right text-sm text-[#6E6E73]">
+        <figcaption
+          className="mt-2 text-right text-sm text-[#6E6E73]"
+          style={{ fontFamily: '"Noto Serif SC", serif' }}
+        >
           {artwork.captionZh}
         </figcaption>
       )}
@@ -41,7 +44,7 @@ export default function Art() {
         {artworksTitle}
       </h2>
 
-      <div className="mt-10 columns-1 gap-4 md:columns-2">
+      <div className="mt-10 columns-1 gap-5 md:columns-2 lg:columns-3">
         {artworks.map((artwork) => (
           <ArtworkItem key={artwork.id} artwork={artwork} />
         ))}
