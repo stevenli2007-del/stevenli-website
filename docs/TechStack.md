@@ -43,7 +43,9 @@ Frontend (React SPA) → Cloudflare Pages (静态托管)
     experience.ts
     artworks.ts
     contact.ts
-  /assets           # 静态图片
+  /assets           # 静态资源（图片 + 字体）
+    art/             # 书法作品图片
+    fonts/           # 子集化字体文件（Phase 3 引入）
   App.tsx
   main.tsx
   index.css         # Tailwind entry

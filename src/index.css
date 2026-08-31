@@ -2,6 +2,17 @@
 
 @import "tailwindcss";
 
+/* Noto Serif SC 子集字体 —— 仅 Art 板块题跋使用（Phase 3 Task 3-6）
+   112 字符子集，29KB woff2，不拖垮 Lighthouse Performance */
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("./assets/fonts/noto-serif-sc-subset.woff2") format("woff2"),
+       url("./assets/fonts/noto-serif-sc-subset.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* 系统字体栈（TechStack.md 锁定）——覆盖 Tailwind 默认 font-sans，
    preflight 会将其应用到 body，全站生效 */
 @theme {
