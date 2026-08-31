@@ -6,15 +6,16 @@ interface SectionProps {
   id: string;
   tone?: "default" | "muted"; // muted = 灰底，制造节奏（About / Art 用）
   children: React.ReactNode;
+  className?: string; // 可选：Hero 全幅背景等特殊布局需要穿透样式
 }
 
 // container: max-w-6xl mx-auto px-6（Design.md §2）
 // section-padding-y: py-16 md:py-24（Design.md §2，移动优先）
-export default function Section({ id, tone = "default", children }: SectionProps) {
+export default function Section({ id, tone = "default", children, className }: SectionProps) {
   return (
     <section
       id={id}
-      className={tone === "muted" ? "bg-[#F5F5F7]" : "bg-white"}
+      className={`${tone === "muted" ? "bg-[#F5F5F7]" : "bg-white"}${className ? ` ${className}` : ""}`}
     >
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">{children}</div>
     </section>
