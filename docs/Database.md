@@ -35,7 +35,7 @@ export interface Project {
     "“The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: " +
     "A Hands-on, Project-based Learning” — research conducted at UPenn ESAP 2024 " +
     "under Dr. Gyuseok L. Kim, published in the 2025 IEEE 53rd Photovoltaic " +
-    "Specialists Conference (PVSC), Montreal, QC, Canada.",
+    "Specialists Conference (PVSC), Montreal, QC, Canada, 29 August 2025.",
   techStack: [
     "CdSe Quantum Dots",
     "Silicon Photovoltaics",
@@ -54,7 +54,8 @@ export interface Project {
 论文元数据（来源 IEEE Xplore，DOI 10.1109/PVSC59419.2025.11133208）：
 - 作者序：Bowen Hou, Jinwook Chang, Talin Patel, **Youcheng Li（第 4）**, Gyuseok L. Kim
 - Venue：2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC)，Montreal, QC, Canada
-- 会议日期：2025-06-08 ~ 06-13；收录进 Xplore：2025-08-29
+- 会议日期：2025-06-08 ~ 06-13（Montreal）；**发表日期以 IEEE Xplore 官方「Date Added to Xplore」为准：2025-08-29**
+  - 注：PRD 原记 2025-09-03，2026-08-30 经 Steven 确认以官方日期为准，已统一为 2025-08-29
 
 ## 2. `experience.ts`
 

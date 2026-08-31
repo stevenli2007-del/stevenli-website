@@ -51,7 +51,7 @@
    - GitHub `stevenli2007-del/moyu`
 3. **IEEE Paper** — Published
    - “The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning”
-   - Venue：2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC)，Montreal, QC, Canada
+   - 发表日期：**2025-08-29**（IEEE Xplore 官方「Date Added to Xplore」；会议 2025-06-08~13，Montreal）
    - 作者序：Bowen Hou, Jinwook Chang, Talin Patel, **Youcheng Li（第 4 作者，共 5 人）**, Gyuseok L. Kim
    - 出处：UPenn ESAP 2024，指导 Dr. Gyuseok L. Kim；DOI 10.1109/PVSC59419.2025.11133208
    - Link: IEEE Xplore `https://ieeexplore.ieee.org/document/11133208`

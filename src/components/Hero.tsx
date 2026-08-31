@@ -12,7 +12,7 @@ export default function Hero() {
         <img
           src={siteInfo.photo}
           alt={siteInfo.name}
-          className="h-40 w-40 rounded-full object-cover shadow-lg md:h-48 md:w-48"
+          className="h-40 w-40 rounded-full object-cover object-[50%_25%] shadow-lg md:h-48 md:w-48"
         />
         <div className="text-center">
           <p className="text-lg text-[#6E6E73]">{siteInfo.name}</p>

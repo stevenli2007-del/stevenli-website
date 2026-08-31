@@ -70,7 +70,7 @@ export const projects: Project[] = [
     status: "published",
     tagline: "IEEE PVSC 2025 · 4th author of 5",
     description:
-      "“The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning” — research conducted at UPenn ESAP 2024 under Dr. Gyuseok L. Kim, published in the 2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC), Montreal, QC, Canada.",
+      "“The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning” — research conducted at UPenn ESAP 2024 under Dr. Gyuseok L. Kim; published in the 2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC), Montreal, QC, Canada, 29 August 2025.",
     techStack: [
       "CdSe Quantum Dots",
       "Silicon Photovoltaics",
