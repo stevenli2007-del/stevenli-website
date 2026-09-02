@@ -8,7 +8,7 @@ export interface AboutExample {
 export interface AboutInfo {
   title: string;                // section 标题
   narrative: string;            // 2-3 行核心叙事
-  examples: AboutExample[];     // 四个自动化例子，并列展示
+  examples: AboutExample[];     // 自动化例子，并列展示
   identity: string;             // 身份线
 }
 
@@ -24,10 +24,6 @@ export const aboutInfo: AboutInfo = {
     {
       title: "Contact-Angle Measurement Platform",
       effect: "Automates experiments",
-    },
-    {
-      title: "Moyu",
-      effect: "Digitizes calligraphy framing",
     },
     {
       title: "Convenience Store Mini Program",

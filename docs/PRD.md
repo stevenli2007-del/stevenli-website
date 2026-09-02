@@ -20,9 +20,8 @@
 | Projects | 你能做什么 |
 
 叙事钩子（内容层面必须保留，不能在开发中被简化掉）：
-- Art → Moyu（墨屿）：你写字，所以做了墨屿。
 - Experience 2022→2026：从"第一次摸 SEM 的学员"到"以助教身份带学生看 SEM"。
-- Projects 三个阶段：LinkedIn AI（已上线）→ 墨屿（开发中）→ IEEE 论文（已发表）——证明持续输出，而非一次性作品。
+- Projects 两个节点：LinkedIn AI（已上线）→ IEEE 论文（已发表）——工程交付与科研产出双线。
 
 ## 4. 页面结构（单页，六个 section，顺序固定）
 
@@ -33,23 +32,18 @@
 ### 4.2 About
 - 2-3 行，非自传体
 - 核心叙事：一直在做同一件事——把手动流程变成自动化
-- 四个例子（并列列出，不用长句）：
+- 三个例子（并列列出，不用长句）：
   1. LinkedIn AI Assistant → 自动化社交
   2. 接触角自动测量平台 → 自动化实验
-  3. 墨屿 → 数字化书法装裱
-  4. 便利店小程序 → 数字化妈妈的生意
+  3. 便利店小程序 → 数字化妈妈的生意
 - 身份线：深圳 → UC Berkeley 2030，产品全链路交付（设计→开发→部署）
 
-### 4.3 Projects（3 张卡片，横向排列，移动端纵向堆叠）
+### 4.3 Projects（2 张卡片，横向排列，移动端纵向堆叠）
 1. **LinkedIn AI Networking Assistant** — Live on Chrome Web Store
    - Chrome extension that automates LinkedIn networking with AI-generated personalized messages.
    - Stack: React + TypeScript + Vite + Chrome MV3 + Cloudflare Workers (Hono + KV) + DeepSeek
    - Links: CWS (Extension ID `jeknmkmekajcbffbfijmmmcakpbbcoa`), GitHub `stevenli2007-del/Linkedin-AI-Assistant`
-2. **墨屿 Moyu** — In development
-   - AI-powered framing engine for traditional Chinese calligraphy art — "千年墨韵，一屿可观"
-   - Stack: Vite + React + TypeScript + Tailwind + Cloudflare Workers (Hono + D1/R2)
-   - GitHub `stevenli2007-del/moyu`
-3. **IEEE Paper** — Published
+2. **IEEE Paper** — Published
    - “The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning”
    - 发表日期：**2025-08-29**（IEEE Xplore 官方「Date Added to Xplore」；会议 2025-06-08~13，Montreal）
    - 作者序：Bowen Hou, Jinwook Chang, Talin Patel, **Youcheng Li（第 4 作者，共 5 人）**, Gyuseok L. Kim
@@ -89,9 +83,8 @@
 ## 6. 待补素材清单（Phase 3 之前必须收集，缺失时用占位符不阻塞开发）
 1. IEEE 论文题目 / 发表 venue / 作者位次
 2. 书法作品高清照 3-5 张
-3. 墨屿界面截图
-4. LinkedIn AI Assistant 商店截图
-5. LinkedIn 主页链接
+3. LinkedIn AI Assistant 商店截图
+4. LinkedIn 主页链接
 
 ## 7. 验收标准（MVP = Phase 1+2 完成时）
 - 六个 section 内容完整（占位符可接受，缺失文字不可接受）

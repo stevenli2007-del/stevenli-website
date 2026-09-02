@@ -1,6 +1,6 @@
 # Roadmap.md — Phase 规划与任务清单
 
-> 本文件是项目执行的唯一进度基准。工作方式沿用 Linkedin-AI-Assistant 与 Moyu 惯例：
+> 本文件是项目执行的唯一进度基准。工作方式沿用 Linkedin-AI-Assistant 惯例：
 > - Phase 编号制（`阶段-任务`，如 `1-3`），一次只做一个任务
 > - 每个 Phase 结束产出 **Done Report**（what / progress / next），由 Steven 验收签收
 > - 每个 Phase 结束提交一次 git commit（沙箱无法 push 时，Bud 本地 commit，Steven 在终端手动 push）
@@ -82,7 +82,7 @@
 |---|---|---|
 | 3-1 | ✅ IEEE 论文信息 | ~~Steven 提供：论文题目 / venue / 作者位次~~ ✅ 已补（2026-08-30）：DOI 10.1109/PVSC59419.2025.11133208，Steven 为第 4 作者（共 5 人） |
 | 3-2 | 🚩 书法作品照 | Steven 提供 3-5 张高清照（横幅+条幅）→ 入 `/src/assets/art/`，更新 `artworks.ts` |
-| 3-3 | 🚩 墨屿截图 | Steven 提供 → 替换 Projects 卡片视觉（如需要） |
+| 3-3 | ⛔ 墨屿截图 | 已取消（2026-09-01）：墨屿项目终止，Projects 卡片与 Art 板块中的墨屿入口均已移除 |
 | 3-4 | ✅ CWS + LinkedIn 链接 | ~~Steven 提供~~ ✅ 已完成（2026-08-30）：LinkedIn 链接已上线，CWS 链接本就有；卡片截图非必需 |
 | 3-5 | 笔迹视觉签名 | 行草笔迹做章节分隔线 / Hero 水印（素材同样来自 3-2 拍摄，需专门拍摄单字/线条素材） |
 | 3-6 | 中文衬线字体 | 引入 Noto Serif SC（仅 Art 板块标题），注意字体文件按需子集化，不得拖垮 Phase 2 拿到的 Lighthouse 分数 |

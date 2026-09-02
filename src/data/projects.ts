@@ -45,26 +45,6 @@ export const projects: Project[] = [
     order: 1,
   },
   {
-    id: "moyu",
-    title: "Moyu",
-    status: "in-development",
-    tagline: "AI-powered framing engine for traditional Chinese calligraphy art",
-    description:
-      "An AI-powered framing engine and community for traditional Chinese calligraphy art.",
-    techStack: [
-      "Vite",
-      "React",
-      "TypeScript",
-      "Tailwind",
-      "Cloudflare Workers (Hono + D1/R2)",
-    ],
-    links: {
-      github: "https://github.com/stevenli2007-del/moyu",
-      live: null,
-    },
-    order: 2,
-  },
-  {
     id: "ieee-paper",
     title: "CdSe Quantum Dots on Si Solar Cells",
     status: "published",
@@ -82,6 +62,6 @@ export const projects: Project[] = [
       live: "https://ieeexplore.ieee.org/document/11133208",
       liveLabel: "IEEE Xplore",
     },
-    order: 3,
+    order: 2,
   },
 ]

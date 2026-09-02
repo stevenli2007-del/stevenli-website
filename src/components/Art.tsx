@@ -49,19 +49,6 @@ export default function Art() {
           <ArtworkItem key={artwork.id} artwork={artwork} />
         ))}
       </div>
-
-      <p className="mt-8 text-center text-sm text-[#6E6E73]">
-        More calligraphy works at{' '}
-        <a
-          href="https://github.com/stevenli2007-del/moyu"
-          target="_blank"
-          rel="noreferrer"
-          className="text-[#0071E3] hover:underline"
-        >
-          Moyu 墨屿
-        </a>
-        {' '}— AI-powered framing engine &amp; traditional art community
-      </p>
     </Section>
   )
 }

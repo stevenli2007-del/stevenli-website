@@ -19,14 +19,13 @@
 
 - LinkedIn AI Assistant → 自动化社交
 - 接触角自动测量平台 → 自动化实验
-- 墨屿 → 数字化书法装裱
 - 便利店小程序 → 数字化妈妈的生意
 
 身份：深圳 → Berkeley 2030，做产品全链路交付（设计 → 开发 → 部署）。
 
 ---
 
-## Projects（3 张卡片）
+## Projects（2 张卡片）
 
 ### 1. LinkedIn AI Networking Assistant
 - **状态：** Live on Chrome Web Store
@@ -35,14 +34,7 @@
 - **链接：** CWS Extension ID `jeknmkmekajcbffbfijmmmcakpbbcoa`
 - **GitHub：** stevenli2007-del/Linkedin-AI-Assistant
 
-### 2. 墨屿 Moyu
-- **状态：** In development
-- **一句话：** AI-powered framing engine for traditional Chinese calligraphy art — "千年墨韵，一屿可观".
-- **技术栈：** Vite + React + TypeScript + Tailwind + Cloudflare Workers (Hono + D1/R2)
-- **GitHub：** stevenli2007-del/moyu
-- **叙事钩子：** 与 Art 板块互相引用 — 你写字 → 所以做了墨屿。
-
-### 3. IEEE Paper
+### 2. IEEE Paper
 - **年份：** 2024 ESAP (UPenn) → published 2025.09.03
 - **指导：** Dr. Kim Gyuseok
 - **方向：** CdSe 量子点 / Si 太阳能电池
@@ -75,7 +67,6 @@
 - **风格：** 行草，繁体字
 - **题材倾向：** 长征主题联语
 - **展示：** 3-5 张高清作品照（横幅 + 条幅搭配）
-- **叙事闭环：** 行草作品 → 指向墨屿 — 解释了"为什么是你做那个产品"
 - **视觉签名：** 用自己的字做网站的视觉元素（章节标题、分隔线直接用笔迹）— 任何模板都抄不走
 
 ---
@@ -91,9 +82,9 @@
 
 ## 叙事架构（三条线互相咬合）
 
-- **产品线**（Projects）：LinkedIn AI 已上线 → 墨屿开发中 → IEEE 论文发表 — 三个不同阶段，证明持续输出
+- **产品线**（Projects）：LinkedIn AI 已上线 → IEEE 论文发表 — 工程交付与科研产出双线
 - **成长线**（Experience）：零一四年五站时间线 — 学员 → 获奖 → 跨校科研 → 被请回去教
-- **人文线**（Art）：行草作品 → 指向墨屿 — 回答"你是谁"
+- **人文线**（Art）：行草作品本身回答"你是谁" — 不依附任何产品
 
 三条线的关系：
 - Art 回答"你是谁"
@@ -127,9 +118,8 @@
 
 1. IEEE 论文题目 / 发表 venue / 作者位次
 2. 书法作品高清照 3-5 张
-3. 墨屿界面截图（等有像样 UI 后补）
-4. LinkedIn AI Assistant 商店链接和截图
-5. LinkedIn 主页链接
+3. LinkedIn AI Assistant 商店链接和截图
+4. LinkedIn 主页链接
 
 ---
 

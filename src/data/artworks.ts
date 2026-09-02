@@ -1,7 +1,6 @@
 // Database.md §3 — Artwork interface
 // Phase 3 素材已到位（2026-08-30），四张行草作品全部来自 Steven 本人。
 // 图片通过 Vite import 引入，构建时生成哈希 URL。
-// 更多作品请访问墨屿 Moyu → https://github.com/stevenli2007-del/moyu
 
 import artwork1Img from '../assets/art/artwork-1-huaniao.jpg'
 import artwork2Img from '../assets/art/artwork-2-dapeng.jpg'
