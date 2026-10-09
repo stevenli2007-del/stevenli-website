@@ -5,6 +5,7 @@
 // 课程名、竞赛名、工具名属专有名词，不翻译；奖项名称按简历原文。
 
 import type { LocalizedText } from './locales'
+import berkeleySeal from '../assets/berkeley-seal.png'
 
 export interface Award {
   title: LocalizedText;         // 奖项名称
@@ -19,8 +20,9 @@ export interface SkillGroup {
 
 export interface EducationInfo {
   school: string;               // 校名（两种语言一致）
+  seal: string;                 // 校标图片（Vite import，构建时哈希）—— 装饰性，无可见文案
   program: LocalizedText;       // 专业
-  detail: LocalizedText;        // 届别 + 转学分
+  detail: LocalizedText;        // 届别 + 在读年级
   coursesLabel: LocalizedText;
   courses: string[];            // 课程名（专有名词，不翻译）
 }
@@ -33,13 +35,21 @@ export const skillsTitle: LocalizedText = { en: 'Technical Skills', zh: '技术�
 
 export const education: EducationInfo = {
   school: 'University of California, Berkeley',
+  // Phase 6 微调（2026-10-09，第 7 条）：新增校标。
+  //   素材来源：Steven 提供的校徽锁图（seal + wordmark），Bud 裁出左侧圆形印章并压到 256×256 / 64 色
+  //   （16.9KB）。⚠️ 若日后拿到 brand.berkeley.edu 的官方矢量素材，替换本文件即可，组件无需改。
+  //   ⚠️ 该校徽属 UC Regents 商标；站上仅用于表明就读身份，不得用于暗示校方背书。
+  seal: berkeleySeal,
   program: {
     en: 'Engineering Physics & Computer Science',
     zh: '工程物理与计算机科学',
   },
+  // Phase 6 微调（2026-10-09，第 7 条）：原「40 units transferred from A-Level」按 Steven 指示移除，
+  //   换成在读年级（「目前大一」），因为目标岗位 NVIDIA Ignite 只招大一 / 大二。
+  //   ⚠️ 英文用 freshman 而非 first-year：伯克利官方口径已改 first-year，但招聘/ATS 语境仍认 freshman。
   detail: {
-    en: 'Class of 2030 · 40 units transferred from A-Level',
-    zh: '2030 届 · A-Level 转入 40 学分',
+    en: 'Class of 2030 · currently a freshman',
+    zh: '2030 届 · 目前大一',
   },
   coursesLabel: { en: 'Coursework', zh: '已修课程' },
   courses: ['Physics 7A', 'Chem 1A & 1AL', 'COLWR R4A', 'Math 53'],

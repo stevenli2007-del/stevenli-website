@@ -25,9 +25,24 @@ export default function Education() {
         </h2>
 
         <div className="mt-6 max-w-3xl">
-          <p className="text-lg font-medium text-[#1D1D1F]">{education.school}</p>
-          <p className="mt-1 text-base text-[#1D1D1F]">{education.program[locale]}</p>
-          <p className="mt-1 text-sm text-[#6E6E73]">{education.detail[locale]}</p>
+          {/* 校标 + 校名/专业/届别：印章是装饰性图片（紧邻文本已给出校名），
+              故 alt="" —— 避免读屏把校名念两遍，也符合 WCAG 对装饰图的处理。
+              窄屏（<sm）校标单独占一行：并排会把文字栏挤到 ~255px，校名被迫断成两行。 */}
+          <div className="sm:flex sm:items-center sm:gap-4">
+            <img
+              src={education.seal}
+              alt=""
+              width={256}
+              height={256}
+              decoding="async"
+              className="block h-14 w-14 shrink-0"
+            />
+            <div className="mt-3 sm:mt-0">
+              <p className="text-lg font-medium text-[#1D1D1F]">{education.school}</p>
+              <p className="mt-1 text-base text-[#1D1D1F]">{education.program[locale]}</p>
+              <p className="mt-1 text-sm text-[#6E6E73]">{education.detail[locale]}</p>
+            </div>
+          </div>
 
           <p className="mt-4 text-sm leading-relaxed text-[#6E6E73]">
             <span className="font-medium text-[#59595E]">{education.coursesLabel[locale]}</span>
