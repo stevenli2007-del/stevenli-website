@@ -4,6 +4,10 @@
 **用途：** 列出「网站、仓库和项目文档里**有证据**、但简历或网站尚未呈现」的项目细节，
 以及「简历与现有资料**互相打架**」需要 Steven 拍板的项。
 
+> **2026-10-09 二轮更新（Steven 裁定）：** 冲突项 **A**（Tempo 学习计划）与 **B**（专业写法）**已解决**，
+> 见第二节划掉的两行。仍待你回答的是 **C / D / E / F / G**：时间段、ESAP 年份、
+> 以及简历要不要补 2022 冬令营 / 2023 星空少年 / 2025 YYGS。
+
 证据来源缩写：`[repo]` 仓库代码/文档 ｜ `[gh]` GitHub 仓库 README ｜ `[docs]` 项目治理文档 ｜ `[site]` 现有网站
 
 ---
@@ -101,8 +105,8 @@
 
 | # | 冲突 | 我的判断 | 需要你回答 |
 |---|---|---|---|
-| A | 简历写 Tempo "generates **semester-long and daily study plans**"，但 Tempo `docs/Database.md` 里 `study_plans` / `plan_items` 标注为 **Phase 2**，仓库内无实现证据 | **网站已按「不写」处理**（本轮 Projects 描述里没有学习计划）。简历这句目前无法自证 | 这个功能**真的上线了吗**？没上线就删掉或改成 "in development" |
-| B | 简历专业 = **Engineering Physics & Computer Science**；我此前记录的是 **L&S → 主修 EECS** | 已按简历原文上站，旧记录作废 | 这是**官方项目名**还是你自己组合的说法？（Engineering Physics 在伯克利属工程学院，不属 L&S，两者对不上） |
+| ~~A~~ | ~~简历写 Tempo "generates semester-long and daily study plans"，但 Tempo 文档里标为 Phase 2~~ | ✅ **已解决（Steven 2026-10-09）**：Tempo 是**持续项目**，网站要把功能写全 —— 学习计划（整学期 + 每日）、学习笔记与简历提到的能力**全部写入** description，并在 outcome 标注「仍在持续开发」。简历原文**不用改** | ~~无~~ |
+| ~~B~~ | ~~简历专业 = Engineering Physics & Computer Science；旧记录是 L&S → 主修 EECS~~ | ✅ **已解决（Steven 2026-10-09）：「专业就按简历上的来」** —— 网站已按 `Engineering Physics & Computer Science` 上站，旧记录「L&S → EECS」作废 | ~~无~~ |
 | C | X-Institute 助教时间：网站写 **2026 暑期**，简历无日期 | 保留 2026 暑期 | 具体**月份**？NVIDIA 会看时间线 |
 | D | ESAP：网站写 **2024 暑期**，简历只写机构名无年份；论文 2025 发表 | 一致（2024 做研究，2025 发表） | 简历**要不要补 2024**？建议补 |
 | E | 简历 Experience 只有 2 条（X-Institute TA、ESAP）；网站有 5 个节点（含 2022 冬令营、2023 暑期科研营、2025 YYGS） | 网站保留全部（你要求保留既有内容） | 简历**要不要补**这三条？NVIDIA Ignite 面向大一/大二，早期经历能证明持续性，建议至少补 2023「星空少年 · 3,000 选 20」 |

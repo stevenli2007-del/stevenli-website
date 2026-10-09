@@ -4,12 +4,12 @@
 //
 // Phase 5（2026-10-09）改写：事实基准 = Steven 的 NVIDIA 申请版简历。
 //   展示顺序（Steven 2026-10-09 拍板）：IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant。
-//   新增两个 status：beta（Tempo，公开测试）/ submission（Cal Hacks，take-home 作业）。
-//   ⚠️ 未搬上网站的简历说法：「semester-long and daily study plans」—— Tempo 的
-//      `study_plans` / `plan_items` 在 `docs/Database.md` 里标注为 Phase 2，仓库内无实现证据，
-//      故 description 只写已落地的能力（syllabus 解析 / Canvas 与邮件汇总 / 考试复习 / 自测卷）。
-//      见 docs/phase-5-resume-addendum.md。
-//   ⚠️ Cal Hacks 项目定位：个人 take-home 作品，不是 Tech Lead、不是正式团队成员。
+//   新增两个 status：beta（Tempo，公开测试 + 持续开发）/ submission（Cal Hacks，个人项目已提交）。
+//   ⚠️ Tempo 是**持续项目**（Steven 2026-10-09 确认），故 description 按简历把功能写全：
+//      学习计划（整学期 + 每日）、交互式学习笔记、考试复习总结、真题自测卷 —— 
+//      简历提到的能力一律写进去（早期文档里 `study_plans` 标为 Phase 2，已由 Steven 确认属持续开发范围）。
+//   ⚠️ Cal Hacks 项目定位：**个人项目**，不是 Tech Lead、不是正式团队成员。
+//      Steven 2026-10-09 指示：文案里**不要出现 "take-home" 字样**。
 //   ⚠️ Moyu 已于 2026-09-01 从全站移除，本文件不再有条目。
 
 import type { LocalizedText } from './locales'
@@ -79,10 +79,13 @@ export const projects: Project[] = [
     id: 'tempo',
     title: { en: 'Tempo — Berkeley Study Mate', zh: 'Tempo · 伯克利学习助手' },
     status: 'beta',
-    outcome: { en: '109 users in public beta', zh: '109 位用户（公开测试阶段）' },
+    outcome: {
+      en: '109 users in public beta · still in active development',
+      zh: '109 位用户（公开测试）· 仍在持续开发',
+    },
     description: {
-      en: 'A course OS for Berkeley students. It parses syllabus PDFs into structured course logistics, pulls assignments, files, modules, and announcements from Canvas and from forwarded email, and keeps every deadline in one dashboard. For each exam it summarizes the material you already have, and turns a real past exam into a self-graded practice set — answers come from the instructor’s key, never from the model. Built with Supabase authentication and real-time sync; 77 users in private beta, 109 in public beta.',
-      zh: '一个面向伯克利学生的课程操作系统。它把 syllabus 解析成结构化的课程规则，从 Canvas 和转发邮件里汇总作业、课件、章节与公告，把截止日期收进同一张看板；针对每一场考试，它基于你已有的材料生成复习总结，并把真实的往年卷子切成可对答案的自测题 —— 答案取教师答案键，不由模型编造。用 Supabase 做认证与实时同步；内测 77 位用户，公开测试 109 位。',
+      en: 'A course OS for Berkeley students, and an ongoing project. It parses syllabus PDFs into structured course logistics, pulls assignments, files, modules, and announcements from Canvas and from forwarded email, and keeps every deadline and its progress in one dashboard. LLM APIs turn a syllabus into a semester-long plan and then a daily plan, and students can revise either one when the schedule shifts; the same models generate interactive study notes, per-exam review summaries built from material you already have, and practice sets cut from real past exams — answers come from the instructor’s key, never from the model. Supabase handles authentication and real-time sync; 77 users in private beta, 109 in public beta.',
+      zh: '一个面向伯克利学生的课程操作系统，目前仍在持续开发。它把 syllabus 解析成结构化的课程规则，从 Canvas 与转发邮件里汇总作业、课件、章节与公告，把截止日期和完成进度收进同一张看板。LLM 把 syllabus 变成整学期的计划，再拆成每日计划，日程有变动时学生可以直接改；同样的模型也用来生成交互式学习笔记、基于你已有材料的考试复习总结，以及从真实往年卷切出来的自测题 —— 答案取教师答案键，不由模型编造。Supabase 负责认证与实时同步；内测 77 位用户，公开测试 109 位。',
     },
     techStack: [
       'TypeScript',
@@ -107,8 +110,8 @@ export const projects: Project[] = [
     title: { en: 'Cal Hacks FA26 Application Portal', zh: 'Cal Hacks FA26 申请门户' },
     status: 'submission',
     outcome: {
-      en: 'Individual take-home for the Cal Hacks FA26 Tech Team application',
-      zh: '为申请 Cal Hacks FA26 技术团队所做的个人 take-home 作品',
+      en: 'Individual project for the Cal Hacks FA26 Tech Team application',
+      zh: '为申请 Cal Hacks FA26 技术团队所做的个人项目',
     },
     description: {
       en: 'A miniature hackathon application portal. Applicants sign in, choose a track — hacker, judge, mentor, or volunteer — and fill a track-specific form with drafts before submitting. Organizers grade with a weighted rubric, watch a coverage tracker that surfaces grading bottlenecks, and move applications across an accept / waitlist / reject board. Every access rule lives in Postgres row-level security behind a single is_organizer() helper.',

@@ -183,7 +183,8 @@
 | IEEE 论文位置 | **继续留在 Projects**，`status = published`，保留 IEEE Xplore 外链与「五作第四」 |
 | Projects 卡片顺序 | **IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant**（Steven 指定） |
 | Moyu | 已于 2026-09-01 全站移除，本轮无需动作；**不得写成活跃产品或 "Present"** |
-| Cal Hacks 定位 | **Projects / Individual Project**，属个人 take-home 作品。不称 Tech Lead、不称正式团队成员 |
+| Cal Hacks 定位 | **Projects / Individual Project**，是为申请 Cal Hacks FA26 技术团队所做的**个人项目**。不称 Tech Lead、不称正式团队成员；Steven 2026-10-09 追加：**可见文案里不要出现 "take-home" 字样** |
+| Tempo 定位 | **持续项目**（Steven 2026-10-09 确认）。网站 description 按简历把功能**写全**：学习计划（整学期 + 每日，日程变动可改）、交互式学习笔记、考试复习总结、真题自测卷；`outcome` 标注「仍在持续开发」 |
 | Dev Log 内容 | Phase 5 **只建页面结构，文章数组刻意为空**；不编造日志、反思或日期。深度打磨归 Phase 6 |
 
 ### 任务清单
@@ -197,10 +198,10 @@
 | 5-5 | ✅ Dev Log 结构 | `src/data/devLog.ts`（`devLogPosts` 空数组）+ `src/components/DevLog.tsx`（空态卡片）+ `/dev-log` 路由 + 导航项（Home → Projects → Experience → **Dev Log** → Art → Contact） |
 | 5-6 | ✅ 实现与验收 | `tsc` + `vite build` 零报错；六条路由 + 404 全部 200；关键文案进 bundle；`docs/Database.md` 已补 §9/§10 接口 |
 
-**未搬上网站的简历说法（有意为之）：** Tempo 的 "generates semester-long and daily study plans" ——
-Tempo `docs/Database.md` 中 `study_plans` / `plan_items` 标注为 **Phase 2**，仓库内无实现证据，
-故 Projects 描述只写已落地能力（syllabus 解析 / Canvas 与邮件汇总 / 考试复习总结 / 真题自测卷）。
-已在 `docs/phase-5-resume-addendum.md` 二-A 列出，待 Steven 确认后决定是否补回。
+**一度搁置、现已解决的疑点：** Tempo 的 "generates semester-long and daily study plans" 曾在
+Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证据」为由未写入网站。
+**Steven 2026-10-09 裁定：Tempo 是持续项目，网站要把功能写全** —— 学习计划、学习笔记与简历提到的
+其它能力**全部写入** `description`，`outcome` 同时标注「仍在持续开发」。
 
 **验收标准：** 所有新增内容均有简历或仓库证据；Dev Log 无编造文章；中英双语文案齐全；`npm run build` 零报错；六条路由可访问。
 

@@ -30,7 +30,9 @@ export interface Project {
 - 全部 `string` → `LocalizedText`；`null` 已无残留（两条目字段全满）
 
 **Phase 5 变更（2026-10-09，事实基准 = Steven 的 NVIDIA 申请版简历）：**
-- `status` 新增 **`beta`**（Tempo，公开测试）与 **`submission`**（Cal Hacks 门户，个人 take-home 已提交）
+- `status` 新增 **`beta`**（Tempo，公开测试 + **持续开发**）与 **`submission`**（Cal Hacks 门户，个人项目已提交）
+- Steven 2026-10-09 追加指示：Cal Hacks 的可见文案里**不要出现 "take-home" 字样**；Tempo 是持续项目，
+  description 需把简历提到的功能**写全**（学习计划 / 学习笔记 / 考试复习总结 / 真题自测卷）
 - 条目由 2 条 → **4 条**，展示顺序由 Steven 拍板：**IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant**
 - Moyu 已于 2026-09-01 全站移除，**本文件不再有 Moyu 条目**；不得写成活跃产品或 "Present"
 - ⚠️ 简历里 Tempo 的 "generates semester-long and daily study plans" **未写入 `description`** ——

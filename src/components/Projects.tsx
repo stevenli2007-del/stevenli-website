@@ -8,7 +8,7 @@ import { useLocale } from '../lib/router'
 // 无 hover 阴影、无动效（spec：no hover animation or shadow）。
 // 标题层级：页面 h1 = Selected Projects，卡片标题降为 h2（保证单 h1 + 不跳级）。
 
-// Phase 5：新增 beta / submission 两个状态（Tempo 公开测试、Cal Hacks take-home 已提交）
+// Phase 5：新增 beta / submission 两个状态（Tempo 公开测试 + 持续开发、Cal Hacks 个人项目已提交）
 const statusDot: Record<Project['status'], string> = {
   live: 'bg-[#34C759]',
   beta: 'bg-[#FF9F0A]',
