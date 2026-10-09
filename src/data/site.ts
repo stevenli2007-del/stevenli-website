@@ -38,12 +38,14 @@ export const siteInfo: SiteInfo = {
     en: 'I build software and lab tools that make complex work easier to do—from a course-planning platform used by 109 students in beta to automated measurements for materials research.',
     zh: '我做软件，也做实验工具，让复杂的工作更容易完成——从 109 名学生正在公开测试的课程规划平台，到面向材料研究的自动化测量。',
   },
-  // Phase 6 微调（2026-10-09）：三项重排 —— 硬件论文打头、Tempo 提至第二位、
-  // 去掉「受邀助教」（不贴 NVIDIA 工程岗）。⚠️ 数字口径与 Tempo 卡片 / intro 不一致：
-  // intro 写 109、此处写 100+，Steven 已看过并保留，勿擅自统一。
+  // Phase 6 微调（2026-10-09）：三项重排 —— 硬件论文打头、Tempo 提至第二位。
+  // 第三项由 `Chrome Web Store developer` 换成 X-Institute 助教（Steven 2026-10-09 指定）。
+  // ⚠️ 机构名写法：零一学院**不是清华的下属院系**，是深圳市举办、依托清华大学深圳国际研究生院
+  //   （Tsinghua SIGS）的机构 —— 故用 `(Tsinghua SIGS)` 括注，不写成 "Tsinghua University Shenzhen"。
+  // ⚠️ 数字口径与 Tempo 卡片 / intro 不一致：intro 写 109、此处写 100+，Steven 已看过并保留，勿擅自统一。
   proof: {
-    en: 'IEEE PVSC 2025 co-author · Tempo founder, 100+ beta users · Chrome Web Store developer',
-    zh: 'IEEE PVSC 2025 论文合著者 · Tempo 创始人，100+ 测试用户 · Chrome 应用商店开发者',
+    en: 'IEEE PVSC 2025 co-author · Tempo founder, 100+ beta users · X-Institute (Tsinghua SIGS) invited TA',
+    zh: 'IEEE PVSC 2025 论文合著者 · Tempo 创始人，100+ 测试用户 · X-Institute（清华 SIGS）受邀助教',
   },
   cta: {
     projects: { en: 'Explore projects', zh: '查看项目' },
