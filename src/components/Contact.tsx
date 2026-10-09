@@ -1,40 +1,71 @@
-import Section from './Section'
-import { contactInfo, contactLinks, contactTitle, emailAction } from '../data/contact'
+import {
+  contactInfo,
+  contactLinks,
+  contactTitle,
+  contactIntro,
+  emailAction,
+  projectLabel,
+} from '../data/contact'
 import { useLocale } from '../lib/router'
+import type { Locale } from '../data/locales'
+import type { ContactLink } from '../data/contact'
 
-// Task 1-8 — Contact（PRD 4.6 / Design.md §7）
-// Phase 4 Task 4-3：移除组件内硬编码 label，改读 contact 数据（具名链接 + 主按钮文案）。
-// 版式（邮箱主按钮、其余降级为内联链接）留待 Task 4-9 按 spec §4 重做。
+// Phase 4 Task 4-9 — Contact 页（spec §4 Contact）
+// 白底；intro max-w-3xl；**邮箱是唯一主按钮**（`rounded-full bg-[#0071E3] px-6 py-3`），
+// 可见地址单独一行；其余链接**降级为内联文字链接**（不再全是药丸按钮 —— spec §3 诊断：
+// 四个同级按钮让「首选联系方式」无从判断）。
+// 外部链接一律 `target="_blank" rel="noreferrer"`。
+// 分组：GitHub / LinkedIn 是联系方式；Chrome Web Store 是项目入口，按 spec §4（P1）
+// 挂在 muted 的「项目」标签下，与联系方式区分。
+
+function OutboundLink({ link, locale }: { link: ContactLink; locale: Locale }) {
+  return (
+    <a href={link.href} target="_blank" rel="noreferrer" className="hover:underline">
+      {link.label[locale]}
+    </a>
+  )
+}
 
 export default function Contact() {
   const locale = useLocale()
+  const profiles = contactLinks.filter((link) => link.group === 'profile')
+  const projects = contactLinks.filter((link) => link.group === 'project')
 
   return (
-    <Section id="contact" tone="default">
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#1D1D1F]">
-        {contactTitle[locale]}
-      </h2>
+    <section className="bg-white">
+      <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
+        <h1 className="text-3xl font-semibold tracking-tight text-[#1D1D1F] md:text-4xl">
+          {contactTitle[locale]}
+        </h1>
 
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1D1D1F]">
+          {contactIntro[locale]}
+        </p>
+
         <a
           href={`mailto:${contactInfo.email}`}
-          className="inline-flex items-center justify-center rounded-full bg-[#0071E3] px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#0077ED]"
+          className="mt-6 inline-flex rounded-full bg-[#0071E3] px-6 py-3 text-sm font-medium text-white"
         >
-          {emailAction[locale]} · {contactInfo.email}
+          {emailAction[locale]}
         </a>
 
-        {contactLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-[#D2D2D7] px-6 py-3 text-[15px] font-medium text-[#1D1D1F] transition-colors hover:border-[#86868B]"
-          >
-            {link.label[locale]}
-          </a>
-        ))}
+        <p className="mt-3 text-sm text-[#6E6E73]">{contactInfo.email}</p>
+
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[#0071E3]">
+          {profiles.map((link) => (
+            <OutboundLink key={link.href} link={link} locale={locale} />
+          ))}
+        </div>
+
+        {projects.length > 0 && (
+          <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm font-medium text-[#0071E3]">
+            <span className="text-[#6E6E73]">{projectLabel[locale]}</span>
+            {projects.map((link) => (
+              <OutboundLink key={link.href} link={link} locale={locale} />
+            ))}
+          </div>
+        )}
       </div>
-    </Section>
+    </section>
   )
 }

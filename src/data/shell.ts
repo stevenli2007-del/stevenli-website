@@ -27,11 +27,15 @@ export const navigation: { label: LocalizedText } = {
   label: { en: 'Site navigation', zh: '站点导航' },
 }
 
-// spec §4：可见选项 EN / 中文；无障碍名按当前语言给出
+// spec §4：可见选项 EN / 中文；无障碍名按当前语言给出。
+// ⚠️ 无障碍名必须**包含可见文字本身**（WCAG 2.5.3 Label in Name；否则 Lighthouse/axe 报
+//   label-content-name-mismatch）。spec 原文只给「Switch to Chinese」/「切换为英文」，
+//   不含可见的 `中文` / `EN` —— 英文态下报错，中文态下 `EN` 链接同样会命中（潜伏）。
+//   故在保留 spec 原句的前提下追加可见短标签，两语言两选项一律成立。
 export const languageSwitch = {
   groupLabel: { en: 'Language', zh: '语言' } as LocalizedText,
-  toEnglish: { en: 'Switch to English', zh: '切换为英文' } as LocalizedText,
-  toChinese: { en: 'Switch to Chinese', zh: '切换为中文' } as LocalizedText,
+  toEnglish: { en: 'Switch to English — EN', zh: '切换为英文 — EN' } as LocalizedText,
+  toChinese: { en: 'Switch to Chinese — 中文', zh: '切换为中文 — 中文' } as LocalizedText,
   shortEnglish: 'EN',
   shortChinese: '中文',
 }

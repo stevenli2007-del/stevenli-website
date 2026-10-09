@@ -1,7 +1,9 @@
 # PRD.md — Personal Website Product Requirements
 
 ## 1. 产品定位
-一个面向美国大学教授 / 投资人 / startup 圈受众的个人单页网站（personal site），核心目的：用最少的滚动、最清晰的叙事，证明「Steven 是一个持续把手动流程自动化的 builder」。
+一个面向美国大学教授 / 投资人 / startup 圈受众的个人网站（personal site），核心目的：用最少的滚动、最清晰的叙事，证明「Steven 是一个持续把手动流程自动化的 builder」。
+
+> **Phase 4（2026-10-08）起形态变更：** 单页长滚动 → **五条独立路由**（`/` `/projects` `/experience` `/art` `/contact`）+ 顶部导航 + 全站中英双语（`?lang=` 为唯一事实源）。原独立页「About」并入首页。决策依据见 `Roadmap.md` Phase 4 决策表，设计 spec 见 `design-spec-v3.md`。
 
 - 定位句（Hero）：`Builder · Calligrapher · UC Berkeley 2030`
 - 语气：正式英文为主，专业但不学究。
@@ -23,11 +25,14 @@
 - Experience 2022→2026：从"第一次摸 SEM 的学员"到"以助教身份带学生看 SEM"。
 - Projects 两个节点：LinkedIn AI（已上线）→ IEEE 论文（已发表）——工程交付与科研产出双线。
 
-## 4. 页面结构（单页，六个 section，顺序固定）
+## 4. 页面结构（Phase 4 起：五条路由；内容顺序固定）
+
+> **v3 映射：** `/` = Hero（4.1）+ About（4.2）｜`/projects` = 4.3｜`/experience` = 4.4｜`/art` = 4.5｜`/contact` = 4.6。
+> 各小节的**内容要求**全部有效，以下按原编号保留；具体版式类名以 `Design.md §9` 与组件实现为准。
 
 ### 4.1 Hero
 - 定位句 `Builder · Calligrapher · UC Berkeley 2030`
-- 背景：极简，可选用本人行草笔迹做隐约水印/分隔线（非必须，Phase 3 再做）
+- 背景：**纯白 + 排版填充**（已定案）。曾试过城市夜景全幅背景，被判定不可用后回滚；笔迹分隔线（原 3-5 BrushDivider）已随独立页面改造移除 —— 拆成独立页后不再需要章节分隔线
 
 ### 4.2 About
 - 2-3 行，非自传体
@@ -42,7 +47,8 @@
 1. **LinkedIn AI Networking Assistant** — Live on Chrome Web Store
    - Chrome extension that automates LinkedIn networking with AI-generated personalized messages.
    - Stack: React + TypeScript + Vite + Chrome MV3 + Cloudflare Workers (Hono + KV) + DeepSeek
-   - Links: CWS (Extension ID `jeknmkmekajcbffbfijmmmcakpbbcoa`), GitHub `stevenli2007-del/Linkedin-AI-Assistant`
+   - Links: CWS (Extension ID `jeknmnkekajcbffbfijmnmckakpbkcoa`), GitHub `stevenli2007-del/Linkedin-AI-Assistant`
+     - ⚠️ 2026-08-30 更正：旧记 ID `jeknmkmekajcbffbfijmmmcakpbbcoa` 为废弃值，勿再使用
 2. **IEEE Paper** — Published
    - “The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning”
    - 发表日期：**2025-08-29**（IEEE Xplore 官方「Date Added to Xplore」；会议 2025-06-08~13，Montreal）
@@ -62,32 +68,38 @@
 时间线视觉需区分「学员」vs「受邀助教」两种身份（不用文字强调，靠视觉层级区分即可）。
 
 ### 4.5 Art（书法 Gallery）
-- 风格：行草，繁体字；题材倾向长征主题联语
-- 3-5 张高清作品照（横幅+条幅搭配），Phase 3 补图前用占位图
-- 视觉签名：章节标题/分隔线用本人笔迹（Phase 3，非 MVP 必需）
+- 风格：行草；**题跋保留繁体原文**（两种语言下均显示原文，不翻译）
+- **4 张本人作品照已就位**（`src/assets/art/artwork-1…4.jpg`：竖幅 3 + 近方形 1），`artworks.ts` 已记录真实像素尺寸
+- **Phase 4 起以等比占位框呈现**（`artworks.ts` 的 `renderArtworkImages = false`，见 `Roadmap.md` 决策表）：四张图仍留在仓库与数据层，下一轮内容/文案定稿后改一行即可切回，版式不跳
+- 视觉签名：笔迹分隔线（原 3-5）已随独立页面改造移除；题跋字体仍用 Noto Serif SC 子集
 - 此板块允许保留中文原文
 
 ### 4.6 Contact
-- Email: stevenli2007@berkeley.edu
-- GitHub: stevenli2007-del
-- LinkedIn: 待补
-- Chrome Web Store 链接
+- Email: `stevenli2007@berkeley.edu` —— 页面上是**唯一的主按钮**（`mailto:`），地址另起一行可见
+- GitHub: `https://github.com/stevenli2007-del`（内联文字链接，不再是药丸按钮）
+- LinkedIn: `https://www.linkedin.com/in/youcheng-li-6b3447335/`（**已上线**，原「待补」作废）
+- Chrome Web Store: **归入 muted「项目 / Project」标签行**，与联系方式区分层级（数据层字段 `ContactLink.group`）
+- 分组理由（spec §4 P1）：CWS 是项目入口，不是联系方式；四个同级按钮会让「首选联系方式」无从判断
 
 ## 5. 非功能性需求
-- 纯静态单页 SPA，无 CMS，无博客系统，无后端数据库
+- 纯静态 SPA（五条客户端路由，`public/_redirects` 提供 fallback），无 CMS，无博客系统，无后端数据库
+- **双语：** 所有面向用户的文案拆 `en` / `zh`；语言状态存于 URL（`?lang=`），不用 localStorage，保证可分享、可回退
+- **路由：** 零依赖自研（约 50 行），不引入 react-router（5 条静态路由无需路由库，省 ~12KB gzip）
+- **已知取舍：** 多路由 + JS 动态写入 `document.title`，无 SSR → 爬虫与分享卡片预览会退化；受众是点链接进来的真人，故此取舍被接受（不做 prerender）
 - 视觉风格：Apple 极简，clean white, rounded corners，浅色为主（深色模式可选，非 MVP）
 - 响应式：移动端必须适配（教授/投资人大概率用手机点开邮件里的链接）
 - 无花哨动效、无 parallax、无 hero video
 - 加载速度优先于视觉效果
 
-## 6. 待补素材清单（Phase 3 之前必须收集，缺失时用占位符不阻塞开发）
-1. IEEE 论文题目 / 发表 venue / 作者位次
-2. 书法作品高清照 3-5 张
-3. LinkedIn AI Assistant 商店截图
-4. LinkedIn 主页链接
+## 6. 素材清单（**全部结清**，2026-10-08 核对）
+1. ✅ IEEE 论文题目 / 发表 venue / 作者位次 —— 2026-08-30 补齐
+2. ✅ 书法作品高清照 4 张 —— 2026-08-30 到位（Phase 4 起以等比占位框呈现，图仍在仓库）
+3. ⛔ LinkedIn AI Assistant 商店截图 —— **不再收集**（CWS 链接已上线，截图非必需）
+4. ✅ LinkedIn 主页链接 —— 2026-08-30 上线
+5. ⛔ 墨屿（MoYu）界面截图 —— 2026-09-01 随项目终止取消，站内引用已清零
 
 ## 7. 验收标准（MVP = Phase 1+2 完成时）
-- 六个 section 内容完整（占位符可接受，缺失文字不可接受）
+- 五条路由内容完整（占位符可接受，缺失文字不可接受）
 - 移动端和桌面端都无布局错乱
 - 无 console error
-- Lighthouse Performance ≥ 90
+- Lighthouse Performance ≥ 90（**移动 + 桌面**）；Accessibility 无未通过项（分数满分不代表没有缺陷 —— 权重为 0 的项也须修）

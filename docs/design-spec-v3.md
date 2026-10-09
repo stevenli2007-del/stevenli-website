@@ -3,6 +3,31 @@
 **Status:** Design proposal selected by Steven: medium restructuring, independent page routes, English/中文 switch.
 **Scope:** Specification only. Do not change `src/`, add implementation code, or run a build as part of this design task.
 
+---
+
+## ⚠️ 实施状态批注（Bud，2026-10-08 · 请 Codex 在下一轮修订时合并进正文）
+
+> 本 spec 正文**未改动**（保留 Codex 所有权）。以下为实现阶段产生的**偏离**与**新增事实**，
+> 细节与理由见 `Roadmap.md` Phase 4 决策表。所有条目均已在代码中生效并验收。
+
+1. **路由数 6 → 5（§1）** —— About 不再独立成页，并入首页 `/`（Home = Hero + About）。导航 5 项。
+   旧 `/about` 仅保留 `_redirects` 301 到 `/`（不 404）。
+2. **中文姓名笔误（§5）** —— 正文的「李宥成」应为 **李佑成**（Steven 确认）。代码与 `document.title` 已用正确写法。
+3. **Art 作品图改为等比占位框**（§4 Art）—— 四张图仍在仓库与数据层，模块级开关 `renderArtworkImages = false`。
+   理由：Steven 将再做一轮「各独立页面内容与文案调整」，此刻为图片体积做压缩属无效功。
+   占位框宽高比**取自原图像素比**，故版式与真图逐像素一致，切回不跳版。
+4. **无障碍修正（§2 / §4）** —— spec 给出的语言切换无障碍名（`Switch to Chinese` / `切换为英文`）**不含该链接的可见文字**
+   （`中文` / `EN`），违反 WCAG 2.5.3 Label in Name，Lighthouse/axe 报 `label-content-name-mismatch`。
+   实现改为「原句 + 可见短标签」（`Switch to Chinese — 中文`）。**请把这条约束写进 spec 正文。**
+5. **标题层级（每页单 `<h1>`）** —— Hero 定位句 / 页面标题用 h1；About 标题降 h2；卡片标题 h2；时间线机构名 h2。
+6. **§4 未给出、由实现方暂译的文案** —— experience 的 `period` / `institution` / `keywords`、projects 的 zh `outcome`、
+   about 的 zh 例子标题。**均待 Codex 校订。**
+7. **§8 IEEE 日期冲突已结案** —— 以 IEEE Xplore 官方「Date Added to Xplore」为准：**2025-08-29**。
+   按 spec 要求，相关文案不写具体日期（只写 venue 年份）；`src/data/*.ts` 内的矛盾值已清除。
+8. **实测数据** —— Lighthouse：移动 98~100 / 桌面 100，Accessibility 全 100；14 组设备×路由走查零溢出、零 console 报错。
+
+---
+
 ## 1. Product and navigation decisions
 
 - Build six static pages corresponding to the existing six narrative sections. Keep their order: Home (Hero) → About → Projects → Experience → Art → Contact.

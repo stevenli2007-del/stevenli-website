@@ -14,6 +14,7 @@ export interface ContactInfo {
 export interface ContactLink {
   label: LocalizedText;         // 具名文案，如 "GitHub profile" / "GitHub 主页"
   href: string;
+  group: 'profile' | 'project'; // profile = 个人主页；project = 项目入口（spec §4：CWS 归到 Project 标签下，不与联系方式同级）
 }
 
 export const contactTitle: LocalizedText = { en: 'Contact', zh: '联系' }
@@ -25,6 +26,9 @@ export const contactIntro: LocalizedText = {
 
 export const emailAction: LocalizedText = { en: 'Email Youcheng', zh: '发送邮件' }
 
+// spec §4 Contact（P1）：Chrome Web Store 属「项目」而非联系方式，需挂在 Project 标签之下
+export const projectLabel: LocalizedText = { en: 'Project', zh: '项目' }
+
 export const contactInfo: ContactInfo = {
   email: 'stevenli2007@berkeley.edu',
   github: 'https://github.com/stevenli2007-del',
@@ -34,13 +38,18 @@ export const contactInfo: ContactInfo = {
 }
 
 export const contactLinks: ContactLink[] = [
-  { label: { en: 'GitHub profile', zh: 'GitHub 主页' }, href: contactInfo.github },
-  { label: { en: 'LinkedIn profile', zh: 'LinkedIn 主页' }, href: contactInfo.linkedin },
+  { label: { en: 'GitHub profile', zh: 'GitHub 主页' }, href: contactInfo.github, group: 'profile' },
+  {
+    label: { en: 'LinkedIn profile', zh: 'LinkedIn 主页' },
+    href: contactInfo.linkedin,
+    group: 'profile',
+  },
   {
     label: {
       en: 'LinkedIn AI Assistant on the Chrome Web Store',
       zh: 'Chrome 应用商店中的 LinkedIn AI Assistant',
     },
     href: contactInfo.chromeWebStore,
+    group: 'project',
   },
 ]

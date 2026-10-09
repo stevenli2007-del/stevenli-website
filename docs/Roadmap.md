@@ -116,6 +116,7 @@
 | IEEE 发表日期 | **2025-08-29**（Steven 2026-08-30 拍板）。spec 文案按原样不写具体日期；`src/data/experience.ts` 中的 `2025-09-03` 为错值，一并修正 |
 | SEO 退化 | 已知且接受（多路由 + JS 动态 title，无 SSR）。受众是点链接进来的真人，不做 prerender |
 | About 合并进 Home | **2026-10-08 即时决定**：「关于」不再独立成页，并入「首页」—— 导航由 6 项变 5 项，路由由 6 变 5。属对 spec §1 的偏离，需同步回 Codex（spec 仍按 6 路由规划） |
+| Art 作品图策略 | **2026-10-08 即时决定**：作品版面先用**等比占位框**（开关在 `src/data/artworks.ts` 的 `renderArtworkImages`，当前为 `false`）。四张图**仍留在仓库与数据层，不压缩、不裁切、不改尺寸**。理由：下一轮还要做「各独立页面内容与文案调整」，此刻为图片体积做优化属无效功；占位框顺带解除 LCP 瓶颈（Art 移动端 87 → 100）。**下一轮定稿后把开关置回 `true` 即恢复真图，版式不跳**（占位框宽高比直接取原图像素比） |
 
 ### 任务清单
 
@@ -127,10 +128,22 @@
 | 4-4 | ✅ Home `/`（含 About） | Hero 重做（纯白、文案列 DOM 前、头像 `h-32/md:h-40` 去阴影、proof line + 双 CTA、容器 `min-h-[calc(100svh-4.5rem)]`）+ About 区块（灰底 `#F5F5F7`、三白卡例子、identity strip）。⚠️ 设计适配待 Codex 报备：About 标题降为 **h2**（单 h1 语义）、Hero H1 取 `text-4xl/md:text-5xl` |
 | 4-5 | ~About `/about`~ | **已并入 4-4**（2026-10-08）：About 不再独立成页；旧 `/about` 链接经 `_redirects` 301 到 `/` |
 | 4-6 | ✅ Projects `/projects` | 白底、intro `max-w-3xl`、卡片网格 `lg:grid-cols-2`（替原三列留空位）；卡内顺序 status 圆点行 → title → outcome → description → Stack（上边框分隔）→ 链接 `mt-auto` 贴底；去掉原 `hover:shadow-md`。⚠️ 设计适配待 Codex 报备：卡片标题用 **h2**（页面 h1 已给 `Selected Projects`）；四个页面的 intro 统一取 About 的 `text-lg` 处理（spec 仅写 `max-w-3xl`，未定字号） |
-| 4-7 | Experience `/experience` | 时间线精简、2026 受邀徽章、SEM 首尾呼应 |
-| 4-8 | Art `/art` | 保留两列 masonry 原比例，加 intro 与白卡片 |
-| 4-9 | Contact `/contact` | 邮箱主按钮，其余降级为具名内联链接 |
-| 4-10 | 走查与收尾 | Lighthouse 复测（≥ 90，移动+桌面）、全设备走查、docs 同步（PRD「单页」描述需改写；spec §1 六路由需标注已合并） |
+| 4-7 | ✅ Experience `/experience` | 白底、intro `max-w-3xl`、时间线 `space-y-8` + `before:` 竖线（`left-[5px]`）；每条 `pl-8`：period（`text-xs uppercase tracking-wide`）→ institution（`text-lg`，受邀者 `font-semibold`）→ 单段 description → keywords（`text-xs`）。2026 受邀助教：实心节点 `bg-[#1D1D1F] ring-4 ring-[#1D1D1F]/10` + 深色「受邀」徽章；学员节点保持空心；2023「星空少年」徽章保留并统一为 `px-2.5 py-1`。⚠️ 卡片/条目标题层级：institution 由 h3 升 **h2**（页面 h1 已给页标题，避免跳级） |
+| 4-8 | ✅ Art `/art` | 保留 `bg-[#F5F5F7]` 灰底、**两列 masonry（`columns-1 gap-4 md:columns-2`）与原图比例**（不裁切、不轮播）；新增 intro（`max-w-3xl`）+ 小注（`四幅作品 · 行草`）；每张改为白底圆角卡 `rounded-2xl border p-3`，图 `w-full rounded-xl`，题跋 `mt-3 text-right`（原繁体、两语言一致、仍用 Noto Serif SC 子集）；`loading="lazy"` 保留。⚠️ 设计适配：题跋字号未动，页 h1 由 h2 升 **h1** |
+| 4-9 | ✅ Contact `/contact` | 白底；intro `max-w-3xl`；**邮箱是唯一主按钮**（`mt-6 inline-flex rounded-full bg-[#0071E3] px-6 py-3 text-sm`），地址另起一行可见；GitHub / LinkedIn **降级为内联文字链接**（`flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#0071E3]`，去掉原「四个同级药丸按钮」）；CWS 归入 muted **「项目 / Project」**标签行（spec §4 P1）。⚠️ 数据层新增：`ContactLink.group`（`'profile' \| 'project'`）+ `projectLabel` 文案（组件不得硬编码「项目」字样） |
+| 4-10 | 走查与收尾 | ① ✅ **全设备走查**：移动 / 平板 / 桌面 × 五路由 + 404 共 14 组，零横向溢出、零 console 报错、每页恰好 1 个 h1；② ✅ **Lighthouse 复测**：首页移动 98 / 桌面 100，Art 移动 **100**（原 87）、桌面 100，Accessibility 全 100；③ ⏳ **docs 同步** —— 待处理：PRD「单页」描述改写；spec §1 六路由标注已并为五条 + §5 中文名「李宥成」笔误；**Database.md §1/§2/§3/§4 接口已全面漂移**（`Project.outcome` 取代 `tagline`、`links` 改具名数组、新增 `ContactLink.group`、`Artwork.alt` 改双语 + 新增 `width`/`height`、`Experience.keywords` 改双语数组）；TechStack.md 需记录「零依赖自研路由」；Design.md 需补 v3 视觉规范 |
+
+**4-10 过程记录（2026-10-08）**
+
+> Lighthouse 报告（JSON + HTML）与全页截图归档于 `.workbuddy/reports/phase-4/`
+
+| # | 问题（均有审计归因，非猜测） | 处置 | 证据 |
+|---|---|---|---|
+| 修① | `shell.ts` 语言切换链接的 `aria-label` 不含可见文字（WCAG 2.5.3 Label in Name）。中文态下存在**镜像问题**（`EN` 链接同样不含可见文字），英文态未触发 | 无障碍名改为「可见文字 + 动作」 | `label-content-name-mismatch` 由失败转 0 失败 |
+| 修② | 4 张作品 `<img>` 缺 `width`/`height` → 空间不预留 → CLS 0.102（`unsized-images` 唯一归因） | `Artwork` 增 `width`/`height`；首图改 `eager` + `fetchPriority="high"` | CLS 0.102 → **0** |
+| 修③ | 图片体积导致 LCP 3.9s（占 Performance 权重 25，得分仅 0.52） | **不压缩图片**，改用等比占位框（见决策表） | LCP 3.9s → **1.3s**，Art 移动端 87 → **100** |
+
+> 未采纳的审计建议：Lighthouse 按 DPR1 建议把 718–960px 作品图缩到 592px —— 会在 Retina 屏发虚，属审计建议与真实观感冲突，**明确不采**。
 
 **验收标准：**
 - 五条路由可直接访问、可刷新、可分享，浏览器前进/后退正常
@@ -150,6 +163,6 @@
 | Phase 1 | ✅ 已完成 | 2026-08-28 |
 | Phase 2 | ✅ 已完成 | 2026-08-28 |
 | Phase 3 | ✅ 已完结（6/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅；3-3 ⛔ 取消（墨屿终止）；3-7 → 并入 4-10；3-8 🚩 自定义域名，Phase 4 收尾后执行 |
-| Phase 4 | 🔄 进行中（5/9） | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。4-1~4-4 ✅ 已验收（commit `515d310`）/ 4-6 ✅ 待走查 |
+| Phase 4 | 🔄 进行中（8/9 + 收尾） | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。4-1~4-4 ✅（`515d310`）/ 4-6 ✅（`d90b076`）/ 4-7 ✅ / 4-8 ✅ / 4-9 ✅ 均已验收 —— **5 个页面全部重做完毕**；4-10 走查 ✅ + Lighthouse ✅（移动 98~100 / 桌面 100），**仅剩 docs 同步**。⚠️ 下一轮：Steven 将做「各独立页面内容与文案调整」，Art 真图届时由 `renderArtworkImages` 开关切回 |
 
 > 每 Phase 签收后由 Bud 更新此表。
