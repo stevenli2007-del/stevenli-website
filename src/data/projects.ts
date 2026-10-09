@@ -102,6 +102,11 @@ export const projects: Project[] = [
         label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
         href: 'https://github.com/stevenli2007-del/tempo',
       },
+      {
+        // Steven 2026-10-09 提供：正式域名，未登录会跳 /login（正常）
+        label: { en: 'Live demo', zh: '在线演示' },
+        href: 'https://app.tempocourse.com/dashboard',
+      },
     ],
     order: 2,
   },
