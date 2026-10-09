@@ -82,7 +82,7 @@
 - 分组理由（spec §4 P1）：CWS 是项目入口，不是联系方式；四个同级按钮会让「首选联系方式」无从判断
 
 ## 5. 非功能性需求
-- 纯静态 SPA（五条客户端路由，`public/_redirects` 提供 fallback），无 CMS，无博客系统，无后端数据库
+- 纯静态 SPA（五条客户端路由；**SPA fallback 由 Cloudflare Workers 平台配置提供**，不写在 `_redirects` —— 见 TechStack §3），无 CMS，无博客系统，无后端数据库
 - **双语：** 所有面向用户的文案拆 `en` / `zh`；语言状态存于 URL（`?lang=`），不用 localStorage，保证可分享、可回退
 - **路由：** 零依赖自研（约 50 行），不引入 react-router（5 条静态路由无需路由库，省 ~12KB gzip）
 - **已知取舍：** 多路由 + JS 动态写入 `document.title`，无 SSR → 爬虫与分享卡片预览会退化；受众是点链接进来的真人，故此取舍被接受（不做 prerender）

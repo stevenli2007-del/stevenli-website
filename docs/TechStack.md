@@ -6,7 +6,7 @@
 纯前端静态站点（无后端、无数据库、无用户登录）。所有内容以本地数据文件（TS/JSON）形式硬编码在项目中，通过 CI/CD 自动部署。
 
 ```
-Frontend (React SPA) → Cloudflare Pages (静态托管)
+Frontend (React SPA) → Cloudflare Workers + Static Assets (托管；构建由 Workers Builds 跑)
 ```
 
 ## 2. Frontend
@@ -21,21 +21,35 @@ Frontend (React SPA) → Cloudflare Pages (静态托管)
   - Art 题跋：Noto Serif SC **子集化**（112 字符，住 `src/assets/fonts/`，`@font-face` + `font-display: swap`）
 
 ## 3. 部署
-- **平台：** Cloudflare Pages
-- **构建命令：** `npm run build`
-- **输出目录：** `dist`
-- **域名：** 当前是 Cloudflare 临时子域名 `https://stevenli-website.stevenli2007.workers.dev`；自定义域名（原 3-8）在 Phase 4 收尾后执行，届时旧 URL 自动 301、不丢流量
 
-**Phase 4 起（多路由）必须保留 `public/_redirects`：**
+> ⚠️ **2026-10-08 更正：本站不是 Cloudflare Pages。** 实际是 **Cloudflare Workers + Static Assets**（线上域名 `*.workers.dev` 亦为此印证），Git 集成走 **Workers Builds**。此前所有文档一律写作 "Cloudflare Pages"，属认知错误，已全面更正。
+
+- **平台：** Cloudflare Workers (Static Assets)；构建由 **Workers Builds** 触发
+- **构建命令：** `npm run build`（输出 `dist`，由 Workers 侧配置指向）
+- **触发方式：** push 到 `main`（GitHub `stevenli2007-del/stevenli-website`）→ 自动构建并部署
+- **构建状态：** 每次 push 在 commit 上生成 `Workers Builds: stevenli-website` check run。**必须确认 `conclusion = success`**，否则线上不会更新（GitHub 仓库无 Actions、无 webhook，check run 是唯一的构建信号）
+- **域名：** 当前临时子域名 `https://stevenli-website.stevenli2007.workers.dev`；自定义域名（原 3-8）Phase 4 收尾后执行，旧 URL 自动 301、不丢流量
+
+### `public/_redirects`（Phase 4 起）
+
+**当前只保留一行：**
 
 ```
 /about / 301
-/* /index.html 200
 ```
 
-- 第 1 行：旧的 `/about` 永久重定向到首页（About 已并入 Home，避免已分享链接 404）
-- 第 2 行：SPA fallback —— **没有它，直接访问 `/projects` 会 404**
-- 该文件在 `public/` 下，随构建原样复制进 `dist/`；改动它属于**部署配置**，不违反「只改指定文件」纪律
+旧的 `/about` 永久重定向到首页（About 已并入 Home，避免已分享链接 404）。该文件在 `public/` 下，随构建原样复制进 `dist/`；改动它属于**部署配置**，不违反「只改指定文件」纪律。
+
+**🔴 禁止再写 `/* /index.html 200`（SPA proxying 规则）**
+
+2026-10-08 首次推送 Phase 4（5 个 commit）时 **Workers Builds 构建失败**；二分后确认唯一变量就是那行 proxying 规则。SPA fallback 已由 Worker 侧的 `not_found_handling = single-page-application` 提供 —— 证据：加 `_redirects` 之前的旧版线上 `/art`、`/projects`、`/nope` 全部返回 200。再写一条 `/index.html 200` 与它冲突，会让**整次构建失败**；删掉该行后立即转 success。
+
+> **多路由 fallback 交给平台配置，不要用 `_redirects` 重复实现。**
+
+**部署验收（push 后必跑）：**
+
+1. `gh api repos/stevenli2007-del/stevenli-website/commits/<sha>/check-runs --jq '.check_runs[] | "\\(.status) \\(.conclusion)"'` → 期望 `completed success`
+2. 资源指纹比对：线上 HTML 引用的 `/assets/index-*.js` 应与本地 `dist/assets/` 下的同名 —— 指纹一致才说明新版本真的上线（`curl -s <线上URL> | grep -o '/assets/[^"]*'`）
 
 ## 4. 项目结构（Coder AI 必须遵守，不得自创目录结构）
 ```
@@ -77,7 +91,7 @@ Frontend (React SPA) → Cloudflare Pages (静态托管)
   main.tsx
   index.css         # Tailwind entry + @font-face
 /public
-  _redirects        # Cloudflare Pages 重定向与 SPA fallback（Phase 4）
+  _redirects        # /about → / 永久重定向（Phase 4；SPA fallback 由 Workers 配置提供，勿写在此文件）
 ```
 
 **关键规则：内容和展示逻辑必须分离。** 任何文字/图片路径/链接都不允许硬编码在组件 JSX 里，必须来自 `/src/data/*.ts`。这样以后改文案不用碰组件代码。

@@ -18,12 +18,12 @@
 | 0-2 | Tailwind 接入 | 安装并配置 Tailwind，`index.css` 作为唯一样式入口 |
 | 0-3 | 目录结构落地 | 按 TechStack.md 第 4 节创建 `/src/components` `/src/data` `/src/assets`，六个组件与四个数据文件先放空壳 |
 | 0-4 | Git 初始化 | `git init` + 首次 commit（含 .gitignore） |
-| 0-5 | Cloudflare Pages 部署 | 关联仓库，构建命令 `npm run build`，输出目录 `dist`，部署空壳并确认线上可访问 |
+| 0-5 | ~~Cloudflare Pages~~ 部署 | 关联仓库，构建命令 `npm run build`，输出目录 `dist`，部署空壳并确认线上可访问（平台名当时记为 Pages；**2026-10-08 更正为 Cloudflare Workers + Static Assets，构建由 Workers Builds 跑**） |
 | 0-6 | 域名决策 🚩 | ~~Steven 决定~~ ✅ 已决策（2026-08-26）：暂用 workers.dev 默认域名，Phase 3 完成后切换自定义域名（届时再选域名 + 配 DNS） |
 
 **验收标准：**
 - `npm run dev` 本地可跑，`npm run build` 零报错
-- 空壳站点在 Cloudflare Pages 线上 URL 可访问
+- 空壳站点在 Cloudflare 线上 URL 可访问（平台 = Workers + Static Assets，见 TechStack §3）
 - 目录结构与 TechStack.md 第 4 节完全一致
 
 **Done Report 要求：** 列出已建文件清单、线上 URL、git commit hash。
@@ -112,7 +112,7 @@
 | 中文繁简 | 不纠结；Art 作品题跋保留原繁体，其余按 spec 文案原样落地 |
 | BrushDivider | **移除**（改为独立页面后章节分隔线不再需要；组件文件一并删除） |
 | 路由方案 | **零依赖自研**（约 50 行），不引入 react-router —— 5 个静态路由无需路由库，省 ~12KB gzip，保 Lighthouse ≥ 90 |
-| 静态托管 | 加 `public/_redirects`（`/* /index.html 200`），否则 Cloudflare Pages 直接访问 `/about` 会 404 |
+| 静态托管 | 加 `public/_redirects` 做 `/about → /` 的 301。~~同时写 `/* /index.html 200` 提供 fallback~~ —— **2026-10-08 更正：该行导致 Workers Builds 构建失败，已删除**；SPA fallback 由平台（Worker 侧 `not_found_handling`）提供。详见「部署事故记录」 |
 | IEEE 发表日期 | **2025-08-29**（Steven 2026-08-30 拍板）。spec 文案按原样不写具体日期；`src/data/experience.ts` 中的 `2025-09-03` 为错值，一并修正 |
 | SEO 退化 | 已知且接受（多路由 + JS 动态 title，无 SSR）。受众是点链接进来的真人，不做 prerender |
 | About 合并进 Home | **2026-10-08 即时决定**：「关于」不再独立成页，并入「首页」—— 导航由 6 项变 5 项，路由由 6 变 5。属对 spec §1 的偏离，需同步回 Codex（spec 仍按 6 路由规划） |
@@ -122,7 +122,7 @@
 
 | # | 任务 | 说明 |
 |---|---|---|
-| 4-1 | ✅ 路由骨架 | 自研 router（`src/lib/router.tsx`，含 `?lang=` 解析）、五条路由挂现有 section 组件、`public/_redirects`（含 `/about / 301`）、404 页、移除 BrushDivider |
+| 4-1 | ✅ 路由骨架 | 自研 router（`src/lib/router.tsx`，含 `?lang=` 解析）、五条路由挂现有 section 组件、`public/_redirects`（**最终只含 `/about / 301`**，proxying 行已因构建失败移除）、404 页、移除 BrushDivider |
 | 4-2 | ✅ 站点外壳 | `Header.tsx`（sticky 导航 + EN/中文 切换，移动端两行横向滚动）+ `Footer.tsx`；`shell.ts` 扩为导航/语言/metadata/页脚文案；`App.tsx` 同步 `<html lang>` / `document.title` / meta description |
 | 4-3 | ✅ 数据层双语化 | 6 个 data 文件文案全拆 `en`/`zh`（spec §4 文案落地）；`Project.tagline`→`outcome`、链接改具名数组 `{label,href}`；组件移除全部硬编码文案（Hero intro / Contact label / Projects 状态与链接）改读 locale。⚠️ spec §4 未给出的字段（experience 的 period/institution/keywords、projects 的 zh outcome、about 的 zh 例子标题）由 Bud 暂译，待 Codex 校订 |
 | 4-4 | ✅ Home `/`（含 About） | Hero 重做（纯白、文案列 DOM 前、头像 `h-32/md:h-40` 去阴影、proof line + 双 CTA、容器 `min-h-[calc(100svh-4.5rem)]`）+ About 区块（灰底 `#F5F5F7`、三白卡例子、identity strip）。⚠️ 设计适配待 Codex 报备：About 标题降为 **h2**（单 h1 语义）、Hero H1 取 `text-4xl/md:text-5xl` |
@@ -131,7 +131,7 @@
 | 4-7 | ✅ Experience `/experience` | 白底、intro `max-w-3xl`、时间线 `space-y-8` + `before:` 竖线（`left-[5px]`）；每条 `pl-8`：period（`text-xs uppercase tracking-wide`）→ institution（`text-lg`，受邀者 `font-semibold`）→ 单段 description → keywords（`text-xs`）。2026 受邀助教：实心节点 `bg-[#1D1D1F] ring-4 ring-[#1D1D1F]/10` + 深色「受邀」徽章；学员节点保持空心；2023「星空少年」徽章保留并统一为 `px-2.5 py-1`。⚠️ 卡片/条目标题层级：institution 由 h3 升 **h2**（页面 h1 已给页标题，避免跳级） |
 | 4-8 | ✅ Art `/art` | 保留 `bg-[#F5F5F7]` 灰底、**两列 masonry（`columns-1 gap-4 md:columns-2`）与原图比例**（不裁切、不轮播）；新增 intro（`max-w-3xl`）+ 小注（`四幅作品 · 行草`）；每张改为白底圆角卡 `rounded-2xl border p-3`，图 `w-full rounded-xl`，题跋 `mt-3 text-right`（原繁体、两语言一致、仍用 Noto Serif SC 子集）；`loading="lazy"` 保留。⚠️ 设计适配：题跋字号未动，页 h1 由 h2 升 **h1** |
 | 4-9 | ✅ Contact `/contact` | 白底；intro `max-w-3xl`；**邮箱是唯一主按钮**（`mt-6 inline-flex rounded-full bg-[#0071E3] px-6 py-3 text-sm`），地址另起一行可见；GitHub / LinkedIn **降级为内联文字链接**（`flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#0071E3]`，去掉原「四个同级药丸按钮」）；CWS 归入 muted **「项目 / Project」**标签行（spec §4 P1）。⚠️ 数据层新增：`ContactLink.group`（`'profile' \| 'project'`）+ `projectLabel` 文案（组件不得硬编码「项目」字样） |
-| 4-10 | 走查与收尾 | ① ✅ **全设备走查**：移动 / 平板 / 桌面 × 五路由 + 404 共 14 组，零横向溢出、零 console 报错、每页恰好 1 个 h1；② ✅ **Lighthouse 复测**：首页移动 98 / 桌面 100，Art 移动 **100**（原 87）、桌面 100，Accessibility 全 100；③ ✅ **docs 同步**（六份文档全部对齐 v3 现状，与实现同在 commit `511208a`）：PRD 改写为五路由双语形态（含 CWS 旧 ID、`LinkedIn: 待补`、素材清单三处 stale 订正）；**Database.md §1~§6 接口全部重写**（`Project.outcome` 取代 `tagline`、`links` 改具名数组、新增 `ContactLink.group`、`Artwork.alt` 改双语 + `width`/`height`、`Experience.keywords` 改双语数组），并新增 §7 `locales.ts` / §8 `shell.ts`；TechStack.md 记录零依赖自研路由（并列入禁止事项）、Tailwind v4、子集字体、真实目录结构、`public/_redirects`；Design.md 新增 **§9 现行 v3 视觉规范**并把 §3~§7 失效章节打上作废标记；`design-spec-v3.md` 顶部加「实施状态批注」（8 条偏离，保持 Codex 正文不动，待其合并） |
+| 4-10 | 走查与收尾 | ① ✅ **全设备走查**：移动 / 平板 / 桌面 × 五路由 + 404 共 14 组，零横向溢出、零 console 报错、每页恰好 1 个 h1；② ✅ **Lighthouse 复测**：首页移动 98 / 桌面 100，Art 移动 **100**（原 87）、桌面 100，Accessibility 全 100；③ ✅ **docs 同步**（六份文档全部对齐 v3 现状，与实现同在 commit `511208a`）：PRD 改写为五路由双语形态（含 CWS 旧 ID、`LinkedIn: 待补`、素材清单三处 stale 订正）；**Database.md §1~§6 接口全部重写**（`Project.outcome` 取代 `tagline`、`links` 改具名数组、新增 `ContactLink.group`、`Artwork.alt` 改双语 + `width`/`height`、`Experience.keywords` 改双语数组），并新增 §7 `locales.ts` / §8 `shell.ts`；TechStack.md 记录零依赖自研路由（并列入禁止事项）、Tailwind v4、子集字体、真实目录结构、`public/_redirects` 契约与部署验收流程（**平台名 2026-10-08 更正为 Workers + Static Assets**）；Design.md 新增 **§9 现行 v3 视觉规范**并把 §3~§7 失效章节打上作废标记；`design-spec-v3.md` 顶部加「实施状态批注」（8 条偏离，保持 Codex 正文不动，待其合并） |
 
 **4-10 过程记录（2026-10-08）**
 
@@ -144,6 +144,19 @@
 | 修③ | 图片体积导致 LCP 3.9s（占 Performance 权重 25，得分仅 0.52） | **不压缩图片**，改用等比占位框（见决策表） | LCP 3.9s → **1.3s**，Art 移动端 87 → **100** |
 
 > 未采纳的审计建议：Lighthouse 按 DPR1 建议把 718–960px 作品图缩到 592px —— 会在 Retina 屏发虚，属审计建议与真实观感冲突，**明确不采**。
+
+**部署事故记录（2026-10-08，Phase 4 首次上线）**
+
+| 阶段 | 事实 |
+|---|---|
+| 现象 | 5 个 commit（`515d310`→`c4bf878`）push 后线上**仍未更新**，停在 `3fc3476`（9-01 版）：title 是旧的 `Youcheng (Steven) Li`，JS 仍 `index-B5178jYw.js` |
+| 定位 | 仓库**无 webhook、无 Actions**；`gh api …/commits/<sha>/check-runs` 显示 `Workers Builds: stevenli-website` → **failure**。顺带查明部署机制是 **Cloudflare Workers Builds**，不是 Pages |
+| 排查（逐项排除） | ① import 大小写（49 条全精确匹配，Linux 也安全）② 源文件缺失（`git ls-files` 完整，无被 ignore 的源文件）③ 本地 `npm run build` 通过 |
+| 根因 | `public/_redirects` 第 2 行 `/* /index.html 200`。SPA fallback 已由 Worker 侧 `not_found_handling` 提供（旧版无 `_redirects` 时 `/art`、`/nope` 均 200），重复的 proxying 规则直接让构建失败 |
+| 修复 | commit `c1466d7` 删除该行（只留 `/about / 301`）→ 构建 **success**，耗时约 50s |
+| 验证 | 线上资源指纹 `index-Cl7ms7eC.js` / `index-pYSA4rCj.css` 与本地 `dist` 一致；JS bundle 命中 `Builder & Calligrapher` / `李佑成` / `Selected Projects`；`/about` → **301** `/`；五路由 + `/nope` 全 200 |
+
+> 教训：**「push 后看线上」不够，必须查 commit 上的 check run** —— 构建失败时线上会静默停在旧版本，CDN 照样返回 200，不报错。
 
 **验收标准：**
 - 五条路由可直接访问、可刷新、可分享，浏览器前进/后退正常
@@ -163,6 +176,6 @@
 | Phase 1 | ✅ 已完成 | 2026-08-28 |
 | Phase 2 | ✅ 已完成 | 2026-08-28 |
 | Phase 3 | ✅ 已完结（7/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅ 3-7 ✅（**已随 4-10 完成**：全设备走查 + Lighthouse 复测）；3-3 ⛔ 取消（墨屿终止）；**3-8 🚩 自定义域名** —— 唯一遗留项，Phase 4 收尾后执行。注：Art 现以等比占位框呈现属 Phase 4 决策（`renderArtworkImages`），非素材缺失 |
-| Phase 4 | ✅ **已完成**（9/9） | 2026-10-08 | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。9 张卡片全部验收；Lighthouse 移动 98~100 / 桌面 100、Accessibility 全 100；六份治理文档已对齐实现。Commits：`515d310`（4-1,4-2）/ `d90b076`（4-3,4-4,4-6）/ `511208a`（4-7~4-10 + docs）。⚠️ 下一轮：Steven 做「各独立页面内容与文案调整」，Art 真图届时由 `renderArtworkImages` 开关切回 |
+| Phase 4 | ✅ **已完成并上线**（9/9） | 2026-10-08 | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。9 张卡片全部验收；Lighthouse 移动 98~100 / 桌面 100、Accessibility 全 100；六份治理文档已对齐实现。Commits：`515d310`（4-1,4-2）/ `d90b076`（4-3,4-4,4-6）/ `511208a`（4-7~4-10 + docs）/ `c4bf878`（Roadmap 收尾）/ `e9b7e1e`（删孤儿 `hero-bg.jpg`）/ `c1466d7`（**修复部署失败**，见上方部署事故记录）。**线上已更新为 v3**：资源指纹与本地 `dist` 一致、`/about` 301、五路由均 200。⚠️ 下一轮：Steven 做「各独立页面内容与文案调整」，Art 真图届时由 `renderArtworkImages` 开关切回 |
 
 > 每 Phase 签收后由 Bud 更新此表。

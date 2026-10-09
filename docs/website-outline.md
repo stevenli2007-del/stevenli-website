@@ -100,7 +100,7 @@
 | 架构 | 纯静态单页（SPA），无 CMS，无博客系统 |
 | 风格 | Apple 极简，clean white，rounded corners |
 | 响应式 | 移动端适配 |
-| 托管 | Cloudflare Pages（免费，Steven 已熟悉 Workers 生态）|
+| 托管 | ~~Cloudflare Pages~~ → **Cloudflare Workers + Static Assets**（免费，Steven 已熟悉 Workers 生态；平台名 2026-10-08 更正）|
 | 字体 | 系统字体 + 可选中文衬线（用于书法区标题）|
 
 ---
