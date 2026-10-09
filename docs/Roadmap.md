@@ -131,7 +131,7 @@
 | 4-7 | ✅ Experience `/experience` | 白底、intro `max-w-3xl`、时间线 `space-y-8` + `before:` 竖线（`left-[5px]`）；每条 `pl-8`：period（`text-xs uppercase tracking-wide`）→ institution（`text-lg`，受邀者 `font-semibold`）→ 单段 description → keywords（`text-xs`）。2026 受邀助教：实心节点 `bg-[#1D1D1F] ring-4 ring-[#1D1D1F]/10` + 深色「受邀」徽章；学员节点保持空心；2023「星空少年」徽章保留并统一为 `px-2.5 py-1`。⚠️ 卡片/条目标题层级：institution 由 h3 升 **h2**（页面 h1 已给页标题，避免跳级） |
 | 4-8 | ✅ Art `/art` | 保留 `bg-[#F5F5F7]` 灰底、**两列 masonry（`columns-1 gap-4 md:columns-2`）与原图比例**（不裁切、不轮播）；新增 intro（`max-w-3xl`）+ 小注（`四幅作品 · 行草`）；每张改为白底圆角卡 `rounded-2xl border p-3`，图 `w-full rounded-xl`，题跋 `mt-3 text-right`（原繁体、两语言一致、仍用 Noto Serif SC 子集）；`loading="lazy"` 保留。⚠️ 设计适配：题跋字号未动，页 h1 由 h2 升 **h1** |
 | 4-9 | ✅ Contact `/contact` | 白底；intro `max-w-3xl`；**邮箱是唯一主按钮**（`mt-6 inline-flex rounded-full bg-[#0071E3] px-6 py-3 text-sm`），地址另起一行可见；GitHub / LinkedIn **降级为内联文字链接**（`flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#0071E3]`，去掉原「四个同级药丸按钮」）；CWS 归入 muted **「项目 / Project」**标签行（spec §4 P1）。⚠️ 数据层新增：`ContactLink.group`（`'profile' \| 'project'`）+ `projectLabel` 文案（组件不得硬编码「项目」字样） |
-| 4-10 | 走查与收尾 | ① ✅ **全设备走查**：移动 / 平板 / 桌面 × 五路由 + 404 共 14 组，零横向溢出、零 console 报错、每页恰好 1 个 h1；② ✅ **Lighthouse 复测**：首页移动 98 / 桌面 100，Art 移动 **100**（原 87）、桌面 100，Accessibility 全 100；③ ⏳ **docs 同步** —— 待处理：PRD「单页」描述改写；spec §1 六路由标注已并为五条 + §5 中文名「李宥成」笔误；**Database.md §1/§2/§3/§4 接口已全面漂移**（`Project.outcome` 取代 `tagline`、`links` 改具名数组、新增 `ContactLink.group`、`Artwork.alt` 改双语 + 新增 `width`/`height`、`Experience.keywords` 改双语数组）；TechStack.md 需记录「零依赖自研路由」；Design.md 需补 v3 视觉规范 |
+| 4-10 | 走查与收尾 | ① ✅ **全设备走查**：移动 / 平板 / 桌面 × 五路由 + 404 共 14 组，零横向溢出、零 console 报错、每页恰好 1 个 h1；② ✅ **Lighthouse 复测**：首页移动 98 / 桌面 100，Art 移动 **100**（原 87）、桌面 100，Accessibility 全 100；③ ✅ **docs 同步**（六份文档全部对齐 v3 现状，与实现同在 commit `511208a`）：PRD 改写为五路由双语形态（含 CWS 旧 ID、`LinkedIn: 待补`、素材清单三处 stale 订正）；**Database.md §1~§6 接口全部重写**（`Project.outcome` 取代 `tagline`、`links` 改具名数组、新增 `ContactLink.group`、`Artwork.alt` 改双语 + `width`/`height`、`Experience.keywords` 改双语数组），并新增 §7 `locales.ts` / §8 `shell.ts`；TechStack.md 记录零依赖自研路由（并列入禁止事项）、Tailwind v4、子集字体、真实目录结构、`public/_redirects`；Design.md 新增 **§9 现行 v3 视觉规范**并把 §3~§7 失效章节打上作废标记；`design-spec-v3.md` 顶部加「实施状态批注」（8 条偏离，保持 Codex 正文不动，待其合并） |
 
 **4-10 过程记录（2026-10-08）**
 
@@ -162,7 +162,7 @@
 | Phase 0 | ✅ 已完成 | 2026-08-26 |
 | Phase 1 | ✅ 已完成 | 2026-08-28 |
 | Phase 2 | ✅ 已完成 | 2026-08-28 |
-| Phase 3 | ✅ 已完结（6/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅；3-3 ⛔ 取消（墨屿终止）；3-7 → 并入 4-10；3-8 🚩 自定义域名，Phase 4 收尾后执行 |
-| Phase 4 | 🔄 进行中（8/9 + 收尾） | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。4-1~4-4 ✅（`515d310`）/ 4-6 ✅（`d90b076`）/ 4-7 ✅ / 4-8 ✅ / 4-9 ✅ 均已验收 —— **5 个页面全部重做完毕**；4-10 走查 ✅ + Lighthouse ✅（移动 98~100 / 桌面 100），**仅剩 docs 同步**。⚠️ 下一轮：Steven 将做「各独立页面内容与文案调整」，Art 真图届时由 `renderArtworkImages` 开关切回 |
+| Phase 3 | ✅ 已完结（7/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅ 3-7 ✅（**已随 4-10 完成**：全设备走查 + Lighthouse 复测）；3-3 ⛔ 取消（墨屿终止）；**3-8 🚩 自定义域名** —— 唯一遗留项，Phase 4 收尾后执行。注：Art 现以等比占位框呈现属 Phase 4 决策（`renderArtworkImages`），非素材缺失 |
+| Phase 4 | ✅ **已完成**（9/9） | 2026-10-08 | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。9 张卡片全部验收；Lighthouse 移动 98~100 / 桌面 100、Accessibility 全 100；六份治理文档已对齐实现。Commits：`515d310`（4-1,4-2）/ `d90b076`（4-3,4-4,4-6）/ `511208a`（4-7~4-10 + docs）。⚠️ 下一轮：Steven 做「各独立页面内容与文案调整」，Art 真图届时由 `renderArtworkImages` 开关切回 |
 
 > 每 Phase 签收后由 Bud 更新此表。
