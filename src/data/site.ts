@@ -27,9 +27,10 @@ export const siteInfo: SiteInfo = {
     en: 'I turn manual workflows into useful tools, from AI-assisted networking to automated lab measurement.',
     zh: '我把手动流程变成实用工具，从 AI 辅助拓展人脉到实验室自动测量。',
   },
+  // Phase 5：按简历事实基准重排（硬件研究打头），并补入 Tempo 公开测试
   proof: {
-    en: 'Chrome Web Store launch · IEEE PVSC 2025 co-author · Invited teaching assistant',
-    zh: 'Chrome 应用商店上线 · IEEE PVSC 2025 论文合著者 · 受邀助教',
+    en: 'IEEE PVSC 2025 co-author · Chrome Web Store launch · Tempo in public beta · Invited teaching assistant',
+    zh: 'IEEE PVSC 2025 论文合著者 · Chrome 应用商店上线 · Tempo 公开测试中 · 受邀助教',
   },
   cta: {
     projects: { en: 'Explore projects', zh: '查看项目' },

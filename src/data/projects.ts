@@ -1,7 +1,16 @@
 // Database.md §1 — Project interface
 // Phase 4 Task 4-3：文案拆 en/zh；链接改为「具名」结构（spec §4 Projects：链接按目的命名）。
 // spec §4：outcome（一句话成果）置于标题下，description 随后，Stack 置底。
-// spec §8：IEEE 日期冲突未决，故 description 不写具体日期（只写 venue 年份）。
+//
+// Phase 5（2026-10-09）改写：事实基准 = Steven 的 NVIDIA 申请版简历。
+//   展示顺序（Steven 2026-10-09 拍板）：IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant。
+//   新增两个 status：beta（Tempo，公开测试）/ submission（Cal Hacks，take-home 作业）。
+//   ⚠️ 未搬上网站的简历说法：「semester-long and daily study plans」—— Tempo 的
+//      `study_plans` / `plan_items` 在 `docs/Database.md` 里标注为 Phase 2，仓库内无实现证据，
+//      故 description 只写已落地的能力（syllabus 解析 / Canvas 与邮件汇总 / 考试复习 / 自测卷）。
+//      见 docs/phase-5-resume-addendum.md。
+//   ⚠️ Cal Hacks 项目定位：个人 take-home 作品，不是 Tech Lead、不是正式团队成员。
+//   ⚠️ Moyu 已于 2026-09-01 从全站移除，本文件不再有条目。
 
 import type { LocalizedText } from './locales'
 
@@ -13,25 +22,27 @@ export interface ProjectLink {
 export interface Project {
   id: string;                   // 唯一标识，如 "linkedin-ai"
   title: LocalizedText;
-  status: 'live' | 'in-development' | 'published';
+  status: 'live' | 'beta' | 'submission' | 'in-development' | 'published';
   outcome: LocalizedText;       // 一句话成果（原 tagline 升级）
   description: LocalizedText;   // 卡片详细描述
   techStack: string[];          // 技术栈（专有名词，不翻译）
   links: ProjectLink[];
-  order: number;                // 展示顺序，1-2
+  order: number;                // 展示顺序，1-4
 }
 
 export const projectsTitle: LocalizedText = { en: 'Selected Projects', zh: '代表项目' }
 
 export const projectsIntro: LocalizedText = {
-  en: 'Two outcomes across product engineering and applied research.',
-  zh: '两个成果，分别来自产品工程与应用研究。',
+  en: 'Four builds across applied hardware research, full-stack product work, and a shipped browser extension.',
+  zh: '四个成果，覆盖硬件应用研究、全栈产品与已发布的浏览器扩展。',
 }
 
 export const stackLabel: LocalizedText = { en: 'Stack', zh: '技术栈' }
 
 export const statusLabels: Record<Project['status'], LocalizedText> = {
   live: { en: 'Live', zh: '已上线' },
+  beta: { en: 'Public Beta', zh: '公开测试' },
+  submission: { en: 'Submitted', zh: '已提交' },
   'in-development': { en: 'In Development', zh: '开发中' },
   published: { en: 'Published', zh: '已发表' },
 }
@@ -41,13 +52,89 @@ const chromeWebStoreUrl =
 
 export const projects: Project[] = [
   {
+    id: 'ieee-paper',
+    title: { en: 'CdSe Quantum Dots on Si Solar Cells', zh: '硒化镉量子点与硅太阳能电池' },
+    status: 'published',
+    outcome: { en: 'IEEE PVSC 2025 · Fourth author of five', zh: 'IEEE PVSC 2025 · 五名作者中排名第四' },
+    description: {
+      en: 'Fabricated and characterized semiconductor devices in the Singh Center cleanroom at UPenn ESAP: patterned substrates by photolithography, grew uniform SiO₂ layers on silicon wafers by thermal oxidation, and characterized CdSe quantum-dot films. Supervised by Dr. Gyuseok L. Kim; the work became “The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning” in IEEE PVSC 2025.',
+      zh: '在宾大 ESAP 的 Singh Center 洁净间完成半导体器件制备与表征：用光刻图形化衬底、以热氧化在硅片上生长均匀的二氧化硅层，并对硒化镉量子点薄膜做表征。由 Gyuseok L. Kim 博士指导，成果即 IEEE PVSC 2025 论文《硒化镉量子点对硅太阳能电池效率的影响：实践式项目学习》。',
+    },
+    techStack: [
+      'CdSe Quantum Dots',
+      'Silicon Photovoltaics',
+      'Photolithography',
+      'Thermal Oxidation',
+      'UV-Vis Characterization',
+    ],
+    links: [
+      {
+        label: { en: 'Read on IEEE Xplore', zh: '在 IEEE Xplore 阅读' },
+        href: 'https://ieeexplore.ieee.org/document/11133208',
+      },
+    ],
+    order: 1,
+  },
+  {
+    id: 'tempo',
+    title: { en: 'Tempo — Berkeley Study Mate', zh: 'Tempo · 伯克利学习助手' },
+    status: 'beta',
+    outcome: { en: '109 users in public beta', zh: '109 位用户（公开测试阶段）' },
+    description: {
+      en: 'A course OS for Berkeley students. It parses syllabus PDFs into structured course logistics, pulls assignments, files, modules, and announcements from Canvas and from forwarded email, and keeps every deadline in one dashboard. For each exam it summarizes the material you already have, and turns a real past exam into a self-graded practice set — answers come from the instructor’s key, never from the model. Built with Supabase authentication and real-time sync; 77 users in private beta, 109 in public beta.',
+      zh: '一个面向伯克利学生的课程操作系统。它把 syllabus 解析成结构化的课程规则，从 Canvas 和转发邮件里汇总作业、课件、章节与公告，把截止日期收进同一张看板；针对每一场考试，它基于你已有的材料生成复习总结，并把真实的往年卷子切成可对答案的自测题 —— 答案取教师答案键，不由模型编造。用 Supabase 做认证与实时同步；内测 77 位用户，公开测试 109 位。',
+    },
+    techStack: [
+      'TypeScript',
+      'Next.js',
+      'React',
+      'Tailwind CSS',
+      'Supabase',
+      'Vercel',
+      'DeepSeek',
+      'Qwen',
+    ],
+    links: [
+      {
+        label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
+        href: 'https://github.com/stevenli2007-del/tempo',
+      },
+    ],
+    order: 2,
+  },
+  {
+    id: 'cal-hacks-portal',
+    title: { en: 'Cal Hacks FA26 Application Portal', zh: 'Cal Hacks FA26 申请门户' },
+    status: 'submission',
+    outcome: {
+      en: 'Individual take-home for the Cal Hacks FA26 Tech Team application',
+      zh: '为申请 Cal Hacks FA26 技术团队所做的个人 take-home 作品',
+    },
+    description: {
+      en: 'A miniature hackathon application portal. Applicants sign in, choose a track — hacker, judge, mentor, or volunteer — and fill a track-specific form with drafts before submitting. Organizers grade with a weighted rubric, watch a coverage tracker that surfaces grading bottlenecks, and move applications across an accept / waitlist / reject board. Every access rule lives in Postgres row-level security behind a single is_organizer() helper.',
+      zh: '一个精简的黑客松申请门户。申请者登录后选择方向 —— 选手、评委、导师或志愿者 —— 填写对应表单，可先存草稿再提交。组织者用加权评分表打分，用覆盖率面板盯住评分瓶颈，并在「录取 / 候补 / 拒绝」看板上推动决策。所有权限规则都写进 Postgres 的行级安全策略，收在同一个 is_organizer() 函数后面。',
+    },
+    techStack: ['TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'Supabase', 'Vercel'],
+    links: [
+      {
+        label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
+        href: 'https://github.com/stevenli2007-del/hackportal',
+      },
+      {
+        label: { en: 'Live demo', zh: '在线演示' },
+        href: 'https://hackportal-tempo-70da.vercel.app',
+      },
+    ],
+    order: 3,
+  },
+  {
     id: 'linkedin-ai',
     title: { en: 'LinkedIn AI Networking Assistant', zh: 'LinkedIn AI Networking Assistant' },
     status: 'live',
-    outcome: { en: 'Live on the Chrome Web Store', zh: '已上线 Chrome 应用商店' },
+    outcome: { en: '17 users, no paid promotion', zh: '17 位用户，无付费推广' },
     description: {
-      en: 'A Chrome extension that drafts personalized messages to help make LinkedIn networking more efficient.',
-      zh: '一款 Chrome 扩展，可生成个性化消息，让 LinkedIn 人脉拓展更高效。',
+      en: 'A Chrome Manifest V3 extension that reads the profile you are viewing, combines it with your own, and drafts personalized outreach messages in four styles. Nothing is sent automatically — you review, edit, and copy. Built end to end across ten iterations: the React/TypeScript interface, a Cloudflare Workers backend that proxies the DeepSeek API so users never paste their own key, and the Chrome Web Store release. 9 of the 17 users found it through Chrome Web Store search.',
+      zh: '一款 Chrome Manifest V3 扩展：读取你正在浏览的主页，结合你自己的档案，用四种风格起草个性化联络消息。扩展不会自动发送 —— 由你审阅、编辑、复制。前后端历经十轮迭代独立完成：React/TypeScript 界面、代理 DeepSeek API 的 Cloudflare Workers 后端（用户无需自行填入密钥），以及 Chrome 应用商店上架。17 位用户中有 9 位通过应用商店搜索找到它。',
     },
     techStack: [
       'React',
@@ -67,29 +154,6 @@ export const projects: Project[] = [
         href: 'https://github.com/stevenli2007-del/Linkedin-AI-Assistant',
       },
     ],
-    order: 1,
-  },
-  {
-    id: 'ieee-paper',
-    title: { en: 'CdSe Quantum Dots on Si Solar Cells', zh: '硒化镉量子点与硅太阳能电池' },
-    status: 'published',
-    outcome: { en: 'IEEE PVSC 2025 · Fourth author of five', zh: 'IEEE PVSC 2025 · 五名作者中排名第四' },
-    description: {
-      en: '“The Effect of CdSe Quantum Dots on the Efficiency of Si Solar Cell: A Hands-on, Project-based Learning.” Research conducted at UPenn ESAP 2024 under Dr. Gyuseok L. Kim; published in IEEE PVSC 2025.',
-      zh: '《硒化镉量子点对硅太阳能电池效率的影响：实践式项目学习》。研究于 2024 年在宾大 ESAP 开展，由 Gyuseok L. Kim 博士指导，发表于 IEEE PVSC 2025。',
-    },
-    techStack: [
-      'CdSe Quantum Dots',
-      'Silicon Photovoltaics',
-      'Bandgap Tuning',
-      'UV-Vis Characterization',
-    ],
-    links: [
-      {
-        label: { en: 'Read on IEEE Xplore', zh: '在 IEEE Xplore 阅读' },
-        href: 'https://ieeexplore.ieee.org/document/11133208',
-      },
-    ],
-    order: 2,
+    order: 4,
   },
 ]

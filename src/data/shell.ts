@@ -15,10 +15,13 @@ export interface NavItem {
 
 // spec §4：Home/首页 · Projects/项目 · Experience/经历 · Art/书法 · Contact/联系
 // （About/关于 已于 2026-10-08 并入 Home，见 Roadmap Phase 4 决策；路由由 6 变 5）
+// Phase 5（2026-10-09）：新增 Dev Log，顺序按 docs/phase-5-plan.md 的建议
+//   Home → Projects → Experience → Dev Log → Art → Contact（路由由 5 变 6）
 export const navItems: NavItem[] = [
   { path: '/', label: { en: 'Home', zh: '首页' } },
   { path: '/projects', label: { en: 'Projects', zh: '项目' } },
   { path: '/experience', label: { en: 'Experience', zh: '经历' } },
+  { path: '/dev-log', label: { en: 'Dev Log', zh: '开发日志' } },
   { path: '/art', label: { en: 'Art', zh: '书法' } },
   { path: '/contact', label: { en: 'Contact', zh: '联系' } },
 ]
@@ -54,9 +57,10 @@ export const siteTitle = {
     en: 'Youcheng (Steven) Li — Builder & Calligrapher',
     zh: '李佑成（Steven Li）— 创造者与书法爱好者',
   } as LocalizedText,
+  // Phase 5：meta description 补入 Tempo（与 Projects / Hero 的事实基准一致）
   description: {
-    en: 'Personal site of Youcheng (Steven) Li — builder and calligrapher. LinkedIn AI Assistant, IEEE PVSC 2025 paper, and calligraphy works.',
-    zh: '李佑成（Steven Li）的个人网站 —— 创造者与书法爱好者。LinkedIn AI Assistant、IEEE PVSC 2025 论文与书法作品。',
+    en: 'Personal site of Youcheng (Steven) Li — builder and calligrapher. Tempo, LinkedIn AI Assistant, IEEE PVSC 2025 paper, and calligraphy works.',
+    zh: '李佑成（Steven Li）的个人网站 —— 创造者与书法爱好者。Tempo、LinkedIn AI Assistant、IEEE PVSC 2025 论文与书法作品。',
   } as LocalizedText,
 }
 

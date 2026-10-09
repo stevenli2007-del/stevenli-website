@@ -45,8 +45,9 @@ export const aboutInfo: AboutInfo = {
       },
     },
   ],
+  // Phase 5：按简历补入专业（Engineering Physics & Computer Science）
   identity: {
-    en: 'From Shenzhen to UC Berkeley. I take products from design through development and deployment.',
-    zh: '从深圳到加州大学伯克利分校。我参与产品从设计、开发到部署的完整流程。',
+    en: 'From Shenzhen to UC Berkeley, studying Engineering Physics & Computer Science. I take products from design through development and deployment.',
+    zh: '从深圳到加州大学伯克利分校，主修工程物理与计算机科学。我参与产品从设计、开发到部署的完整流程。',
   },
 }
