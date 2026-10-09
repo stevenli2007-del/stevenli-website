@@ -33,14 +33,17 @@ export const siteInfo: SiteInfo = {
     // ⚠️ 若改回「加州大学伯克利分校」，必须同时解决窄屏溢出（降字号或允许 CJK 断行）。
     zh: ['创造者', '书法家', 'UC Berkeley 2030届'],
   },
+  // Phase 6 微调（2026-10-09）：Steven 指定文案（GPT 版 intro + 自写 proof）。
   intro: {
-    en: 'I turn manual workflows into useful tools, from AI-assisted networking to automated lab measurement.',
-    zh: '我把手动流程变成实用工具，从 AI 辅助拓展人脉到实验室自动测量。',
+    en: 'I build software and lab tools that make complex work easier to do—from a course-planning platform used by 109 students in beta to automated measurements for materials research.',
+    zh: '我做软件，也做实验工具，让复杂的工作更容易完成——从 109 名学生正在公开测试的课程规划平台，到面向材料研究的自动化测量。',
   },
-  // Phase 5：按简历事实基准重排（硬件研究打头），并补入 Tempo 公开测试
+  // Phase 6 微调（2026-10-09）：三项重排 —— 硬件论文打头、Tempo 提至第二位、
+  // 去掉「受邀助教」（不贴 NVIDIA 工程岗）。⚠️ 数字口径与 Tempo 卡片 / intro 不一致：
+  // intro 写 109、此处写 100+，Steven 已看过并保留，勿擅自统一。
   proof: {
-    en: 'IEEE PVSC 2025 co-author · Chrome Web Store launch · Tempo in public beta · Invited teaching assistant',
-    zh: 'IEEE PVSC 2025 论文合著者 · Chrome 应用商店上线 · Tempo 公开测试中 · 受邀助教',
+    en: 'IEEE PVSC 2025 co-author · Tempo founder, 100+ beta users · Chrome Web Store developer',
+    zh: 'IEEE PVSC 2025 论文合著者 · Tempo 创始人，100+ 测试用户 · Chrome 应用商店开发者',
   },
   cta: {
     projects: { en: 'Explore projects', zh: '查看项目' },
