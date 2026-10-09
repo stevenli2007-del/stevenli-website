@@ -2,19 +2,24 @@
 // Phase 4 Task 4-3：全部用户可见文案拆 en/zh（spec §4 Home / §5 双语规则）。
 // spec §5：《legal name 中英一致，不臆造中文姓名拼写》；URL / 产品名 / 机构名等不作翻译。
 
-import type { Locale, LocalizedText } from './locales'
+import type { LocalizedText } from './locales'
 import portfolioImg from '../assets/portfolio.jpg'
 
-// Phase 6 微调（2026-10-09）：tagline 由「一整句 LocalizedText」改为「分段数组」。
-// 原因：H1 里 "UC Berkeley 2030" 是专名，被浏览器在空格处拆成两行（UC / Berkeley）。
-//   分段后由 Hero 对**每段**加 whitespace-nowrap，换行只可能发生在段与段之间；
-//   中文同理（CJK 允许在任意字间断行，"加州大学伯克利分校" 会被拆开）。
-// 段与段之间的可见分隔符是排版层，落在下方 taglineSeparator，组件不硬编码文案。
-export const taglineSeparator = ' · '
+// Phase 6 微调（2026-10-09，第 4 条）：tagline 由「一整句 → 分段数组」再改为「school / focus 两行」。
+// 演进原因：
+//   1. 一整句时 "UC Berkeley 2030" 被浏览器在空格处拆成两行（UC / Berkeley）；
+//   2. 改成用 `·` 分隔的分段数组后，窄屏换行时行尾会孤悬一个 `·`，观感差；
+//   3. 现方案：school / focus **各占一行**，段间不再需要任何分隔符字符（点已彻底移除），
+//      school 是专名仍 nowrap；focus 是描述性短语，允许自由换行（否则窄屏会溢出）。
+// ⚠️ focus 段**不要**加 whitespace-nowrap —— "Software & Semiconductor Research" 在 375px
+//    屏宽下约 610px，nowrap 会把页面撑出横向滚动条（违 WCAG 1.4.10）。
 
 export interface SiteInfo {
   name: string;                    // Legal name（两种语言一致，故不拆 LocalizedText）
-  tagline: Record<Locale, string[]>; // Hero H1 定位句（分段：每段内部不换行）
+  tagline: {
+    school: LocalizedText;         // 第一行：学校 + 届别（专名，段内不换行）
+    focus: LocalizedText;          // 第二行：方向（描述性短语，可自由换行）
+  };
   intro: LocalizedText;            // Hero 介绍句（spec §4）
   proof: LocalizedText;            // Hero 实证行（spec §4，Task 4-4 渲染）
   cta: {                           // Hero 双 CTA 文案（spec §4，Task 4-4 渲染）
@@ -26,12 +31,15 @@ export interface SiteInfo {
 
 export const siteInfo: SiteInfo = {
   name: 'Youcheng (Steven) Li',
+  // 第一行 school：机构名不翻译（spec §5）；中文用 UC Berkeley 而非全称，
+  //   全称 8 字 @36px 宽 452px，窄屏放不下（实测 375px 溢出 38px）。
+  // 第二行 focus：用 Semiconductor 而非 Materials —— 更贴 NVIDIA，也是 IEEE PVSC 论文的实际领域。
+  //   书法已从 H1 移除（Steven 认为 "Calligrapher" 像职业标签），由 /art 页面呈现。
+  // ⚠️ focus 长度有硬约束：实测 "Software & Semiconductor Research"（34 字符）在 768px 下会把
+  //   H1 撑到 4 行 / 240px 高。现用 25 字符版本，桌面端 school+focus 共 2 行。再改长务必重测行数。
   tagline: {
-    en: ['Builder', 'Calligrapher', 'UC Berkeley 2030'],
-    // 中文第三段用 UC Berkeley 而非全称：全称 8 字在移动端（≤768px）会超出内容宽度，
-    // 因该段 nowrap 而把页面撑出横向滚动条（实测溢出 31~66px）。机构名不翻译符合 spec §5。
-    // ⚠️ 若改回「加州大学伯克利分校」，必须同时解决窄屏溢出（降字号或允许 CJK 断行）。
-    zh: ['创造者', '书法家', 'UC Berkeley 2030届'],
+    school: { en: 'UC Berkeley 2030', zh: 'UC Berkeley 2030届' },
+    focus: { en: 'Software & Semiconductors', zh: '软件与半导体' },
   },
   // Phase 6 微调（2026-10-09）：Steven 指定文案（GPT 版 intro + 自写 proof）。
   intro: {

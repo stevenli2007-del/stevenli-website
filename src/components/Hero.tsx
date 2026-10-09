@@ -1,6 +1,5 @@
-import { Fragment } from 'react'
 import { Link, useLocale, useLocation } from '../lib/router'
-import { siteInfo, taglineSeparator } from '../data/site'
+import { siteInfo } from '../data/site'
 
 // Phase 4 Task 4-4 — Home / Hero（spec §4 Home）
 // 纯白背景；文案列在 DOM 前、桌面端头像靠右；头像缩小（h-32 / md:h-40）并移除阴影；
@@ -18,15 +17,11 @@ export default function Hero() {
         <div className="max-w-2xl text-center md:text-left">
           <p className="text-sm font-medium text-[#6E6E73]">{siteInfo.name}</p>
 
-          {/* tagline 分段渲染：每段 nowrap（专名如 "UC Berkeley 2030" / "加州大学伯克利分校" 不被拆行），
-              换行只允许发生在段间的分隔符处。见 site.ts 的 taglineSeparator 注释。 */}
+          {/* tagline 两行渲染：school 一行（专名 nowrap，不拆行）、focus 一行（可自由换行）。
+              两行之间不放任何分隔符字符 —— 见 site.ts 的 tagline 注释。 */}
           <h1 className="mt-3 text-4xl font-semibold tracking-tight leading-tight text-[#1D1D1F] md:text-5xl">
-            {siteInfo.tagline[locale].map((part, i) => (
-              <Fragment key={part}>
-                {i > 0 && taglineSeparator}
-                <span className="whitespace-nowrap">{part}</span>
-              </Fragment>
-            ))}
+            <span className="block whitespace-nowrap">{siteInfo.tagline.school[locale]}</span>
+            <span className="block">{siteInfo.tagline.focus[locale]}</span>
           </h1>
 
           <p className="mt-4 text-base leading-relaxed text-[#6E6E73] md:text-lg">
