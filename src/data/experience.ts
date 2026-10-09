@@ -38,7 +38,7 @@ export const experience: ExperienceEntry[] = [
     period: "2024 Summer",
     institution: "UPenn ESAP",
     description:
-      "Worked with Dr. Kim Gyuseok on CdSe quantum dots / Si solar cells — research that became an IEEE paper, published 2025-09-03.",
+      "Worked with Dr. Kim Gyuseok on CdSe quantum dots / Si solar cells — research that became an IEEE PVSC 2025 paper.",
     keywords: ["CdSe Quantum Dots", "Si Solar Cells", "IEEE Paper"],
     role: "student",
   },

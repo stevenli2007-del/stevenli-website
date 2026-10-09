@@ -98,6 +98,50 @@
 
 ---
 
+## Phase 4 — v3 双语多页重构
+
+**Spec：** `docs/design-spec-v3.md`（Codex 主导设计与文案，Bud 负责实现。Codex 只写 `docs/`，不碰 `src/`）
+
+**目标：** 单页 → 五条独立路由（About 已并入 Home）+ 顶部导航 + 中英切换 + 全站文案双语化。
+
+### 已拍板决策（Steven 2026-10-08）
+
+| 项 | 决定 |
+|---|---|
+| 中文姓名 | **李佑成**（spec §5 原写「李宥成」为笔误，已更正）。Legal name 仍为 `Youcheng (Steven) Li` |
+| 中文繁简 | 不纠结；Art 作品题跋保留原繁体，其余按 spec 文案原样落地 |
+| BrushDivider | **移除**（改为独立页面后章节分隔线不再需要；组件文件一并删除） |
+| 路由方案 | **零依赖自研**（约 50 行），不引入 react-router —— 5 个静态路由无需路由库，省 ~12KB gzip，保 Lighthouse ≥ 90 |
+| 静态托管 | 加 `public/_redirects`（`/* /index.html 200`），否则 Cloudflare Pages 直接访问 `/about` 会 404 |
+| IEEE 发表日期 | **2025-08-29**（Steven 2026-08-30 拍板）。spec 文案按原样不写具体日期；`src/data/experience.ts` 中的 `2025-09-03` 为错值，一并修正 |
+| SEO 退化 | 已知且接受（多路由 + JS 动态 title，无 SSR）。受众是点链接进来的真人，不做 prerender |
+| About 合并进 Home | **2026-10-08 即时决定**：「关于」不再独立成页，并入「首页」—— 导航由 6 项变 5 项，路由由 6 变 5。属对 spec §1 的偏离，需同步回 Codex（spec 仍按 6 路由规划） |
+
+### 任务清单
+
+| # | 任务 | 说明 |
+|---|---|---|
+| 4-1 | ✅ 路由骨架 | 自研 router（`src/lib/router.tsx`，含 `?lang=` 解析）、五条路由挂现有 section 组件、`public/_redirects`（含 `/about / 301`）、404 页、移除 BrushDivider |
+| 4-2 | ✅ 站点外壳 | `Header.tsx`（sticky 导航 + EN/中文 切换，移动端两行横向滚动）+ `Footer.tsx`；`shell.ts` 扩为导航/语言/metadata/页脚文案；`App.tsx` 同步 `<html lang>` / `document.title` / meta description |
+| 4-3 | 数据层双语化 | `src/data/*.ts` 全部文案拆 `en` / `zh`，组件零硬编码文案 |
+| 4-4 | Home `/`（含 About） | 按 spec §4：Hero（文案列前、头像缩至 h-32/md:h-40、proof line、双 CTA）+ 原 About 内容（灰底三卡例子 + identity strip）合并为一页 |
+| 4-5 | ~About `/about`~ | **已并入 4-4**（2026-10-08）：About 不再独立成页；旧 `/about` 链接经 `_redirects` 301 到 `/` |
+| 4-6 | Projects `/projects` | 两列卡片、outcome 优先、Stack 置底、具名外链 |
+| 4-7 | Experience `/experience` | 时间线精简、2026 受邀徽章、SEM 首尾呼应 |
+| 4-8 | Art `/art` | 保留两列 masonry 原比例，加 intro 与白卡片 |
+| 4-9 | Contact `/contact` | 邮箱主按钮，其余降级为具名内联链接 |
+| 4-10 | 走查与收尾 | Lighthouse 复测（≥ 90，移动+桌面）、全设备走查、docs 同步（PRD「单页」描述需改写；spec §1 六路由需标注已合并） |
+
+**验收标准：**
+- 五条路由可直接访问、可刷新、可分享，浏览器前进/后退正常
+- 语言切换保留当前路径，URL 为唯一事实源（`?lang=`）
+- `npm run build` 零报错；Lighthouse Performance ≥ 90
+- 所有可见文案来自 `src/data/*.ts`
+
+**工作方式：** 一张卡做完 → Steven 验收 → 批准 → 才动下一张。
+
+---
+
 ## 进度追踪
 
 | Phase | 状态 | 完成时间 |
@@ -105,6 +149,7 @@
 | Phase 0 | ✅ 已完成 | 2026-08-26 |
 | Phase 1 | ✅ 已完成 | 2026-08-28 |
 | Phase 2 | ✅ 已完成 | 2026-08-28 |
-| Phase 3 | 🔄 进行中（6/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅；3-3 🚩 素材 / 3-7 ⏳ 待走查 / 3-8 🚩 决策 |
+| Phase 3 | ✅ 已完结（6/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅；3-3 ⛔ 取消（墨屿终止）；3-7 → 并入 4-10；3-8 🚩 自定义域名，Phase 4 收尾后执行 |
+| Phase 4 | 🔄 进行中（2/9） | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。4-1 ✅ / 4-2 ✅（待 Steven 走查） |
 
 > 每 Phase 签收后由 Bud 更新此表。
