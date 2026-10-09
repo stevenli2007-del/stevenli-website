@@ -123,10 +123,10 @@
 |---|---|---|
 | 4-1 | ✅ 路由骨架 | 自研 router（`src/lib/router.tsx`，含 `?lang=` 解析）、五条路由挂现有 section 组件、`public/_redirects`（含 `/about / 301`）、404 页、移除 BrushDivider |
 | 4-2 | ✅ 站点外壳 | `Header.tsx`（sticky 导航 + EN/中文 切换，移动端两行横向滚动）+ `Footer.tsx`；`shell.ts` 扩为导航/语言/metadata/页脚文案；`App.tsx` 同步 `<html lang>` / `document.title` / meta description |
-| 4-3 | 数据层双语化 | `src/data/*.ts` 全部文案拆 `en` / `zh`，组件零硬编码文案 |
-| 4-4 | Home `/`（含 About） | 按 spec §4：Hero（文案列前、头像缩至 h-32/md:h-40、proof line、双 CTA）+ 原 About 内容（灰底三卡例子 + identity strip）合并为一页 |
+| 4-3 | ✅ 数据层双语化 | 6 个 data 文件文案全拆 `en`/`zh`（spec §4 文案落地）；`Project.tagline`→`outcome`、链接改具名数组 `{label,href}`；组件移除全部硬编码文案（Hero intro / Contact label / Projects 状态与链接）改读 locale。⚠️ spec §4 未给出的字段（experience 的 period/institution/keywords、projects 的 zh outcome、about 的 zh 例子标题）由 Bud 暂译，待 Codex 校订 |
+| 4-4 | ✅ Home `/`（含 About） | Hero 重做（纯白、文案列 DOM 前、头像 `h-32/md:h-40` 去阴影、proof line + 双 CTA、容器 `min-h-[calc(100svh-4.5rem)]`）+ About 区块（灰底 `#F5F5F7`、三白卡例子、identity strip）。⚠️ 设计适配待 Codex 报备：About 标题降为 **h2**（单 h1 语义）、Hero H1 取 `text-4xl/md:text-5xl` |
 | 4-5 | ~About `/about`~ | **已并入 4-4**（2026-10-08）：About 不再独立成页；旧 `/about` 链接经 `_redirects` 301 到 `/` |
-| 4-6 | Projects `/projects` | 两列卡片、outcome 优先、Stack 置底、具名外链 |
+| 4-6 | ✅ Projects `/projects` | 白底、intro `max-w-3xl`、卡片网格 `lg:grid-cols-2`（替原三列留空位）；卡内顺序 status 圆点行 → title → outcome → description → Stack（上边框分隔）→ 链接 `mt-auto` 贴底；去掉原 `hover:shadow-md`。⚠️ 设计适配待 Codex 报备：卡片标题用 **h2**（页面 h1 已给 `Selected Projects`）；四个页面的 intro 统一取 About 的 `text-lg` 处理（spec 仅写 `max-w-3xl`，未定字号） |
 | 4-7 | Experience `/experience` | 时间线精简、2026 受邀徽章、SEM 首尾呼应 |
 | 4-8 | Art `/art` | 保留两列 masonry 原比例，加 intro 与白卡片 |
 | 4-9 | Contact `/contact` | 邮箱主按钮，其余降级为具名内联链接 |
@@ -150,6 +150,6 @@
 | Phase 1 | ✅ 已完成 | 2026-08-28 |
 | Phase 2 | ✅ 已完成 | 2026-08-28 |
 | Phase 3 | ✅ 已完结（6/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅；3-3 ⛔ 取消（墨屿终止）；3-7 → 并入 4-10；3-8 🚩 自定义域名，Phase 4 收尾后执行 |
-| Phase 4 | 🔄 进行中（2/9） | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。4-1 ✅ / 4-2 ✅（待 Steven 走查） |
+| Phase 4 | 🔄 进行中（5/9） | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。4-1~4-4 ✅ 已验收（commit `515d310`）/ 4-6 ✅ 待走查 |
 
 > 每 Phase 签收后由 Bud 更新此表。
