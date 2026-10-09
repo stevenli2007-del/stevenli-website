@@ -52,15 +52,18 @@ export const footer = {
 }
 
 // spec §5：document.title 与 meta description 随语言切换
+// Phase 6 微调（2026-10-09，第 5 条）：base 与 description 里的定位语同步为新 tagline
+//   （旧值 "Builder & Calligrapher" / 「创造者与书法爱好者」已随 H1 一起作废）。
+//   App.tsx 对非首页路由会拼成 `${pageLabel} — ${base}`，故 base 不宜再长。
 export const siteTitle = {
   base: {
-    en: 'Youcheng (Steven) Li — Builder & Calligrapher',
-    zh: '李佑成（Steven Li）— 创造者与书法爱好者',
+    en: 'Youcheng (Steven) Li — UC Berkeley 2030 · Software & Semiconductors',
+    zh: '李佑成（Steven Li）— UC Berkeley 2030届 · 软件与半导体',
   } as LocalizedText,
   // Phase 5：meta description 补入 Tempo（与 Projects / Hero 的事实基准一致）
   description: {
-    en: 'Personal site of Youcheng (Steven) Li — builder and calligrapher. Tempo, LinkedIn AI Assistant, IEEE PVSC 2025 paper, and calligraphy works.',
-    zh: '李佑成（Steven Li）的个人网站 —— 创造者与书法爱好者。Tempo、LinkedIn AI Assistant、IEEE PVSC 2025 论文与书法作品。',
+    en: 'Personal site of Youcheng (Steven) Li — UC Berkeley 2030, software and semiconductor research. Tempo, LinkedIn AI Assistant, IEEE PVSC 2025 paper, and calligraphy works.',
+    zh: '李佑成（Steven Li）的个人网站 —— UC Berkeley 2030届，软件与半导体研究。Tempo、LinkedIn AI Assistant、IEEE PVSC 2025 论文与书法作品。',
   } as LocalizedText,
 }
 
