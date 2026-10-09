@@ -13,12 +13,12 @@ export interface ProjectLink {
 export interface Project {
   id: string;                   // 唯一标识，如 "linkedin-ai"
   title: LocalizedText;
-  status: "live" | "in-development" | "published";
+  status: "live" | "beta" | "submission" | "in-development" | "published";
   outcome: LocalizedText;       // 一句话成果（**替代原 tagline**）
   description: LocalizedText;   // 卡片详细描述（PRD 4.3 的英文长句）
   techStack: string[];          // 技术栈（专有名词，不翻译）
   links: ProjectLink[];         // **具名链接数组**（替代原 links 对象）
-  order: number;                // 展示顺序，1-2
+  order: number;                // 展示顺序，1-4（Phase 5 起四张卡）
 }
 ```
 
@@ -28,6 +28,14 @@ export interface Project {
 - `tagline: string | null` → **`outcome: LocalizedText`** —— 语义从「一句话描述」升级为「一句话成果」，卡片里置于标题之下、描述之上
 - `links: { github, live, extensionId?, liveLabel? }` → **`links: ProjectLink[]`** —— 链接按目的命名；`extensionId` / `liveLabel` 两个派生字段**已删除**（链接文案不再靠 ID 推断）
 - 全部 `string` → `LocalizedText`；`null` 已无残留（两条目字段全满）
+
+**Phase 5 变更（2026-10-09，事实基准 = Steven 的 NVIDIA 申请版简历）：**
+- `status` 新增 **`beta`**（Tempo，公开测试）与 **`submission`**（Cal Hacks 门户，个人 take-home 已提交）
+- 条目由 2 条 → **4 条**，展示顺序由 Steven 拍板：**IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant**
+- Moyu 已于 2026-09-01 全站移除，**本文件不再有 Moyu 条目**；不得写成活跃产品或 "Present"
+- ⚠️ 简历里 Tempo 的 "generates semester-long and daily study plans" **未写入 `description`** ——
+  Tempo `docs/Database.md` 中 `study_plans` / `plan_items` 标注为 Phase 2，仓库内无实现证据。
+  待 Steven 确认后决定是否补回（见 `docs/phase-5-resume-addendum.md` 二-A）
 
 实际条目（IEEE 论文，Task 3-1 已补全；Phase 4 起 `description` 只写 venue 年份、不含具体日期）：
 ```ts
@@ -203,18 +211,72 @@ export const siteTitle: { base: LocalizedText; description: LocalizedText }; // 
 export const notFound: { title: LocalizedText; body: LocalizedText; homeLink: LocalizedText };
 ```
 
-- 导航 = **5 项**（`/` `/projects` `/experience` `/art` `/contact`）；`/about` 已并入首页，仅保留 301 兜底
+- 导航 = **6 项**（`/` `/projects` `/experience` `/dev-log` `/art` `/contact`）；`/about` 已并入首页，仅保留 301 兜底
+  - **Phase 5（2026-10-09）：** 新增 `/dev-log`（开发日志），位于 Experience 与 Art 之间；路由由 5 变 6
 - **无障碍约束（Task 4-10 修正）：** `toEnglish` / `toChinese` 用作 `aria-label`，**必须包含该链接的可见文字**
   （`EN` / `中文`），否则违反 WCAG 2.5.3 Label in Name，Lighthouse/axe 报 `label-content-name-mismatch`。
   英文态与中文态各有一次触发机会，两处都要成立
 
-## 9. 通用规则
+## 9. `education.ts`（Phase 5 新增）
+
+```ts
+export interface Award {
+  title: LocalizedText;         // 奖项名称
+  detail: LocalizedText;        // 名次 / 范围说明
+  year: string;                 // 年份（专有数据，不翻译）
+}
+
+export interface SkillGroup {
+  label: LocalizedText;         // 分组名，如 Languages / 编程语言
+  items: string[];              // 技术名（专有名词，不翻译）
+}
+
+export interface EducationInfo {
+  school: string;               // 校名（两种语言一致，故不拆 LocalizedText）
+  program: LocalizedText;       // 专业
+  detail: LocalizedText;        // 届别 + 转学分
+  coursesLabel: LocalizedText;
+  courses: string[];            // 课程名（专有名词，不翻译）
+}
+```
+
+同文件另导出：`educationTitle` / `awardsTitle` / `skillsTitle` / `education` / `awards` / `skillGroups`。
+
+**事实基准（Steven 2026-10-09 拍板）：**
+- 专业写作 **`Engineering Physics & Computer Science`** —— 旧记录的「L&S → 主修 EECS」作废
+- 奖项 4 条、技能 3 组，一律照简历原文；课程名 / 竞赛名 / 工具名不翻译
+- 渲染位置：Home 页 About 区块之后（`src/components/Education.tsx`）
+  - 标题层级：Home 的 h1 在 Hero、About 已是 h2，故本区块 h2 = Education，
+    **Awards 与 Technical Skills 降为 h3**（避免三个同级大标题，也不跳级）
+
+## 10. `devLog.ts`（Phase 5 新增）
+
+```ts
+export interface DevLogPost {
+  id: string;                   // 唯一标识，如 "tempo-canvas-sync"
+  date: string;                 // 显示用日期，如 "2026-10"；不确定就不写
+  title: LocalizedText;
+  topic: LocalizedText;         // 归属项目 / 主题
+  summary: LocalizedText;       // 一句话 takeaway
+  body?: LocalizedText[];       // 正文段落（单页索引阶段可留空）
+}
+```
+
+同文件另导出：`devLogTitle` / `devLogIntro` / `devLogEmpty` / `devLogPosts`。
+
+**Phase 5 硬约束：**
+- **`devLogPosts` 刻意为空数组** —— Steven 明确要求不编造日志、反思或日期；页面渲染 `devLogEmpty` 空态卡片
+- 一篇文章必须回答：想做什么 · 试了或决定了什么 · 什么变了或失败了 · 下次怎么做
+- 来源只能是已确认的项目事实；**不得从项目名称臆造复盘**
+- 内容的深度打磨归 **Phase 6**（`body` 字段与详情页渲染分支已预留，Phase 6 再决定单页索引 vs 独立路由）
+
+## 11. 通用规则
 - 所有 `id` 字段用 kebab-case（如 `"linkedin-ai"`），不是 camelCase——因为它可能被用作 HTML anchor / URL slug。
 - 所有其他变量名用 camelCase。
 - 缺失数据用 `null`，不用空字符串 `""`，方便前端统一判断"是否需要显示占位符"。
 - 图片路径统一放在 `/src/assets/`，通过相对路径引用，不用外链图床。
 
-## 10. 变更记录
+## 12. 变更记录
 - 2026-08-25（Bud）：`Project.tagline`、`Project.links.*` 改为可空类型（与示例及第 5 节规则对齐）；新增 `Project.description` 字段（PRD 4.3 卡片需要一段详细描述，原接口装不下）。
 - 2026-08-26（Bud）：`Artwork.src` 改为可空类型（Phase 3 补图前用 null 占位，与第 5 节"缺失数据用 null"规则对齐）。
 - 2026-08-27（Bud）：新增 `site.ts`（SiteInfo：name / tagline），承接 Hero 定位句——Phase 1 验收要求组件 JSX 无硬编码文案，Hero 文案需有数据归属。原第 5/6 节顺延为 6/7。
@@ -227,3 +289,9 @@ export const notFound: { title: LocalizedText; body: LocalizedText; homeLink: Lo
   - `SiteInfo`：新增 `intro` / `proof` / `cta`（Hero 的硬编码文案收进数据层）
   - 除 `locale` / `shell` / `siteTitle` 外，所有用户可见文案一律 `LocalizedText`；**组件内零硬编码文案**（除注释）
   - `about.ts` 例子数量由「四个」订正为 **3 个**（第 4 个墨屿已随项目终止移除）
+- **2026-10-09（Bud，Phase 5 简历事实基准落地）：**
+  - 新增 **§9 `education.ts`**（`EducationInfo` / `Award` / `SkillGroup`）、**§10 `devLog.ts`**（`DevLogPost`）；原 §9/§10 顺延为 §11/§12
+  - `Project.status` 新增 **`beta`** 与 **`submission`**；`order` 范围 1-2 → **1-4**
+  - `shell.ts` 导航由 **5 项 → 6 项**（新增 `/dev-log`，位于 Experience 与 Art 之间）；`siteTitle.description` 补入 Tempo
+  - `site.ts` 的 `proof`、`about.ts` 的 `identity` 按简历更新（专业 = Engineering Physics & Computer Science）
+  - ⚠️ 简历中 Tempo 的「semester-long and daily study plans」**未入站**（无实现证据），见 `docs/phase-5-resume-addendum.md`

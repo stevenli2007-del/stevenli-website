@@ -168,6 +168,67 @@
 
 ---
 
+## Phase 5 — Resume-led content + Dev Log
+
+**计划：** `docs/phase-5-plan.md`（2026-10-08）｜**补充清单：** `docs/phase-5-resume-addendum.md`（2026-10-09）
+
+**目标：** 保留所有既有活动，优先面向两份 NVIDIA Ignite（Software Engineering / Hardware Engineering）申请，基于简历和可核实事实逐项目打磨现有双语页面文案；新增 `/dev-log` 及顶部导航入口。Tesla 为次要选项，只有岗位描述与 12 周线下安排确认可行后再纳入针对性修改。
+
+### 已拍板决策（Steven 2026-10-09）
+
+| 项 | 决定 |
+|---|---|
+| 专业写法 | **Engineering Physics & Computer Science**（照简历原文）。旧记录的「L&S → 主修 EECS」作废 |
+| Education / Awards / Skills | **上站**，作为 Home 页 About 之后的新区块（不新增路由，导航仍是 6 项） |
+| IEEE 论文位置 | **继续留在 Projects**，`status = published`，保留 IEEE Xplore 外链与「五作第四」 |
+| Projects 卡片顺序 | **IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant**（Steven 指定） |
+| Moyu | 已于 2026-09-01 全站移除，本轮无需动作；**不得写成活跃产品或 "Present"** |
+| Cal Hacks 定位 | **Projects / Individual Project**，属个人 take-home 作品。不称 Tech Lead、不称正式团队成员 |
+| Dev Log 内容 | Phase 5 **只建页面结构，文章数组刻意为空**；不编造日志、反思或日期。深度打磨归 Phase 6 |
+
+### 任务清单
+
+| # | 任务 | 说明 |
+|---|---|---|
+| 5-1 | ✅ 目标岗位矩阵 | 沿用 `docs/phase-5-plan.md`（2026-10-08 已核）。两份 NVIDIA Ignite 为主目标；Tesla 待澄清职位描述与 12 周可行性 |
+| 5-2 | ✅ 简历事实清单 | Steven 2026-10-09 直接提供简历全文（Education / Experience / Projects / Publication / Skills / Awards），无需截图转录 |
+| 5-3 | ✅ 逐项改写简历 | 输出 `docs/phase-5-resume-addendum.md`：7 项可补细节 + 8 项冲突待确认（🔴 含 Tempo「学习计划」未实现、专业写法、时间段缺失） |
+| 5-4 | ✅ 网站内容落地 | ① Projects 四张卡（新增 Tempo / Cal Hacks，新增 `beta` / `submission` 两个 status）；② Experience 按简历充实 2024 ESAP（洁净间工艺）与 2026 受邀助教（浏览器端接触角工具 / EWOD 校准 / 教学）；③ 新增 Home 的 Education & Awards & Skills 区块；④ Hero proof line 与 About identity 按简历更新 |
+| 5-5 | ✅ Dev Log 结构 | `src/data/devLog.ts`（`devLogPosts` 空数组）+ `src/components/DevLog.tsx`（空态卡片）+ `/dev-log` 路由 + 导航项（Home → Projects → Experience → **Dev Log** → Art → Contact） |
+| 5-6 | ✅ 实现与验收 | `tsc` + `vite build` 零报错；六条路由 + 404 全部 200；关键文案进 bundle；`docs/Database.md` 已补 §9/§10 接口 |
+
+**未搬上网站的简历说法（有意为之）：** Tempo 的 "generates semester-long and daily study plans" ——
+Tempo `docs/Database.md` 中 `study_plans` / `plan_items` 标注为 **Phase 2**，仓库内无实现证据，
+故 Projects 描述只写已落地能力（syllabus 解析 / Canvas 与邮件汇总 / 考试复习总结 / 真题自测卷）。
+已在 `docs/phase-5-resume-addendum.md` 二-A 列出，待 Steven 确认后决定是否补回。
+
+**验收标准：** 所有新增内容均有简历或仓库证据；Dev Log 无编造文章；中英双语文案齐全；`npm run build` 零报错；六条路由可访问。
+
+---
+
+## Phase 6 — Art 与 Dev Log 深度打磨
+
+**安排在 Phase 5 之后。** 本阶段只做这两个 section，不扩大到其它页面。
+
+**目标：** 把 Phase 5 建起来的空壳变成真正有内容的两个 section —— Art 从「等比占位框」回到真图并完成内容定稿，Dev Log 从「空态」到有首批真实文章。
+
+### 任务清单（草案，待 Steven 开工时确认）
+
+| # | 任务 | 说明 |
+|---|---|---|
+| 6-1 | Art 真图切回 | `src/data/artworks.ts` 的 `renderArtworkImages` 置回 `true`（占位框宽高比取自原图像素比，**切回不跳版**）。需先确认是否需要压缩以保住 Lighthouse Performance ≥ 90（Phase 4 时 Art 移动端曾因图片体积掉到 87） |
+| 6-2 | Art 内容定稿 | 四幅作品的题跋、尺寸、创作背景文案中英双语定稿；确认「龍虎風雨，天下梟雄」标题用法 |
+| 6-3 | Dev Log 首批文章 | 按 `docs/phase-5-plan.md` 的候选主题**先做事实采访**再写：Tempo / 接触角测量工具 / LinkedIn 扩展发布 / 便利店小程序 / 从第一次用 SEM 到带学生看 SEM。每篇必须回答：想做什么 · 试了或决定了什么 · 什么变了或失败了 · 下次怎么做 |
+| 6-4 | Dev Log 形态决策 | 单页索引 vs 每篇独立路由（Phase 5 已预留 `DevLogPost.body` 字段与详情页渲染分支） |
+| 6-5 | 走查与收尾 | 全设备走查 + Lighthouse 复测（Performance ≥ 90、Accessibility 100）+ docs 同步 |
+
+**硬约束：**
+- Dev Log 每篇文章都必须来自 Steven 确认过的真实经历，**不得从项目名称臆造复盘、日期或反思**
+- 不引入 CMS、后端或动画；内容仍住 `src/data/` 静态数据层
+- 保持六条路由、双语 `?lang=` 与「组件零硬编码文案」三条既有约定
+
+---
+
 ## 进度追踪
 
 | Phase | 状态 | 完成时间 |
@@ -176,6 +237,7 @@
 | Phase 1 | ✅ 已完成 | 2026-08-28 |
 | Phase 2 | ✅ 已完成 | 2026-08-28 |
 | Phase 3 | ✅ 已完结（7/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅ 3-7 ✅（**已随 4-10 完成**：全设备走查 + Lighthouse 复测）；3-3 ⛔ 取消（墨屿终止）；**3-8 🚩 自定义域名** —— 唯一遗留项，Phase 4 收尾后执行。注：Art 现以等比占位框呈现属 Phase 4 决策（`renderArtworkImages`），非素材缺失 |
-| Phase 4 | ✅ **已完成并上线**（9/9） | 2026-10-08 | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。9 张卡片全部验收；Lighthouse 移动 98~100 / 桌面 100、Accessibility 全 100；六份治理文档已对齐实现。Commits：`515d310`（4-1,4-2）/ `d90b076`（4-3,4-4,4-6）/ `511208a`（4-7~4-10 + docs）/ `c4bf878`（Roadmap 收尾）/ `e9b7e1e`（删孤儿 `hero-bg.jpg`）/ `c1466d7`（**修复部署失败**，见上方部署事故记录）。**线上已更新为 v3**：资源指纹与本地 `dist` 一致、`/about` 301、五路由均 200。⚠️ 下一轮：Steven 做「各独立页面内容与文案调整」，Art 真图届时由 `renderArtworkImages` 开关切回 |
+| Phase 4 | ✅ **已完成并上线**（9/9） | 2026-10-08 | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。9 张卡片全部验收；Lighthouse 移动 98~100 / 桌面 100、Accessibility 全 100；六份治理文档已对齐实现。Commits：`515d310`（4-1,4-2）/ `d90b076`（4-3,4-4,4-6）/ `511208a`（4-7~4-10 + docs）/ `c4bf878`（Roadmap 收尾）/ `e9b7e1e`（删孤儿 `hero-bg.jpg`）/ `c1466d7`（**修复部署失败**，见上方部署事故记录）。**线上已更新为 v3**：资源指纹与本地 `dist` 一致、`/about` 301、五路由均 200。下一轮已转入 Phase 5：简历事实审阅、各页面文案打磨、新增 Dev Log；Art 真图在内容定稿后由 `renderArtworkImages` 开关切回 |
+| Phase 5 | ✅ **已完成（6/6）** | 2026-10-09 | 简历事实基准落地：Projects 四张卡（新增 Tempo / Cal Hacks，新增 `beta` / `submission` 状态）、Experience 按简历充实 ESAP 与受邀助教、Home 新增 Education & Awards & Skills 区块、新增 `/dev-log`（**文章数组刻意为空，不编造**）。补充清单 `docs/phase-5-resume-addendum.md` 含 7 项可补细节 + 8 项冲突待确认（🔴 Tempo「学习计划」未实现 / 专业写法 / 时间段缺失）。`tsc` + `build` 零报错，六条路由 + 404 全 200。**未 push** —— 待 Steven 审阅后手动推。 |
 
 > 每 Phase 签收后由 Bud 更新此表。
