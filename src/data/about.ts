@@ -22,12 +22,17 @@ export const aboutInfo: AboutInfo = {
     en: 'Across software and lab work, I look for repetitive steps and build tools that make them easier to complete.',
     zh: '无论是软件还是实验室工作，我都会寻找重复步骤，并动手做工具，让这些流程更简单。',
   },
+  // Phase 6 微调（2026-10-09，第 6 条）：第一张卡由 LinkedIn AI Assistant 换成 Tempo。
+  //   原因：Steven 认为 LinkedIn 扩展不足以代表「关于我」；About 缺的是软件侧的旗舰产品，
+  //   而 LinkedIn 卡在 Projects 页第 4 张仍在，About 删掉不丢信息。
+  //   ⚠️ 用户数写 `100+`（与 Hero intro / proof 同口径）。Projects 页 Tempo 卡仍写 109，未同步。
+  //   ⚠️ About 是 sm:grid-cols-3 固定三列，examples 恒为 3 条；加第 4 条会掉到第二行孤卡。
   examples: [
     {
-      title: { en: 'LinkedIn AI Assistant', zh: 'LinkedIn AI Assistant' },
+      title: { en: 'Tempo — Berkeley Study Mate', zh: 'Tempo · 伯克利学习助手' },
       effect: {
-        en: 'Drafts personalized networking messages to reduce repetitive outreach.',
-        zh: '生成个性化的人脉拓展消息，减少重复沟通。',
+        en: 'Turns syllabi and Canvas updates into one course plan; 100+ students in public beta.',
+        zh: '把 syllabus 与 Canvas 的更新汇总成一份课程计划；100+ 名学生正在公开测试。',
       },
     },
     {
