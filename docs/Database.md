@@ -70,14 +70,22 @@ export interface Project {
 ## 2. `experience.ts`
 
 ```ts
+export interface ExperienceImage {
+  src: string;
+  width: number;   // 处理后文件的实际像素宽（写进 <img width>，防 CLS）
+  height: number;
+}
+
 export interface ExperienceEntry {
   id: string;
-  period: LocalizedText;        // 如 "2022 Winter" / "2022 冬季"
+  period: LocalizedText;        // 如 "2022 Winter" / "2022 冬季"；月度节点用 "2023 June" / "2023 年 6 月"
   institution: LocalizedText;   // 机构名（专有名词部分保持原文）
   description: LocalizedText;
   keywords: LocalizedText[];    // 关键词（**双语数组**）
   badge?: LocalizedText;        // 「星空少年」/「受邀」，可选
   role: "student" | "invited-ta"; // 用于视觉区分学员 vs 受邀助教
+  image: ExperienceImage;       // 配图（Phase 5.5 新增）
+  imageAlt: LocalizedText;      // 配图 alt，双语（spec §9.6）
 }
 ```
 
@@ -85,6 +93,12 @@ export interface ExperienceEntry {
 
 **Phase 4 Task 4-3 变更：** 五个 `string` 字段全部改 `LocalizedText`；2026 节点新增
 `badge: { en: "Invited", zh: "受邀" }`（3-1 起的时间线视觉区分现在有了文字徽章支撑）。
+
+**Phase 5.5 变更（2026-10-09）：** 数组由 5 条扩至 **8 条**，并为每条新增 `image` + `imageAlt`。
+- ESAP 拆两条：`upenn-esap-lab-2024`（2024-07~08 洁净间制备）与 `upenn-esap-paper`（2024-08~2025-09 成文发表）
+- 新增两个毕业节点：`whittle-2023`（2023-06 荟同学校）、`scie-2026`（2026-06 深圳国际交流学院）
+- 图片住 `src/assets/experience/`，`docs/Design.md` §9.4 规定渲染方式（不裁切、写实际宽高、首图 eager）
+- ⚠️ 毕业节点 `keywords: []` —— 组件对空数组不渲染关键词行
 
 数组按时间正序排列（2022 → 2026），前端不做排序逻辑，数据顺序即展示顺序。
 

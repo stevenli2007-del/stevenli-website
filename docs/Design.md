@@ -178,6 +178,15 @@ font-family: "Noto Serif SC", serif;
 - 排列：数据正序 2022→2026，前端不排序
 - 移动端与桌面端同规格（原「移动端缩至 h-2.5」的设想未实现，也不需要）
 
+**配图（Phase 5.5 新增，2026-10-09）：**
+
+- 条目结构：`mt-3 grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8` —— 文字左、图右；`lg` 以下单列，图**落在文字下方**
+- 图：`w-full max-w-[22rem] self-start rounded-xl border border-[#D2D2D7] lg:max-w-none`（窄屏限宽 22rem，防竖幅图占满整屏）
+- **不裁切**：保留原始比例，`width` / `height` 写**文件实际像素**（防 CLS）；故各行图高不同（193~469px），属预期
+- 加载：**仅首条** `loading="eager"` + `fetchPriority="high"`（本页首屏图），其余 `loading="lazy"` + `decoding="async"`
+- 素材：`src/assets/experience/*.jpg`，最长边 880px / quality 80 / progressive（8 张共 628KB）
+- `alt` 必填且双语（`imageAlt: LocalizedText`），见 §9.6
+
 ### 9.5 Art 页（替代 §6）
 
 - 页面 `bg-[#F5F5F7]`；intro + 小注（`mt-3 text-sm text-[#6E6E73]`）

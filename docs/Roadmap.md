@@ -207,6 +207,29 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 
 ---
 
+## Phase 5.5 — 上线前内容微调（Steven 逐条指定，插在 Phase 6 之前）
+
+**性质：** 非计划内阶段。Steven 逐条口述要改的点，Bud 实现 → 直接 push 上线 → 他在线上看效果，不再走「先审 diff 再推」。
+
+**范围与结果（2026-10-09，共 8 条，全部已上线）：**
+
+| # | Commit | 改动 |
+|---|---|---|
+| 1 | `c77d9e3` | Hero H1 换行修复：tagline 由整句字符串改为**分段数组**（`tagline: Record<Locale, string[]>` + `taglineSeparator`），每段 `whitespace-nowrap`，`UC Berkeley 2030` 不再被拆行 |
+| 2 | `efbb4cf` | Hero intro 重写 + proof 行由 4 项减为 3 项（下线 `Invited teaching assistant`） |
+| 3 | `e35fba4` | proof 第三项 `Chrome Web Store developer` → `X-Institute (Tsinghua SIGS) invited TA` |
+| 4 | `b7290aa` | H1 改**两行**（学校 / 方向），去掉分隔符 `·`，拿掉 `Builder` / `Calligrapher`；方向词定为 `Software & Semiconductors` |
+| 5 | `0fcb812` | `document.title` + meta description 同步新定位；intro 用户数 `109` → `100+`（**`index.html` 的静态兜底必须同改**） |
+| 6 | `ce96877` | About 首卡 LinkedIn AI Assistant → Tempo（examples 恒 3 条，`sm:grid-cols-3`） |
+| 7 | `d7bbf52` | Education 加 Berkeley 校标（`src/assets/berkeley-seal.png`，256×256 64 色量化 16.9KB）；`40 units transferred from A-Level` → `currently a freshman` |
+| 8 | `e3bfad7` | **Experience 时间线扩到 8 条 + 每条配图**（ESAP 拆 Lab Work / Research Paper；新增 2023-06 Whittle 与 2026-06 SCIE 两个毕业节点） |
+
+**遗留：** Projects 页 Tempo 卡 `109 users in public beta` 与 `77 users in private beta` 尚未统一为 `100+`（Steven 仅指定改 intro 那句）。
+
+**验收方式（本轮固定套路）：** `tsc --noEmit` + `npm run build` → CDP 无头 Chrome 在 320/375/430/768/1024/1440 × 中英下量 `scrollWidth - clientWidth` 与各容器矩形 → `Page.captureScreenshot` 截图目视 → push 后查 check run `success` → 比对线上 `/assets/index-*.js` 指纹与本地 `dist/`。
+
+---
+
 ## Phase 6 — Art 与 Dev Log 深度打磨
 
 **安排在 Phase 5 之后。** 本阶段只做这两个 section，不扩大到其它页面。
@@ -240,5 +263,6 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 | Phase 3 | ✅ 已完结（7/8） | 3-1 ✅ 3-2 ✅ 3-4 ✅ 3-5 ✅ 3-6 ✅ 3-7 ✅（**已随 4-10 完成**：全设备走查 + Lighthouse 复测）；3-3 ⛔ 取消（墨屿终止）；**3-8 🚩 自定义域名** —— 唯一遗留项，Phase 4 收尾后执行。注：Art 现以等比占位框呈现属 Phase 4 决策（`renderArtworkImages`），非素材缺失 |
 | Phase 4 | ✅ **已完成并上线**（9/9） | 2026-10-08 | v3 双语多页重构（About 已并入 Home，路由 6→5）。Spec：`docs/design-spec-v3.md`（Codex 主导设计，Bud 实现）。9 张卡片全部验收；Lighthouse 移动 98~100 / 桌面 100、Accessibility 全 100；六份治理文档已对齐实现。Commits：`515d310`（4-1,4-2）/ `d90b076`（4-3,4-4,4-6）/ `511208a`（4-7~4-10 + docs）/ `c4bf878`（Roadmap 收尾）/ `e9b7e1e`（删孤儿 `hero-bg.jpg`）/ `c1466d7`（**修复部署失败**，见上方部署事故记录）。**线上已更新为 v3**：资源指纹与本地 `dist` 一致、`/about` 301、五路由均 200。下一轮已转入 Phase 5：简历事实审阅、各页面文案打磨、新增 Dev Log；Art 真图在内容定稿后由 `renderArtworkImages` 开关切回 |
 | Phase 5 | ✅ **已完成（6/6）** | 2026-10-09 | 简历事实基准落地：Projects 四张卡（新增 Tempo / Cal Hacks，新增 `beta` / `submission` 状态）、Experience 按简历充实 ESAP 与受邀助教、Home 新增 Education & Awards & Skills 区块、新增 `/dev-log`（**文章数组刻意为空，不编造**）。补充清单 `docs/phase-5-resume-addendum.md` 含 7 项可补细节 + 8 项冲突待确认（🔴 Tempo「学习计划」未实现 / 专业写法 / 时间段缺失）。`tsc` + `build` 零报错，六条路由 + 404 全 200。**未 push** —— 待 Steven 审阅后手动推。 |
+| Phase 5.5 | ✅ **已完成并上线（8/8）** | 2026-10-09 | 上线前内容微调（Steven 逐条口述，Bud 实现并直接 push）。含 Hero 换行修复与两行标题、proof 重排、title/meta 同步、About 首卡换 Tempo、Education 加校标、**Experience 扩至 8 条并全部配图**。详见上方 Phase 5.5 章节。 |
 
 > 每 Phase 签收后由 Bud 更新此表。
