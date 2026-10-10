@@ -120,4 +120,4 @@
 
 - **Hardware Engineering**：ESAP 洁净间工艺（光刻 / 热氧化 / 量子点表征）+ IEEE 论文 + EWOD 校准 + SEM —— 这堆是 Steven 最硬的硬件证据，建议在简历里把 **ESAP 提到 Experience 第一条**（目前 X-Institute TA 在前），并把 Publication 区块紧跟 Experience。
 - **Software Engineering**：Tempo（Next.js + Supabase + RLS）与 Cal Hacks（RLS + 评审后台）是两条最完整的全栈证据；LinkedIn 扩展证明「能独立发布」。
-- ⚠️ 两份 NVIDIA Ignite 岗位都写明了 **12 周、Santa Clara 线下**，申请前请确认档期可行（此项沿用 `docs/phase-5-plan.md` 的待办）。
+- ⚠️ 两份 NVIDIA Ignite 岗位都写明了 **12 周、Santa Clara 线下**，申请前请确认档期可行（Phase 5 遗留待办，原记录在已清理的 Phase 5 计划文档里，现并入本清单以免丢失）。

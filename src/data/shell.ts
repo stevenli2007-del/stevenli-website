@@ -15,8 +15,9 @@ export interface NavItem {
 
 // spec §4：Home/首页 · Projects/项目 · Experience/经历 · Art/书法 · Contact/联系
 // （About/关于 已于 2026-10-08 并入 Home，见 Roadmap Phase 4 决策；路由由 6 变 5）
-// Phase 5（2026-10-09）：新增 Dev Log，顺序按 docs/phase-5-plan.md 的建议
+// Phase 5（2026-10-09）：新增 Dev Log，与 Projects / Experience 相邻（Project-ish 内容归拢在一起）
 //   Home → Projects → Experience → Dev Log → Art → Contact（路由由 5 变 6）
+//   （2026-10-09 清理：原依据的 Phase 5 计划文档已删，结论保留在本注释里）
 export const navItems: NavItem[] = [
   { path: '/', label: { en: 'Home', zh: '首页' } },
   { path: '/projects', label: { en: 'Projects', zh: '项目' } },

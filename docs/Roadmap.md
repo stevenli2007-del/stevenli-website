@@ -170,7 +170,7 @@
 
 ## Phase 5 — Resume-led content + Dev Log
 
-**计划：** `docs/phase-5-plan.md`（2026-10-08）｜**补充清单：** `docs/phase-5-resume-addendum.md`（2026-10-09）
+**计划：** Phase 5 计划文档已于 2026-10-09 清理，**其结论已并入本文件的 Phase 5 任务表** ｜**补充清单：** `docs/phase-5-resume-addendum.md`（2026-10-09，仍有待你拍板的项）
 
 **目标：** 保留所有既有活动，优先面向两份 NVIDIA Ignite（Software Engineering / Hardware Engineering）申请，基于简历和可核实事实逐项目打磨现有双语页面文案；新增 `/dev-log` 及顶部导航入口。Tesla 为次要选项，只有岗位描述与 12 周线下安排确认可行后再纳入针对性修改。
 
@@ -191,7 +191,7 @@
 
 | # | 任务 | 说明 |
 |---|---|---|
-| 5-1 | ✅ 目标岗位矩阵 | 沿用 `docs/phase-5-plan.md`（2026-10-08 已核）。两份 NVIDIA Ignite 为主目标；Tesla 待澄清职位描述与 12 周可行性 |
+| 5-1 | ✅ 目标岗位矩阵 | 2026-10-08 核：两份 NVIDIA Ignite（Software / Hardware Engineering）为主目标；Tesla 待澄清职位描述与 12 周可行性 |
 | 5-2 | ✅ 简历事实清单 | Steven 2026-10-09 直接提供简历全文（Education / Experience / Projects / Publication / Skills / Awards），无需截图转录 |
 | 5-3 | ✅ 逐项改写简历 | 输出 `docs/phase-5-resume-addendum.md`：7 项可补细节 + 8 项冲突待确认（🔴 含 Tempo「学习计划」未实现、专业写法、时间段缺失） |
 | 5-4 | ✅ 网站内容落地 | ① Projects 四张卡（新增 Tempo / Cal Hacks，新增 `beta` / `submission` 两个 status）；② Experience 按简历充实 2024 ESAP（洁净间工艺）与 2026 受邀助教（浏览器端接触角工具 / EWOD 校准 / 教学）；③ 新增 Home 的 Education & Awards & Skills 区块；④ Hero proof line 与 About identity 按简历更新 |
@@ -242,14 +242,33 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 |---|---|---|
 | 6-1 | Art 真图切回 | `src/data/artworks.ts` 的 `renderArtworkImages` 置回 `true`（占位框宽高比取自原图像素比，**切回不跳版**）。需先确认是否需要压缩以保住 Lighthouse Performance ≥ 90（Phase 4 时 Art 移动端曾因图片体积掉到 87） |
 | 6-2 | Art 内容定稿 | 四幅作品的题跋、尺寸、创作背景文案中英双语定稿；确认「龍虎風雨，天下梟雄」标题用法 |
-| 6-3 | Dev Log 首批文章 | 按 `docs/phase-5-plan.md` 的候选主题**先做事实采访**再写：Tempo / 接触角测量工具 / LinkedIn 扩展发布 / 便利店小程序 / 从第一次用 SEM 到带学生看 SEM。每篇必须回答：想做什么 · 试了或决定了什么 · 什么变了或失败了 · 下次怎么做 |
-| 6-4 | Dev Log 形态决策 | 单页索引 vs 每篇独立路由（Phase 5 已预留 `DevLogPost.body` 字段与详情页渲染分支） |
+| 6-3 | Dev Log 首批文章 | 候选主题（**先做事实采访**再写）：Tempo / 接触角测量工具 / LinkedIn 扩展发布 / 便利店小程序 / 从第一次用 SEM 到带学生看 SEM。每篇必须回答：想做什么 · 试了或决定了什么 · 什么变了或失败了 · 下次怎么做。**已拍板，写作规范见下方「Dev Log 写作契约」** |
+| 6-4 | Dev Log 形态决策 | ✅ **已定（2026-10-09）：单篇独立路由 `/dev-log/<slug>` + 干净索引页**。已实测线上任意深路径均返回 SPA index（Worker 侧 `not_found_handling`），**零配置可用，勿写进 `_redirects`** |
 | 6-5 | 走查与收尾 | 全设备走查 + Lighthouse 复测（Performance ≥ 90、Accessibility 100）+ docs 同步 |
 
 **硬约束：**
 - Dev Log 每篇文章都必须来自 Steven 确认过的真实经历，**不得从项目名称臆造复盘、日期或反思**
 - 不引入 CMS、后端或动画；内容仍住 `src/data/` 静态数据层
 - 保持六条路由、双语 `?lang=` 与「组件零硬编码文案」三条既有约定
+
+### Dev Log 写作契约（Steven 2026-10-09 拍板，勿推翻）
+
+**已定四项：**
+1. **放宽页面定位** —— 给每篇加 `category`（Dev / Lab / Research 之类），intro 从「shipped 项目的 build notes」放宽为「我做过的事的构建笔记与复盘」。理由：四篇里只有 Tempo 与 LinkedIn 是真·产品上线，助教与 ESAP 不是。
+2. **单篇独立路由 `/dev-log/<slug>`**（见 6-4）。
+3. **语气参考 https://blog.dylanlu.com/going-to-nvidia/** —— 第一人称、短句、自嘲、承认搞砸。⚠️ 风险已告知（受众含教授 / NVIDIA recruiter、且中文直译无对应词），Steven 确认要这档。
+4. **照片**：学生正脸可用（Steven 有授权），但**文章里不点名学生**。
+
+**写法三条硬规则：**
+- **叙事做皮、四问当骨。** 上表要求的四问**不要做成四个小标题**（那样像周报），让答案自然长在故事里：读起来是叙事，检查时四项都在。
+- **双语不直译，改功能对等。** 英文用英文的口语层（`lowk` / `honestly`），中文用中文的口语层（「讲真」「挺别扭的」）。保证**语气一致 + 信息一致**，spec §5 不要求字面相等。
+- **护栏：技术论断处一律平实。** 招聘官扫「我做了什么」的句子时不该撞上俚语。口语负责节奏与诚实，平实负责可信度。
+
+**素材：** 每张图必须有双语 `alt`；图片走既有管线（`ImageOps.exif_transpose` → 最长边 **880px** → JPEG **q80 / progressive / optimize**）。
+
+**节奏：** 先写 X-Institute 助教一篇当样稿，Steven 认可语气后再铺 Tempo / LinkedIn / ESAP。别一次写四篇。
+
+**开工卡点：** 动笔前必须先向 Steven 确认事实，最关键三条 —— ① 那十天具体负责什么（几个学生、什么学段、每天在干嘛）；② **中间出过什么岔子**（这是整篇的骨头）；③ 接触角测量平台是不是他自己写的代码。
 
 ---
 

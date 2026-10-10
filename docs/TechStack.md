@@ -60,7 +60,7 @@ Frontend (React SPA) → Cloudflare Workers + Static Assets (托管；构建由 
   Database.md      # 数据字典（数据层契约）
   Design.md        # UI 设计规范（Design Tokens）
   design-spec-v3.md   # Phase 4 双语多页重构 spec（Codex 产出，只读参考）
-  website-outline.md  # 最初的内容大纲
+                      # （2026-10-09 清理：website-outline.md「最初的单页内容大纲」已废除 —— 站点早已是多页架构，大纲结论已并入 PRD/Roadmap）
 /src
   /components       # 每条路由一个页面组件 + 外壳/工具组件
     Hero.tsx        #   `/`（上）
