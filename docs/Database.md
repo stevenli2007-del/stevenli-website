@@ -287,6 +287,12 @@ export interface DevLogPost {
   category: LocalizedText;    // Dev / Lab / Research …（Phase 6 放宽到非 shipped 项目）
   title: LocalizedText;
   summary: LocalizedText;     // 一句话 takeaway，索引页展示
+  cover?: {                   // 封面图（可选），单篇页标题区下方展示；不裁切
+    src: string
+    width: number
+    height: number
+    alt: LocalizedText
+  }
   body: DevLogBlock[];        // 正文
 }
 ```

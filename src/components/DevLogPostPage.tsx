@@ -83,6 +83,22 @@ export default function DevLogPostPage({ slug }: { slug: string }) {
 
         <p className="mt-6 text-lg leading-relaxed text-[#1D1D1F]">{post.summary[locale]}</p>
 
+        {/* Phase 6：封面图（可选）—— 不裁切，竖/方幅限宽居中，width/height 防 CLS */}
+        {post.cover && (
+          <figure className="mt-8">
+            <img
+              src={post.cover.src}
+              alt={post.cover.alt[locale]}
+              width={post.cover.width}
+              height={post.cover.height}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="mx-auto w-full max-w-[560px] rounded-xl border border-[#D2D2D7]"
+            />
+          </figure>
+        )}
+
         <div className="mt-8">
           {post.body.map((block, index) => (
             <Block key={index} block={block} locale={locale} index={index} />

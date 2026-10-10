@@ -12,6 +12,7 @@ import imgXInstituteTa2026 from '../assets/experience/x-institute-ta-2026.jpg'
 import imgAfmLotus2022 from '../assets/dev-log/afm-lotus-2022.jpg'
 import imgCondensation2023 from '../assets/dev-log/condensation-2023.jpg'
 import imgCommercialContactAngle from '../assets/dev-log/commercial-contact-angle.jpg'
+import imgXInstituteBuilding from '../assets/dev-log/x-institute-building.jpg'
 
 // Phase 6：正文块。段落用 p，小节标题用 h，图片用 img（双语 alt 必填）。
 export type DevLogBlock =
@@ -32,6 +33,12 @@ export interface DevLogPost {
   category: LocalizedText;    // Dev / Lab / Research …（Phase 6 拍板：放宽到非 shipped 项目）
   title: LocalizedText;
   summary: LocalizedText;     // 一句话 takeaway，索引页展示
+  cover?: {                   // 封面图（可选），单篇页标题下方展示；不裁切、保留原比例
+    src: string
+    width: number
+    height: number
+    alt: LocalizedText
+  }
   body: DevLogBlock[];        // 正文
 }
 
@@ -70,10 +77,20 @@ export const devLogPosts: DevLogPost[] = [
     id: 'x-institute-ta-2026',
     date: '2026',
     category: { en: 'Lab', zh: '实验室' },
-    title: { en: 'Ten Days as a TA', zh: '十天助教' },
+    // Steven 指定（2026-10-09）：不叫「十天助教」，就叫 X-Institute 3.0 —— 学生冬令营 → 学生暑期营 → 助教，第三次回来
+    title: { en: 'X-Institute 3.0', zh: 'X-Institute 3.0' },
     summary: {
       en: 'First time on the other side of the room: teaching middle and high schoolers to build their own contact-angle tool with AI — and getting the excitement back.',
       zh: '第一次站在讲台的另一边：带初中生和高中生用 AI 写自己的接触角测量工具，也把学习的兴奋捡了回来。',
+    },
+    cover: {
+      src: imgXInstituteBuilding,
+      width: 807,
+      height: 880,
+      alt: {
+        en: 'The X-Institute building in Shenzhen on a clear summer day.',
+        zh: '晴天的深圳零一学院大楼。',
+      },
     },
     body: [
       { type: 'h', text: { en: 'That one WeChat message', zh: '那条微信' } },
@@ -266,8 +283,8 @@ export const devLogPosts: DevLogPost[] = [
       {
         type: 'p',
         text: {
-          en: 'When it settled, the pay came out to ¥3,808. Honestly, that felt like a lot.',
-          zh: '最后结算下来，3808 块。讲真，我觉得超级多。',
+          en: 'When it settled, the pay came out to ¥3,232. Honestly, that felt like a lot.',
+          zh: '最后结算下来，3232 块。讲真，我觉得超级多。',
         },
       },
     ],
