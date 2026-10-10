@@ -14,7 +14,9 @@ export default function Header() {
   const current = normalizePath(pathname)
 
   const routeLinks = navItems.map((item) => {
-    const isCurrent = item.path === current
+    // Phase 6：子路径也算命中（/dev-log/<slug> 时高亮 Dev Log）
+    const isCurrent =
+      current === item.path || (item.path !== '/' && current.startsWith(`${item.path}/`))
     return (
       <li key={item.path}>
         <Link

@@ -265,26 +265,50 @@ export interface EducationInfo {
   - 标题层级：Home 的 h1 在 Hero、About 已是 h2，故本区块 h2 = Education，
     **Awards 与 Technical Skills 降为 h3**（避免三个同级大标题，也不跳级）
 
-## 10. `devLog.ts`（Phase 5 新增）
+## 10. `devLog.ts`（Phase 5 新增，Phase 6 升级）
 
 ```ts
+// Phase 6：正文块 —— 段落 / 小标题 / 图片。装得下图与小标题才有法写带图文章
+export type DevLogBlock =
+  | { type: 'p'; text: LocalizedText }
+  | { type: 'h'; text: LocalizedText }
+  | {
+      type: 'img'
+      src: string
+      width: number          // 处理后文件的实际像素（写进 <img width> 防 CLS）
+      height: number
+      alt: LocalizedText     // 双语 alt 必填
+      caption?: LocalizedText
+    }
+
 export interface DevLogPost {
-  id: string;                   // 唯一标识，如 "tempo-canvas-sync"
-  date: string;                 // 显示用日期，如 "2026-10"；不确定就不写
+  id: string;                 // 唯一标识，**同时是单篇路由 slug**（/dev-log/<id>）
+  date: string;               // 显示用日期，如 "2026-10"；不确定就只写年份
+  category: LocalizedText;    // Dev / Lab / Research …（Phase 6 放宽到非 shipped 项目）
   title: LocalizedText;
-  topic: LocalizedText;         // 归属项目 / 主题
-  summary: LocalizedText;       // 一句话 takeaway
-  body?: LocalizedText[];       // 正文段落（单页索引阶段可留空）
+  summary: LocalizedText;     // 一句话 takeaway，索引页展示
+  body: DevLogBlock[];        // 正文
 }
 ```
 
-同文件另导出：`devLogTitle` / `devLogIntro` / `devLogEmpty` / `devLogPosts`。
+同文件另导出：`devLogTitle` / `devLogIntro` / `devLogEmpty` / `devLogPosts` / `devLogBackToIndex` /
+`devLogReadMore` / `devLogFigureLabel` / `findDevLogPost(id)`。
 
-**Phase 5 硬约束：**
-- **`devLogPosts` 刻意为空数组** —— Steven 明确要求不编造日志、反思或日期；页面渲染 `devLogEmpty` 空态卡片
+**形态（Phase 6 定案，见 Roadmap 6-4）：** `/dev-log` 为索引页（卡片 → `Read`），
+单篇走独立路由 **`/dev-log/<slug>`**（`App.tsx` 前缀匹配，约 15 行，不引路由库；
+线上 Worker 侧 `not_found_handling = single-page-app`，深路径零配置可用）。
+
+**硬约束：**
+- 每篇必须来自 Steven 确认过的真实经历；**未确认的细节一律不写**（Phase 6 改稿时同上）
 - 一篇文章必须回答：想做什么 · 试了或决定了什么 · 什么变了或失败了 · 下次怎么做
 - 来源只能是已确认的项目事实；**不得从项目名称臆造复盘**
-- 内容的深度打磨归 **Phase 6**（`body` 字段与详情页渲染分支已预留，Phase 6 再决定单页索引 vs 独立路由）
+- 文章内**不点名学生**；学生正脸可用（Steven 有授权）
+- 双语**功能对等**，不直译；技术论断处一律平实
+- 写作契约全文见 `docs/Roadmap.md`「Dev Log 写作契约」
+
+**首篇（Phase 6，2026-10-09）：** `x-institute-ta-2026` —— 2026 夏 X-Institute 受邀助教十天，
+category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回答 → 整理成稿）。
+仍缺（后续可补）：岔子/翻车、腾讯参访细节、十天具体日期。
 
 ## 11. 通用规则
 - 所有 `id` 字段用 kebab-case（如 `"linkedin-ai"`），不是 camelCase——因为它可能被用作 HTML anchor / URL slug。
@@ -311,3 +335,8 @@ export interface DevLogPost {
   - `shell.ts` 导航由 **5 项 → 6 项**（新增 `/dev-log`，位于 Experience 与 Art 之间）；`siteTitle.description` 补入 Tempo
   - `site.ts` 的 `proof`、`about.ts` 的 `identity` 按简历更新（专业 = Engineering Physics & Computer Science）
   - ⚠️ 简历中 Tempo 的「semester-long and daily study plans」**未入站**（无实现证据），见 `docs/phase-5-resume-addendum.md`
+- **2026-10-09（Bud，Phase 6 Dev Log 首批内容）：**
+  - §10 `DevLogPost.body` 由 `LocalizedText[]` 升级为 **`DevLogBlock[]`**（`p` / `h` / `img`，图片带双语 alt 与 width/height）；`topic` → **`category`**
+  - `devLog.ts` 新增 `findDevLogPost(id)`、`devLogBackToIndex`、`devLogReadMore`、`devLogFigureLabel`；`devLogIntro` 按契约放宽为「上线与否都算」
+  - 新增单篇路由 **`/dev-log/<slug>`**（`App.tsx` 前缀匹配 + `components/DevLogPostPage.tsx`）；`/dev-log` 改索引页；Header 子路径高亮
+  - 首篇文章落库：`x-institute-ta-2026`（category `Lab`，中英全文来自 Steven 口述采访）
