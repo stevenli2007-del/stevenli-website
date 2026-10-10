@@ -9,8 +9,21 @@ import type { Locale } from '../data/locales'
 // 2026 受邀助教：实心节点 `bg-[#1D1D1F] ring-4 ring-[#1D1D1F]/10` + 深色「受邀」徽章；
 //   学员节点保持空心（border-2 + bg-white）。2023 的「星空少年」徽章保留、降为灰底。
 // 时间序 2022 → 2026 不变（数据顺序即展示顺序）。
+//
+// Phase 6 微调（2026-10-09，Steven 指定）：每条加配图 —— 见 Design.md §9.4。
+//   文字与图：宽屏两栏（文字 1fr / 图 18rem），窄屏图落在文字下方、限宽 22rem 防竖幅图过高。
+//   图片**不裁切**（保留原始比例），`width`/`height` 取自文件实际像素 → 零 CLS。
+//   仅首条 `loading="eager"` + `fetchPriority="high"`（它是本页首屏图，其余 lazy）。
 
-function TimelineNode({ entry, locale }: { entry: ExperienceEntry; locale: Locale }) {
+function TimelineNode({
+  entry,
+  locale,
+  priority,
+}: {
+  entry: ExperienceEntry
+  locale: Locale
+  priority: boolean
+}) {
   const isTA = entry.role === 'invited-ta'
 
   return (
@@ -41,15 +54,30 @@ function TimelineNode({ entry, locale }: { entry: ExperienceEntry; locale: Local
         )}
       </div>
 
-      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#6E6E73]">
-        {entry.description[locale]}
-      </p>
+      <div className="mt-3 grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
+        <div className="min-w-0">
+          <p className="max-w-3xl text-sm leading-relaxed text-[#6E6E73]">
+            {entry.description[locale]}
+          </p>
 
-      {entry.keywords.length > 0 && (
-        <p className="mt-2 text-xs text-[#59595E]">
-          {entry.keywords.map((keyword) => keyword[locale]).join(' · ')}
-        </p>
-      )}
+          {entry.keywords.length > 0 && (
+            <p className="mt-2 text-xs text-[#59595E]">
+              {entry.keywords.map((keyword) => keyword[locale]).join(' · ')}
+            </p>
+          )}
+        </div>
+
+        <img
+          src={entry.image.src}
+          alt={entry.imageAlt[locale]}
+          width={entry.image.width}
+          height={entry.image.height}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : undefined}
+          decoding="async"
+          className="w-full max-w-[22rem] self-start rounded-xl border border-[#D2D2D7] lg:max-w-none"
+        />
+      </div>
     </li>
   )
 }
@@ -69,8 +97,8 @@ export default function Experience() {
         </p>
 
         <ol className="relative mt-8 space-y-8 before:absolute before:bottom-2 before:left-[5px] before:top-2 before:w-px before:bg-[#D2D2D7]">
-          {experience.map((entry) => (
-            <TimelineNode key={entry.id} entry={entry} locale={locale} />
+          {experience.map((entry, index) => (
+            <TimelineNode key={entry.id} entry={entry} locale={locale} priority={index === 0} />
           ))}
         </ol>
       </div>
