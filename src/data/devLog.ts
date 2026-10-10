@@ -9,6 +9,9 @@
 
 import type { LocalizedText } from './locales'
 import imgXInstituteTa2026 from '../assets/experience/x-institute-ta-2026.jpg'
+import imgAfmLotus2022 from '../assets/dev-log/afm-lotus-2022.jpg'
+import imgCondensation2023 from '../assets/dev-log/condensation-2023.jpg'
+import imgCommercialContactAngle from '../assets/dev-log/commercial-contact-angle.jpg'
 
 // Phase 6：正文块。段落用 p，小节标题用 h，图片用 img（双语 alt 必填）。
 export type DevLogBlock =
@@ -112,10 +115,30 @@ export const devLogPosts: DevLogPost[] = [
         },
       },
       {
+        type: 'img',
+        src: imgAfmLotus2022,
+        width: 880,
+        height: 660,
+        alt: {
+          en: 'The benchtop AFM used to probe the surface microstructure of a lotus leaf during the 2022 winter camp.',
+          zh: '2022 年冬令营里用来探查荷叶表面微结构的台式 AFM。',
+        },
+      },
+      {
         type: 'p',
         text: {
           en: 'The next summer I went back for the research camp, studying how micro- and nano-scale surface structures affect droplet condensation efficiency. That project got me the Starry Youth title and tied me to X-Institute for good. After that: underactuated soft robotic grippers with Prof. Zhang Wenzeng, CdSe quantum dots at Penn ESAP, an IEEE paper — all the same direction.',
           zh: '来年暑假我又回去，进了暑期科研营，研究微纳表面结构怎么影响水滴的冷凝效率。那个项目给了我“星空少年”的称号，也把我跟零一彻底绑上了。再往后就是跟张文增老师做欠驱动的柔性机器人抓手、去宾大 ESAP 做 CdSe 量子点、发 IEEE 论文——一路都是同一个方向。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgCondensation2023,
+        width: 880,
+        height: 495,
+        alt: {
+          en: 'The bench setup for the surface-structure vs. condensation-efficiency project at the 2023 summer research camp.',
+          zh: '2023 年暑期科研营，表面微结构与冷凝效率项目的实验台。',
         },
       },
       {
@@ -165,6 +188,16 @@ export const devLogPosts: DevLogPost[] = [
         text: {
           en: 'There was a commercial instrument in the lab (the software looked like it came from another era), but the course was not about operating a machine — it was about understanding the measurement itself: how you get an angle out of a photo, where the baseline sits, how the tangent is drawn. Write it once yourself and you do not forget it.',
           zh: '实验室里商用仪器是有的（配套软件看着很有年代感），但课程要的不是“会用仪器”，是“理解测量这件事本身”——角度怎么从一张照片里算出来，基线在哪、切线怎么定。自己写过一遍就再也忘不掉了。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgCommercialContactAngle,
+        width: 880,
+        height: 660,
+        alt: {
+          en: 'The lab’s commercial contact-angle goniometer and its bundled measurement software.',
+          zh: '实验室的商用接触角测量仪及其配套测量软件。',
         },
       },
       {
