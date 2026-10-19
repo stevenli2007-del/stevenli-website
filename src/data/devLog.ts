@@ -17,6 +17,7 @@ import imgTempoDashboard from '../assets/dev-log/tempo-dashboard.jpg'
 import imgGoogleMuse from '../assets/dev-log/google-muse.jpg'
 import imgTempoRoadmapDocs from '../assets/dev-log/tempo-roadmap-docs.jpg'
 import imgTempoMessagesParse from '../assets/dev-log/tempo-messages-parse.jpg'
+import imgTempoSettingsPrivacy from '../assets/dev-log/tempo-settings-privacy.jpg'
 
 // Phase 6：正文块。段落用 p，小节标题用 h，图片用 img（双语 alt 必填）。
 export type DevLogBlock =
@@ -181,6 +182,23 @@ export const devLogPosts: DevLogPost[] = [
         alt: {
           en: 'Tempo’s message feed: a MATH 53 course update parsed from a course-page link, with plenty of noisy, low-value “updates”.',
           zh: 'Tempo 的消息栏：一条从课程网页链接解析出来的 MATH 53 内容更新，混着不少失真、低价值的「更新」。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'And on top of all that, I never thought about the real-world usage scenario. Right now basically every feature on the site runs through my personal AI API key to call DeepSeek. If the user base grows, my key can’t survive a flood of requests in a short window — the whole thing just falls over.',
+          zh: '还有就是没有考虑到真实的使用场景。现在全站功能基本全部要依靠我个人的AI API Key来调度DeepSeek，如果用户量涨起来了，我的key根本撑不住短时间内大量的request，一下子就崩掉了。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgTempoSettingsPrivacy,
+        width: 880,
+        height: 479,
+        alt: {
+          en: 'Tempo’s Settings & Privacy page: syllabi, tasks and Canvas connections stored in Supabase, with AI calls routed through a single personal API key.',
+          zh: 'Tempo 的「设置与隐私」页：课程与任务存在 Supabase，AI 调度走的是我个人的 API key。',
         },
       },
       {
