@@ -13,6 +13,10 @@ import imgAfmLotus2022 from '../assets/dev-log/afm-lotus-2022.jpg'
 import imgCondensation2023 from '../assets/dev-log/condensation-2023.jpg'
 import imgCommercialContactAngle from '../assets/dev-log/commercial-contact-angle.jpg'
 import imgXInstituteBuilding from '../assets/dev-log/x-institute-building.jpg'
+import imgTempoDashboard from '../assets/dev-log/tempo-dashboard.jpg'
+import imgGoogleMuse from '../assets/dev-log/google-muse.jpg'
+import imgTempoRoadmapDocs from '../assets/dev-log/tempo-roadmap-docs.jpg'
+import imgTempoMessagesParse from '../assets/dev-log/tempo-messages-parse.jpg'
 
 // Phase 6：正文块。段落用 p，小节标题用 h，图片用 img（双语 alt 必填）。
 export type DevLogBlock =
@@ -73,6 +77,163 @@ export const devLogFigureLabel: LocalizedText = {
 }
 
 export const devLogPosts: DevLogPost[] = [
+  {
+    // 第二篇（2026-10-18）：Tempo 开发受阻的复盘。正文由 Steven 本人撰写，Bud 只修错别字与专名拼写，内容未改动。
+    id: 'tempo-diagnosis-2026',
+    date: '2026-10',
+    category: { en: 'Dev', zh: '开发' },
+    title: { en: 'Diagnosing Tempo', zh: 'Tempo的诊断书' },
+    summary: {
+      en: 'Tempo is stuck and this is the post-mortem: a roadmap that melted, a context window that exploded, and four lessons I should have learned earlier.',
+      zh: 'Tempo 开发受阻的复盘：roadmap 失控、上下文撑爆、定位没想清，以及四条本该早点学会的教训。',
+    },
+    cover: {
+      src: imgTempoDashboard,
+      width: 880,
+      height: 571,
+      alt: {
+        en: 'The Tempo course dashboard: today’s tasks pulled in from Canvas, sorted by deadline pressure.',
+        zh: 'Tempo 的课程面板：从 Canvas 抓来的今日任务，按紧迫度折叠排序。',
+      },
+    },
+    body: [
+      {
+        type: 'p',
+        text: {
+          en: 'Sigh. The most painful thing these past few weeks has been watching Tempo’s development get more and more blocked — especially code review and fixes, UI design, and feature building. A complete mess...',
+          zh: '唉这些天最让我难受的事莫过于Tempo的开发越来越受阻，尤其是代码review和修改、UI设计，以及功能建造上，简直一团乱麻。。。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'First, what even is Tempo? At the start of my first semester at Berkeley, systems and platforms were flying at me from every direction (one thing on bCourses, another on Gradescope, another on Expert TA — the most ridiculous one, why do I have to pay to do my homework?). And the syllabi professors hand out are long, unreadable, and somehow still easy to miss important info in. So my roommate Harris and I decided to build a unified portal (Tempo) that pulls all the platforms into one place.',
+          zh: '首先先讲讲Tempo是个啥。伯克利大一第一学期开学初，各种系统，平台满天飞（一会儿在bCourses，一会儿在Gradescope，一会儿又在Expert TA【这个平台最离谱，为什么还要付费才能做作业？】），并且，老师给的Syllabus那可以说是又臭又长，根本读不下去，还会miss很多重要信息。于是我和我的室友Harris就决定做一个unified portal（也就是Tempo）来集合所有的平台，一站通的那种感觉。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'The overall logic is not complicated: a few multimodal LLMs running in the background (mostly DeepSeek), connected to each platform through API access tokens (Canvas, for example), pulling info from them and keeping everything up to date.',
+          zh: '整体逻辑其实不难，后台调度几个多模态LLM（主要DeepSeek），然后通过API access Token连接到各个平台（比如Canvas）然后抓取上面的信息实时更新。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'I even had this bigger vision of a personal secretary — and then, mid-build, I found out Google had already shipped MUSE?? Exactly what I wanted to build, super-powered edition.',
+          zh: '我甚至还有个大的设想就是personal secretary，结果我做着做着发现怎么Google已经发布了MUSE？？？完完全全就是我想做的东西的超级无敌加强版。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGoogleMuse,
+        width: 802,
+        height: 482,
+        alt: {
+          en: 'Google MUSE, an AI assistant product that overlaps with the personal-secretary vision I had for Tempo.',
+          zh: 'Google MUSE——和我给 Tempo 设想的 personal secretary 方向高度重合的 AI 助手产品。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Now for Tempo’s actual problems. The one that stresses me out most: the development roadmap completely fell apart. Before we started, I designed a roadmap with 5 phases, where Phase 0 handled the MVP. I actually finished Phase 0 pretty early — by the cards, I should have been moving on to Private Beta.',
+          zh: '现在主要来聊聊Tempo的问题。。（最让我焦心的）首先是这个开发roadmap完全混乱掉了。开始动工之前设计了一个roadmap，里面分成了5个phase，Phase 0主要负责MVP。其实我Phase 0很早就完工了，按照卡上的安排，我应该是要开始Private Beta了。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgTempoRoadmapDocs,
+        width: 880,
+        height: 480,
+        alt: {
+          en: 'Tempo’s “development constitution” docs on GitHub — the roadmap has grown far past what it was designed to hold.',
+          zh: 'GitHub 上 Tempo 的开发宪法文档——roadmap 早已超出当初设计的体量。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'But instead: build a little, discover a new problem, want to add a new feature. The roadmap that was supposed to end at P0-4 got stretched all the way to P0-5-4, and the project’s “development constitution” docs are now a mess. [Problem 1]',
+          zh: '结果呢，我一边做，一边发现新的问题，然后想要加新的功能来完善，这就导致原本直到P0-4的roadmap硬生生被我撑到P0-5-4。整个开发宪法Docs现在就很混乱。【问题1】',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Second, my main coder this time has been WorkBuddy (Hy4 has gotten seriously smart, I have to say), and some of the project’s internal docs have grown so large that content management broke down. Every time I tell WorkBuddy to start work and have it read the constitution, the context just explodes. There are also hidden files like .workbuddy/memory that I can’t even see, let alone edit — that’s a big problem. [Problem 2]',
+          zh: '其次，我这次主要的码农是WorkBuddy（Hy4现在变得很聪明不得不说），现在项目内部的一些文档存储太太太大了，内容管理也出现了问题，导致我每次和WorkBuddy说开工，叫他读开发宪法的时候，上下文直接撑爆。。也有一些隐藏文件例如.workbuddy/memory，我完全看不到，也无法修改，这是个很大的问题【问题2】',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Third: positioning, monetization, and per-feature polish were never thought through. Take external link monitoring. The current approach caches the page inside Tempo and fetches it through the scheduling API. But a lot of what comes back is badly parsed and full of irrelevant noise. And Tempo doesn’t really know how to handle what it fetches: “Unit 2 exam” and “Test 2” are the same thing, but Tempo adds a new item instead of overwriting. The way WorkBuddy fixed it was incredibly crude — it just found some semantic set to stuff into the prompt. That’s pure garbage-code stacking (which is exactly why the project becomes impossible to change once it gets big).',
+          zh: '然后，项目定位，变现逻辑，以及单个功能优化没想清楚。举例子来说：关于外部链接监控这个功能，目前的做法是缓存在Tempo平台里，然后通过调度API去抓。但是很多时候抓取到的信息都存在解析结果非常失真，且带有大量非必要信息的情况。而且，Tempo没有办法很好理解怎么处理抓取到的信息：比如Unit 2 exam和Test 2其实是一个东西，但是Tempo会新加一个东西而不是覆盖。WorkBuddy修的方式也特别粗暴，单纯找了个语义集来输入进prompt里，这么做完全是堆叠垃圾代码（这也是为什么项目一大完全改不动。）',
+        },
+      },
+      {
+        type: 'img',
+        src: imgTempoMessagesParse,
+        width: 880,
+        height: 568,
+        alt: {
+          en: 'Tempo’s message feed: a MATH 53 course update parsed from a course-page link, with plenty of noisy, low-value “updates”.',
+          zh: 'Tempo 的消息栏：一条从课程网页链接解析出来的 MATH 53 内容更新，混着不少失真、低价值的「更新」。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Finally, the UI is badly designed (I think it needs an Astra redesign), and the site’s main language is still Chinese.',
+          zh: '最后，UI设计得特别烂（我觉得需要Astra redesign一下），以及全站目前的主语言还是中文。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'My summary at the end — I learned a lot:',
+          zh: '我最后的总结：学到了很多很多：',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '1. You really can’t get lazy and let WorkBuddy or any agent do all the coding for you. The pile of garbage code grows fast, especially when fixing or completing a specific feature — the AI’s fix is always a local patch, never a logic change.',
+          zh: '1. 真的是不能偷懒纯让WorkBuddy/any agent来完全代劳coding，屎山代码越攒越多，尤其是修复/补全特定功能的时候，AI的修法完全是局部修好，而不是改逻辑',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '2. Once a roadmap is set, it really shouldn’t move. At minimum, don’t keep adding tasks to the current phase, or there will never be a day it gets done.',
+          zh: '2. Roadmap设计好，就真的不能动了。至少当前Phase的任务不能随便乱加，否则根本就没有完成的那一天。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '3. File, context, and constitution management have to be planned ahead of time, otherwise they blow up easily — and the project will quietly generate piles of useless, meaningless junk docs on its own.',
+          zh: '3. 文件和上下文和宪法管理一定要提前想好，要不然很容易就轻轻松松撑爆，项目也会自己生成一堆根本没有用没有意义的垃圾文档。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '4. UI and site language have to move in sync with development. Otherwise, once the project gets big, retrofitting them is a huge job...',
+          zh: '4. UI/站内语言一定要和开发同步进行。否则到了后面项目规模做大了，UI和站内语言再去改动就会是个huge work。。。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'And my solution is simple: thank god for GitHub. I’ll roll back a few versions, fix the development docs first, and then keep building.',
+          zh: '我的解决方案也很简单：还好我有Github。我会回滚几个版本，然后先把开发文档什么的修好，然后再继续开发。',
+        },
+      },
+    ],
+  },
   {
     id: 'x-institute-ta-2026',
     date: '2026',
