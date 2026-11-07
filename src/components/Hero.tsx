@@ -1,5 +1,6 @@
 import { Link, useLocale, useLocation } from '../lib/router'
 import { siteInfo } from '../data/site'
+import homeCalligraphy from '../assets/home-calligraphy.jpg'
 
 // Phase 4 Task 4-4 — Home / Hero（spec §4 Home）
 // 纯白背景；文案列在 DOM 前、桌面端头像靠右；头像缩小（h-32 / md:h-40）并移除阴影；
@@ -12,7 +13,11 @@ export default function Hero() {
   const { search } = useLocation()
 
   return (
-    <section className="bg-white">
+    <section
+      className="relative isolate bg-cover bg-center"
+      style={{ backgroundImage: `url(${homeCalligraphy})` }}
+    >
+      <div className="absolute inset-0 -z-10 bg-[#f8f6ee]/90" aria-hidden="true" />
       <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-6xl flex-col items-center justify-center gap-8 px-6 py-12 md:flex-row md:justify-between md:gap-12 md:py-16">
         <div className="max-w-2xl text-center md:text-left">
           <p className="text-sm font-medium text-[#6E6E73]">{siteInfo.name}</p>

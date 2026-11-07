@@ -32,7 +32,7 @@ export default function Contact() {
   const projects = contactLinks.filter((link) => link.group === 'project')
 
   return (
-    <section className="bg-white">
+    <section className="bg-[#faf9f5]">
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
         <h1 className="text-3xl font-semibold tracking-tight text-[#1D1D1F] md:text-4xl">
           {contactTitle[locale]}

@@ -40,7 +40,7 @@ export default function Header() {
     }`
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#D2D2D7] bg-white/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 border-b border-[#d8d3c8] bg-[#faf9f5]/95 backdrop-blur-sm">
       <nav
         aria-label={navigation.label[locale]}
         className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 py-3"

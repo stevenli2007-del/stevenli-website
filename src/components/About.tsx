@@ -9,7 +9,7 @@ export default function About() {
   const locale = useLocale()
 
   return (
-    <section className="bg-[#F5F5F7]">
+    <section className="bg-[#efede6]">
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
         <h2 className="text-3xl font-semibold tracking-tight text-[#1D1D1F] md:text-4xl">
           {aboutInfo.title[locale]}
@@ -21,7 +21,7 @@ export default function About() {
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {aboutInfo.examples.map((example, index) => (
-            <div key={index} className="rounded-2xl border border-[#D2D2D7] bg-white p-5">
+            <div key={index} className="rounded-2xl border border-[#d8d3c8] bg-[#faf9f5] p-5">
               <p className="text-base font-semibold text-[#1D1D1F]">{example.title[locale]}</p>
               <p className="mt-2 text-sm leading-relaxed text-[#6E6E73]">{example.effect[locale]}</p>
             </div>
