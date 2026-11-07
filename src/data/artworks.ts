@@ -8,7 +8,7 @@
 //   每张 slide 自带画框底色（tone：light → 纯白画布，dark → 近黑画布），
 //   图居中、留大白、超大低对比编号；下方为细线进度 + 同步缩略图条 + 极简计数与箭头。
 //   不做自动播放 / 视差 / 淡入 —— 高级感靠画布、留白和层级，不靠动效。
-// 旧四幅 + 上一轮从 pptx 解出的四张图仍留在 src/assets/art，不进数组、不删除。
+// 旧四幅 artwork-1~4 留在 src/assets/art 归档、不进数组；上一轮从 pptx 解出的四张中间图已于 2026-11-06 清入废纸篓。
 // 组件零硬编码文案：图集区域名、缩略图 aria-label、箭头 aria-label、滑动提示全部住在本文件。
 
 import type { LocalizedText } from './locales'

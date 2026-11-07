@@ -8,7 +8,7 @@ import {
 import { Link, useLocale, useLocation } from '../lib/router'
 
 // Phase 5（2026-10-09）新增 — /dev-log 索引页
-// 白底；容器与间距同其它页面（max-w-6xl / py-16 md:py-20 / intro max-w-3xl）。
+// 米色底 bg-[#faf9f5]（Phase 7b）；容器与间距同其它页面（max-w-6xl / py-16 md:py-20 / intro max-w-3xl）。
 // Phase 5 只建结构：devLogPosts 为空 → 渲染空态卡片，不编造文章。
 // Phase 6（2026-10-09）：改为**索引页** —— 每篇一张卡，点进单篇路由 /dev-log/<id>（Roadmap 6-4）。
 //   卡片展示 date · category → title → summary → 阅读链接；语言状态随 URL 带进单篇。
@@ -29,7 +29,7 @@ export default function DevLog() {
         </p>
 
         {devLogPosts.length === 0 ? (
-          <p className="mt-8 max-w-3xl rounded-2xl border border-dashed border-[#D2D2D7] bg-[#F5F5F7] px-6 py-8 text-sm leading-relaxed text-[#6E6E73]">
+          <p className="mt-8 max-w-3xl rounded-2xl border border-dashed border-[#D2D2D7] bg-[#efede6] px-6 py-8 text-sm leading-relaxed text-[#6E6E73]">
             {devLogEmpty[locale]}
           </p>
         ) : (

@@ -4,7 +4,7 @@
 
 interface SectionProps {
   id: string;
-  tone?: "default" | "muted"; // muted = 灰底，制造节奏（About / Art 用）
+  tone?: "default" | "muted"; // default = 米色 #faf9f5；muted = 暖灰 #efede6（Phase 7b 统一）
   children: React.ReactNode;
   className?: string; // 可选：Hero 全幅背景等特殊布局需要穿透样式
 }
@@ -15,7 +15,7 @@ export default function Section({ id, tone = "default", children, className }: S
   return (
     <section
       id={id}
-      className={`${tone === "muted" ? "bg-[#F5F5F7]" : "bg-white"}${className ? ` ${className}` : ""}`}
+      className={`${tone === "muted" ? "bg-[#efede6]" : "bg-[#faf9f5]"}${className ? ` ${className}` : ""}`}
     >
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">{children}</div>
     </section>

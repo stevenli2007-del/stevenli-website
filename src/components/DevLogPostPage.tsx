@@ -11,7 +11,7 @@ import NotFound from './NotFound'
 import type { Locale } from '../data/locales'
 
 // Phase 6（2026-10-09）新增 — /dev-log/<slug> 单篇页（Roadmap 6-4：单篇独立路由）。
-// 排版沿用站内既有令牌：白底、max-w-3xl 正文、h1 3xl/4xl、正文 text-[17px] leading-relaxed 灰 #6E6E73。
+// 排版沿用站内既有令牌：米色底 bg-[#faf9f5]（Phase 7b 统一）、max-w-3xl 正文、h1 3xl/4xl、正文 text-[17px] leading-relaxed 灰 #6E6E73。
 // 图片：不裁切，width/height 取自文件实际像素（零 CLS），首图 eager，其余 lazy。
 // 文案零硬编码：返回链接、图注标签均来自 data 层。
 
@@ -64,7 +64,7 @@ export default function DevLogPostPage({ slug }: { slug: string }) {
   if (!post) return <NotFound />
 
   return (
-    <article className="bg-white">
+    <article className="bg-[#faf9f5]">
       <div className="mx-auto w-full max-w-3xl px-6 py-16 md:py-20">
         <Link
           to={`/dev-log${search}`}

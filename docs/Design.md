@@ -6,6 +6,10 @@
 
 > ⚠️ **Phase 4（2026-10-08）起：`§3` `§4` `§5` `§6` `§7` 中与 §9 冲突的条目一律作废，以 §9 为准。**
 > 本文件 §1 颜色系统与 §2 圆角/间距基本仍然有效（个别行已在原位更新）。新增实现前请先读 §9。
+>
+> 🟢 **2026-11-06 全面刷新（Phase 7 / 7b）**：§9 已按线上现状重写 —— ① 全站底色改宣纸米色 `#faf9f5`；
+> ② Hero 加书法底图（覆盖此前「Hero 纯白无背景图」）；③ Art 页改横向滑动编辑式图集；
+> ④ Experience 时间线改倒序（最近在上）。§1 表格同步更新；`§3~§7` 为历史记录，一律以 §9 为准。
 
 ---
 
@@ -13,13 +17,21 @@
 
 | Token | 色值 | Tailwind 写法 | 用途 |
 |---|---|---|---|
-| `bg-primary` | `#FFFFFF` | `bg-white` | 页面主背景 |
-| `bg-secondary` | `#F5F5F7` | `bg-[#F5F5F7]` | 交替 section 背景（制造节奏，如 About / Art 用灰底） |
+| `bg-page`（原 `bg-primary`） | `#faf9f5` | `bg-[#faf9f5]` | **页面 / section / header / body 主背景**（2026-11-06 起；原 `#FFFFFF` 不再是页面底） |
+| `bg-block`（原 `bg-secondary`） | `#efede6` | `bg-[#efede6]` | About 区块暖灰底（原 `#F5F5F7` 已下线） |
+| `surface` | `#FFFFFF` | `bg-white` | 卡片、图片容器、时间线空心节点、Art 白纸作品画框 |
+| `frame-dark` | `#0B0B0C` | `bg-[#0B0B0C]` | Art 黑纸白墨作品的画框 |
+| `hero-veil` | `#f8f6ee` @ 90% | `bg-[#f8f6ee]/90` | Hero 书法底图的遮罩层 |
+| `divider-warm` | `#d8d3c8` | `border-[#d8d3c8]` | Header 下边线、About 卡片描边 |
 | `text-primary` | `#1D1D1F` | `text-[#1D1D1F]` | 标题与正文主色 |
 | `text-secondary` | `#6E6E73` | `text-[#6E6E73]` | 次要说明文字 |
 | `text-tertiary` | `#59595E` | `text-[#59595E]` | caption / meta / 时间线年份 |
-| `divider` | `#D2D2D7` | `border-[#D2D2D7]` | 分隔线、卡片描边 |
+| `divider` | `#D2D2D7` | `border-[#D2D2D7]` | 分隔线、卡片描边、时间线竖线 |
 | `accent` | `#0071E3` | `text-[#0071E3]` | 链接、交互强调（Apple 蓝，全站唯一强调色） |
+
+> 文字色、divider、accent 自 Phase 4 起未变；2026-11-06 只换了**背景层与暖色描边**。
+> **2026-11-06 全站配色已统一**：`src/components/Section.tsx`（仅 404 页使用）default → `#faf9f5`、muted → `#efede6`；Dev Log 单篇 `<article>` → `#faf9f5`、Dev Log 索引页空态卡 → `#efede6`。
+> **刻意保留的 `bg-white` 属 `surface` token，不是遗漏**：Projects 卡片、时间线空心节点、Art 白纸作品画框。
 
 ### 状态标识（Projects 卡片）— Phase 4 起（替代原彩色徽章）
 
@@ -51,7 +63,7 @@
 | `container` | 最大 1152px | `max-w-6xl mx-auto px-6` | 全站统一容器 |
 | `card-padding` | 24px | `p-6` | 卡片内边距 |
 | `card-gap` | 24px | `gap-6` | 卡片间距 |
-| `grid-gap` | 16px | `gap-4` | Art 图廊图片间距 |
+| `grid-gap` | 16px | `gap-4` | 卡片网格间距（Art 已改横向图集，不再用 grid，见 §9.5） |
 
 ---
 
@@ -99,7 +111,7 @@ font-family: "Noto Serif SC", serif;
 - 竖线：`w-px bg-[#D2D2D7]` 贯穿节点左侧
 - 年份：`text-sm text-[#59595E]`（caption 层级）
 - badge（星空少年）：复用状态徽章样式，`bg-[#6E6E73] text-white rounded-full text-xs`
-- 排列：数据正序 2022→2026（Database.md 已锁定，前端不排序）
+- ~~排列：数据正序 2022→2026（Database.md 已锁定，前端不排序）~~ → **⚠️ 已被 §9.4 覆盖：2026-11-06 起前端倒序渲染，最近在上**
 - 移动端：节点圆点缩至 `h-2.5 w-2.5`（桌面 `h-3 w-3`），竖线对应内移；机构名与描述同列堆叠
 
 ---
@@ -134,10 +146,17 @@ font-family: "Noto Serif SC", serif;
 
 ### 9.1 版面骨架
 
-- **五条独立路由**，每页一个 `<section>` 自带背景：首页 / Projects / Experience / Contact 白底；About 区块与 Art 页 `#F5F5F7`
-- 容器：`mx-auto w-full max-w-6xl px-6 py-16 md:py-20`
-- `Header`：`sticky top-0 z-50 border-b border-[#D2D2D7] bg-white/95 backdrop-blur-sm`；内层 `mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 py-3`
+- **六条独立路由**（`/`、`/projects`、`/experience`、`/dev-log`、`/art`、`/contact`）+ `/dev-log/<slug>` 深链；每页一个 `<section>` 自带背景：
+  - 页面 / section / `body`：`bg-[#faf9f5]`（Hero 外的所有页面、Header、Education 区块、Art 页）
+  - About 区块：`bg-[#efede6]`；About 内卡片 `bg-[#faf9f5]` + `border-[#d8d3c8]`
+  - Dev Log 单篇 `<article>`、404 页 `Section` 均已统一为 `#faf9f5`；`Section` 的 muted 变体与 Dev Log 索引页空态卡为 `#efede6`
+  - **刻意保留的白色 surface**：Projects 卡片 `bg-white`（米底上做卡片层次）、时间线空心节点、Art 白纸作品画框（跟作品纸底走）
+  - `body` 兜底写在 `src/index.css`：`background:#faf9f5; color:#1d1d1f`
+- 容器：`mx-auto w-full max-w-6xl px-6 py-16 md:py-20`（Art 页拆成 `pt-16 md:pt-20`，底部留白交给图集控制区）
+- `Header`：`sticky top-0 z-50 border-b border-[#d8d3c8] bg-[#faf9f5]/95 backdrop-blur-sm`；内层 `mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 py-3`
   - 移动端（<768px）导航折成第二行横向滚动：`flex w-full gap-5 overflow-x-auto whitespace-nowrap pb-1 md:hidden`（**无汉堡菜单**）
+- `Hero`（2026-11-06 起）：`relative isolate bg-cover bg-center` + 内联 `background-image: url(src/assets/home-calligraphy.jpg)`，上覆 `absolute inset-0 -z-10 bg-[#f8f6ee]/90` 遮罩保证文字对比度；静态图，无视频、无视差、无动效。
+  **⚠️ 此条明确覆盖此前「Hero 纯白、无背景图」的约定**（该约定源于更早一次全幅背景被否决；本版用 90% 遮罩把底图压到近乎纸纹）。
 - `Footer`：`border-t` + 一行版权（两种语言都用 legal name）
 - 语言切换：`inline-flex rounded-full border border-[#D2D2D7] p-1 text-xs`，当前语言 `font-medium text-[#1D1D1F]`，另一项 `text-[#6E6E73] hover:text-[#1D1D1F]`
 
@@ -175,7 +194,7 @@ font-family: "Noto Serif SC", serif;
   - 受邀助教：实心 `bg-[#1D1D1F]` + `ring-4 ring-[#1D1D1F]/10`（比原 `ring-2` 更明显）
 - period：`text-xs font-medium uppercase tracking-wide text-[#6E6E73]`
 - badge：`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium text-white` —— 受邀 `bg-[#1D1D1F]`、星空少年 `bg-[#6E6E73]`
-- 排列：数据正序 2022→2026，前端不排序
+- 排列（**2026-11-06 起，Steven 指定**）：**倒序，最近在上**（2026 暑期 → 2022 冬季）。数据层 `experience[]` 仍按时间正序维护，组件用 `[...experience].reverse()` 生成展示序列；数据顺序 ≠ 展示顺序
 - 移动端与桌面端同规格（原「移动端缩至 h-2.5」的设想未实现，也不需要）
 
 **配图（Phase 5.5 新增，2026-10-09）：**
@@ -183,33 +202,42 @@ font-family: "Noto Serif SC", serif;
 - 条目结构：`mt-3 grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8` —— 文字左、图右；`lg` 以下单列，图**落在文字下方**
 - 图：`w-full max-w-[22rem] self-start rounded-xl border border-[#D2D2D7] lg:max-w-none`（窄屏限宽 22rem，防竖幅图占满整屏）
 - **不裁切**：保留原始比例，`width` / `height` 写**文件实际像素**（防 CLS）；故各行图高不同（193~469px），属预期
-- 加载：**仅首条** `loading="eager"` + `fetchPriority="high"`（本页首屏图），其余 `loading="lazy"` + `decoding="async"`
+- 加载：**仅首条** `loading="eager"` + `fetchPriority="high"`，其余 `loading="lazy"` + `decoding="async"` —— 倒序后首条 = 2026 受邀助教条目，它同时是首屏图、实心节点与「受邀」徽章所在
 - 素材：`src/assets/experience/*.jpg`，最长边 880px / quality 80 / progressive（8 张共 628KB）
 - `alt` 必填且双语（`imageAlt: LocalizedText`），见 §9.6
 
-### 9.5 Art 页（替代 §6）
+### 9.5 Art 页 —— 横向滑动编辑式图集（2026-11-06 Phase 7 重写）
 
-- 页面 `bg-[#F5F5F7]`；intro + 小注（`mt-3 text-sm text-[#6E6E73]`）
-- 画廊：`mt-8 columns-1 gap-4 md:columns-2` —— **保留两列 masonry 与图片原始比例**
-  （曾改成三列 + `max-h-[420px] object-cover`，被判定更差并回滚；要再动必须先出方案）
-- 作品卡：`mb-4 break-inside-avoid rounded-2xl border border-[#D2D2D7] bg-white p-3`；题跋 `mt-3 text-right`
-- 图片：`w-full rounded-xl`，**必须同时写 `width` / `height`**（预留空间，防 CLS）
-- **占位模式**（`renderArtworkImages = false`，当前状态）：渲染等比占位框 `w-full rounded-xl border border-[#D2D2D7] bg-[#F5F5F7]` + `role="img"` + `aria-label`；
-  宽高比取自 `width`/`height`（**不是 `aspect-[3/4]`**），故切回真图不跳版
-- 真图模式：首图 `loading="eager"` + `fetchPriority="high"`，其余 `loading="lazy"` + `decoding="async"`
-- 禁止：给作品叠加序号/水印、轮播；题跋两语言下均显示原繁体
+> 本节为**现行规范**。早期的「两列 masonry + 原图比例 + 占位框」已被 Steven 明确推翻，历史见文末。
 
-**⚠️ 2026-11-06 起本节作废（Steven 明确覆盖）：** Art 页改为**横向滑动图集**（编辑式画廊），不再是两列 masonry，也不再有占位模式。三张成品图原样展示（装裱 / 朱红引号 / 竖排小注 / 配画均在图内），网页不拆元素、不加配文。现行规范见 §9.5 之后的补充说明与 `src/components/Art.tsx` 顶部注释；§9.7「禁止轮播」同样以本条为准（禁止的是自动播放 / 视差 / 过渡动效，不是用户主动横滑）。
+- 页面 `bg-[#faf9f5]`；标题 / intro / 小注在 `max-w-6xl px-6 pt-16 md:pt-20` 容器内，小注 `mt-3 text-sm text-[#6E6E73]`（`artworksNote`：`三幅作品 · 行草` / `Three works · Cursive script`）
+- 素材：`src/assets/art/gallery-1~3.jpg`，三张成品图**字节级原样展示** —— 装裱、朱红引号、竖排小注、青杏配画全在图内；网页**不拆元素、不裁切主图、不加配文、不加题跋**
+- 数据层：`Artwork = { id, src, alt: LocalizedText, width, height, tone: 'light' | 'dark' }`；
+  `tone` 决定该 slide 的画框底色（白纸 → `bg-white`，黑纸白墨 → `bg-[#0B0B0C]`）。横滑时整块画布随作品推进，**无 JS 改色、无淡入**
+- 主舞台：track `flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-webkit-overflow-scrolling:touch]`；
+  slide `relative flex w-full flex-none snap-start items-center justify-center overflow-hidden px-0 py-8 sm:px-8 md:px-16 md:py-14`
+- 主图：`relative h-auto max-h-[62vh] w-auto max-w-full object-contain md:max-h-[68vh]`；`width`/`height` 写文件实际像素防 CLS；首图 `loading="eager"` + `fetchPriority="high"`，其余 `lazy` + `decoding="async"`
+- 角落超大编号 `01/02/03`：`md:block text-[88px] lg:text-[140px]`，浅画布 `text-[#1D1D1F]/[0.06]`、深画布 `text-white/10`，`aria-hidden`（**画框装饰，不叠在作品图上**）
+- 控制区：细线进度段（`h-px flex-1`，走过的 `bg-[#1D1D1F]`）→ `01 / 03` 计数 → 同步缩略图条（`aspect-[4/3] object-cover`，仅缩略图裁切；当前 `border-[#1D1D1F] opacity-100`，其余 `opacity-50`）→ 极简圆形箭头
+  - 桌面箭头浮在画面两侧，颜色随当前 `tone` 切换；移动端收回控制区，主要靠手指横滑
+- 交互：原生 `overflow-x` + CSS scroll-snap，支持触摸横滑 / 触控板 / 缩略图跳转 / 方向键；**零依赖、无自动播放、无视差、无过渡动效**
+- 无障碍：`role="region"` + `tabIndex=0` + 方向键导航；每图双语 `alt`；缩略图 `aria-current` 与双语 `aria-label`；箭头 `aria-label` 含可见字符 `←` / `→`（WCAG 2.5.3）；全部控件文案住 `artworks.ts`
+- 滚动条隐藏**写在组件上的 Tailwind 任意属性类**，不写进 `src/index.css`（该文件已有全站配色规则，避免耦合）
+- **禁止**：自动播放、视差、淡入缩放、阴影、位移/缩放动效；仅 hover 的 color / opacity 微变化
+
+> 历史沿革：Phase 4~5.5 的规范是 `columns-1 gap-4 md:columns-2` 两列 masonry、题跋 `mt-3 text-right` 原繁体、以及 `renderArtworkImages = false` 的等比占位框（曾因真图拖慢移动端 Lighthouse 到 87 而启用）。2026-11-06 Steven 明确覆盖：改为三幅成品图的横向图集，`renderArtworkImages` 开关删除，`orientation` / `captionZh` / `artwork-1~4` 均下线（旧图留仓库归档）。参考形态：Swiper「Photo Gallery – Minimal」、Bridget Baker 摄影集、contact sheet 缩略图条。实现细节见 `src/components/Art.tsx` 顶部注释。
 
 ### 9.6 无障碍硬约束（Phase 4 新增）
 
 - 语言切换链接的 `aria-label` **必须包含可见文字**（`EN` / `中文`）—— WCAG 2.5.3 Label in Name。英文态与中文态各有一次触发机会，两处都要成立
 - 装饰性元素（状态圆点、时间线节点）加 `aria-hidden="true"`
-- 图片必须有 `alt`；占位框用 `role="img"` + `aria-label`
+- 图片必须有 `alt`；Art 图集另需 `role="region"` 可聚焦 + 方向键导航 + 缩略图 `aria-current`（见 §9.5）
 - 导航与链接带 `focus-visible` 焦点样式（`focusRing`，见 `Header.tsx`）
 - **Lighthouse / axe 权重为 0 的项也必须修** —— 分数满分不代表没有真实缺陷
 
-### 9.7 动效（替代 §7）
+### 9.7 动效（替代 §7，2026-11-06 修订）
 
-- 全站唯一的交互反馈是 `hover:underline`（链接）
-- 禁止：阴影过渡、位移/缩放、滚动触发动画、淡入序列、parallax、hero video、轮播
+- 允许的交互反馈：`hover:underline`（链接）、Art 图集控件的 color / opacity 微变化（`transition-colors` / `transition-opacity`）
+- 禁止：阴影过渡、位移/缩放、滚动触发动画、淡入序列、parallax、hero video、**自动播放的轮播**
+- **允许**由用户主动驱动的横向 scroll-snap 图集（Art 页）——§7 的「全站无图片轮播」与早期「禁止轮播」指的是自动播放 / 自动切换，不禁止用户手动横滑；Art 页的 `aria-roledescription="carousel"` 只是读屏语义
+- Hero 书法底图是静态背景，不参与任何动效

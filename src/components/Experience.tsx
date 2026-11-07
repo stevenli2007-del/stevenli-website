@@ -3,17 +3,19 @@ import { useLocale } from '../lib/router'
 import type { Locale } from '../data/locales'
 
 // Phase 4 Task 4-7 — Experience 页（spec §4 Experience）
-// 白底；intro max-w-3xl；时间线 `relative mt-8 space-y-8 before:…`（左侧 1px 竖线）。
+// 米色底（`bg-[#faf9f5]`，Phase 7b）；intro max-w-3xl；时间线 `relative mt-8 space-y-8 before:…`（左侧 1px 竖线）。
 // 每条 `relative pl-8`：period（xs/uppercase/tracking-wide）→ institution（lg/semibold）
 //   → 单段精简 description（max-w-3xl）→ keywords（xs）。
 // 2026 受邀助教：实心节点 `bg-[#1D1D1F] ring-4 ring-[#1D1D1F]/10` + 深色「受邀」徽章；
 //   学员节点保持空心（border-2 + bg-white）。2023 的「星空少年」徽章保留、降为灰底。
-// 时间序 2022 → 2026 不变（数据顺序即展示顺序）。
+// 数据层按时间正序维护（2022 → 2026），**页面倒序展示**（最近在上），见下方 timeline 常量。
 //
 // Phase 6 微调（2026-10-09，Steven 指定）：每条加配图 —— 见 Design.md §9.4。
-//   文字与图：宽屏两栏（文字 1fr / 图 18rem），窄屏图落在文字下方、限宽 22rem 防竖幅图过高。
+//   文字与图：宽屏两栏（文字 1fr / 图 22rem），窄屏图落在文字下方、限宽 22rem 防竖幅图过高。
 //   图片**不裁切**（保留原始比例），`width`/`height` 取自文件实际像素 → 零 CLS。
-//   仅首条 `loading="eager"` + `fetchPriority="high"`（它是本页首屏图，其余 lazy）。
+//   仅首条 `loading="eager"` + `fetchPriority="high"`（其余 lazy）——倒序后首条 = 2026 受邀助教。
+//
+// Phase 7b（2026-11-06，Steven 指定）：时间轴改为倒序，2026 → 2022；数据层物理顺序不动。
 
 function TimelineNode({
   entry,
@@ -82,6 +84,10 @@ function TimelineNode({
   )
 }
 
+// 展示序列：数据层按时间正序维护，页面倒序渲染（最近在上，2026 → 2022）。
+// 于是「首条」= 2026 受邀助教：实心节点、受邀徽章与 eager 首图都落在它身上。
+const timeline = [...experience].reverse()
+
 export default function Experience() {
   const locale = useLocale()
 
@@ -97,7 +103,7 @@ export default function Experience() {
         </p>
 
         <ol className="relative mt-8 space-y-8 before:absolute before:bottom-2 before:left-[5px] before:top-2 before:w-px before:bg-[#D2D2D7]">
-          {experience.map((entry, index) => (
+          {timeline.map((entry, index) => (
             <TimelineNode key={entry.id} entry={entry} locale={locale} priority={index === 0} />
           ))}
         </ol>

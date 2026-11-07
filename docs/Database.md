@@ -100,7 +100,7 @@ export interface ExperienceEntry {
 - 图片住 `src/assets/experience/`，`docs/Design.md` §9.4 规定渲染方式（不裁切、写实际宽高、首图 eager）
 - ⚠️ 毕业节点 `keywords: []` —— 组件对空数组不渲染关键词行
 
-数组按时间正序排列（2022 → 2026），前端不做排序逻辑，数据顺序即展示顺序。
+数组按时间正序排列（2022 → 2026）便于维护。**2026-11-06 起页面展示为倒序**（最近在上，2026 → 2022），由 `src/components/Experience.tsx` 的 `[...experience].reverse()` 生成展示序列；数据顺序 ≠ 展示顺序，首条（= 2026 受邀助教）持 `eager` 首图。
 
 ## 3. `artworks.ts`
 

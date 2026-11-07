@@ -2,7 +2,7 @@ import { projects, projectsTitle, projectsIntro, stackLabel, statusLabels, type 
 import { useLocale } from '../lib/router'
 
 // Phase 4 Task 4-6 — Projects 页（spec §4 Projects）
-// 白底；intro max-w-3xl；两列卡片网格（lg 起两列，替代原来三列留空位）。
+// 米色底 bg-[#faf9f5]（Phase 7b）；卡片本身仍 bg-white；intro max-w-3xl；两列卡片网格（lg 起两列）。
 // 卡片：状态降级为「圆点 + 小字」一行（原 status chip 比证据更抢眼，见 spec §3 诊断），
 //       title → outcome（蓝黑正文）→ description → Stack 置底 → 链接（mt-auto 贴底）。
 // 无 hover 阴影、无动效（spec：no hover animation or shadow）。

@@ -3,8 +3,9 @@ import { siteInfo } from '../data/site'
 import homeCalligraphy from '../assets/home-calligraphy.jpg'
 
 // Phase 4 Task 4-4 — Home / Hero（spec §4 Home）
-// 纯白背景；文案列在 DOM 前、桌面端头像靠右；头像缩小（h-32 / md:h-40）并移除阴影；
-// 新增 proof line 与双 CTA。无动效、无阴影、无新图片。
+// 宣纸米色底（Phase 7b）：书法图 bg-cover 铺底 + bg-[#f8f6ee]/90 遮罩压住对比度；
+// 文案列在 DOM 前、桌面端头像靠右；头像缩小（h-32 / md:h-40）并移除阴影；proof line 与双 CTA 保持。
+// 底图是静态背景，无动效、无阴影、无视差。
 // 容器高度扣掉 sticky header（约 4.5rem），避免首屏被挤压（spec 诊断 §3 Home）。
 // CTA 链接保留当前 ?lang=（延续「语言跟着走」）。
 

@@ -9,7 +9,7 @@ import {
 import { useLocale } from '../lib/router'
 
 // Phase 5（2026-10-09）新增 — Home 页的 Education / Awards / Technical Skills 区块
-// 白底（紧接灰底 #F5F5F7 的 About 区块之后）；容器与间距同其它页面（max-w-6xl / py-16 md:py-20）。
+// 米色底 bg-[#faf9f5]（Phase 7b；紧接暖灰 #efede6 的 About 区块之后）；容器与间距同其它页面（max-w-6xl / py-16 md:py-20）。
 // 标题层级：Home 的 h1 在 Hero，About 已是 h2，故本区块 h2 = Education，
 //   Awards 与 Technical Skills 降为 h3（避免与 About 同级却更零碎，也不跳级）。
 // 竞赛名 / 课程名 / 工具名一律不翻译，原样渲染。

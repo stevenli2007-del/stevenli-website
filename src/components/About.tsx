@@ -2,7 +2,7 @@ import { aboutInfo } from '../data/about'
 import { useLocale } from '../lib/router'
 
 // Phase 4 Task 4-4 — About 区块（spec §4 About），已并入 Home（Roadmap Phase 4 决策）
-// 灰底 #F5F5F7；narrative 限宽 max-w-3xl；三张白卡例子（sm 起三列）；底部 identity strip。
+// 暖灰底 #efede6（Phase 7b 米色主题）；narrative 限宽 max-w-3xl；三张米色卡 bg-[#faf9f5]（sm 起三列）；底部 identity strip。
 // 设计适配：原独立页的 H1 降为 h2 —— Home 的 h1 已在 Hero（保证每页单 h1 语义）。
 
 export default function About() {

@@ -1,6 +1,7 @@
 // Database.md §2 — ExperienceEntry interface
 // Phase 4 Task 4-3：文案拆 en/zh（spec §4 Experience / §5）。
-// 数组按时间正序（2022 → 2026），数据顺序即展示顺序。
+// 数组按时间正序（2022 → 2026）便于维护；页面**倒序展示**（最近在上，2026 → 2022），
+//   由 Experience.tsx 的 `[...experience].reverse()` 实现 —— 数据顺序 ≠ 展示顺序（2026-11-06 起）。
 // spec §4：2023 保留 Starry Youth 徽章；2026 新增「受邀」徽章。
 //
 // Phase 6 微调（2026-10-09，Steven 指定）：时间线由 5 条扩到 8 条并配图。

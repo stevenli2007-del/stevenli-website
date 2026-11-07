@@ -11,7 +11,7 @@ import type { Locale } from '../data/locales'
 import type { ContactLink } from '../data/contact'
 
 // Phase 4 Task 4-9 — Contact 页（spec §4 Contact）
-// 白底；intro max-w-3xl；**邮箱是唯一主按钮**（`rounded-full bg-[#0071E3] px-6 py-3`），
+// 米色底 bg-[#faf9f5]（Phase 7b）；intro max-w-3xl；**邮箱是唯一主按钮**（`rounded-full bg-[#0071E3] px-6 py-3`），
 // 可见地址单独一行；其余链接**降级为内联文字链接**（不再全是药丸按钮 —— spec §3 诊断：
 // 四个同级按钮让「首选联系方式」无从判断）。
 // 外部链接一律 `target="_blank" rel="noreferrer"`。
