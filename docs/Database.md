@@ -123,6 +123,13 @@ export interface Artwork {
 - **`renderArtworkImages = false`**（Task 4-10，Steven 拍板）：Art 页渲染**与原图等比**的占位框，不发起任何图片请求。
   `src` 字段仍持有真实路径，置回 `true` 即恢复真图；占位框宽高比直接取 `width`/`height`，故版式不跳、无需改组件
 
+**⚠️ 2026-11-06 起以上接口与开关全部作废（Steven 覆盖）：** `artworks.ts` 已重写为横向滑动图集，
+`Artwork` 现为 `{ id, src, alt: LocalizedText, width, height, tone: 'light' | 'dark' }`；
+`renderArtworkImages` / `orientation` / `captionZh` / 四幅旧作品均已下线（旧图留在 `src/assets/art/` 归档）。
+新增控件文案 `artworksGalleryLabel` / `artworksPrevLabel` / `artworksNextLabel` / `artworksSwipeHint`
+与 `artworksGoToLabel(index)`，一律住数据层；组件零硬编码文案。三张成品图在 `src/assets/art/gallery-1~3.jpg`，
+字节级原样入库、不裁切。详见 `docs/Roadmap.md` Phase 7。
+
 ## 4. `contact.ts`
 
 ```ts
@@ -346,3 +353,7 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   - `devLog.ts` 新增 `findDevLogPost(id)`、`devLogBackToIndex`、`devLogReadMore`、`devLogFigureLabel`；`devLogIntro` 按契约放宽为「上线与否都算」
   - 新增单篇路由 **`/dev-log/<slug>`**（`App.tsx` 前缀匹配 + `components/DevLogPostPage.tsx`）；`/dev-log` 改索引页；Header 子路径高亮
   - 首篇文章落库：`x-institute-ta-2026`（category `Lab`，中英全文来自 Steven 口述采访）
+- **2026-11-06（Bud，Phase 7 Art 图集）：** §3 `artworks.ts` 接口整体重写为横向滑动图集
+  （`Artwork` 精简为 `{id, src, alt, width, height, tone}`，新增 `artworksGoToLabel()` 与 4 项控件文案）；
+  四幅旧作品与 `renderArtworkImages` 占位开关下线；三张成品图 `gallery-1~3.jpg` 原样入库。
+  `Design.md §9.5` / `§9.7` 关于 masonry 与「禁止轮播」的约定由 Steven 本轮明确覆盖。

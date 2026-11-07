@@ -1,27 +1,28 @@
 // Database.md §3 — Artwork interface
-// Phase 4 Task 4-3：标题 / intro / note / alt 拆 en/zh；作品题跋保持原繁体（spec §5）。
-// 四张行草作品来自 Steven 本人；图片经 Vite import，构建时生成哈希 URL。
+// Phase 7（2026-11-06，Steven 口述）—— Art 页最终形态 = 编辑式图集（editorial photo gallery）。
+//   三张成品图由 Steven 直接给出（装裱、引号、竖排小注、配画全部已在图内），
+//   **照片本身不做任何改动**：不裁切、不拆元素、不加配文，字节级原样入库。
+//   ⚠️ 这是 Steven 对既有两个约定的明确覆盖：
+//      ① Design.md §9.5「两列 masonry、不轮播」；② §9.7「禁止轮播」。
+// 第二版视觉（参考 Swiper Minimal Photo Gallery / Bridget Baker / 摄影集 contact sheet）：
+//   每张 slide 自带画框底色（tone：light → 纯白画布，dark → 近黑画布），
+//   图居中、留大白、超大低对比编号；下方为细线进度 + 同步缩略图条 + 极简计数与箭头。
+//   不做自动播放 / 视差 / 淡入 —— 高级感靠画布、留白和层级，不靠动效。
+// 旧四幅 + 上一轮从 pptx 解出的四张图仍留在 src/assets/art，不进数组、不删除。
+// 组件零硬编码文案：图集区域名、缩略图 aria-label、箭头 aria-label、滑动提示全部住在本文件。
 
 import type { LocalizedText } from './locales'
-import artwork1Img from '../assets/art/artwork-1-huaniao.jpg'
-import artwork2Img from '../assets/art/artwork-2-dapeng.jpg'
-import artwork3Img from '../assets/art/artwork-3-aojin.jpg'
-import artwork4Img from '../assets/art/artwork-4-mingyue.jpg'
-
-// Task 4-10 —— 作品图总开关（唯一需要改的一行）。
-//   false → Art 页渲染**与原图完全等比**的占位框：不发起任何图片请求，LCP / 图片体积与页面解耦。
-//   true  → 渲染真实作品图（四张图仍在仓库与数据层，src 字段未动，随时可切回）。
-// Steven 2026-10-08：艺术版面先以占位符呈现，待下一轮「各独立页面内容与文案调整」定稿后再启用。
-export const renderArtworkImages = false
+import gallery1Img from '../assets/art/gallery-1.jpg'
+import gallery2Img from '../assets/art/gallery-2.jpg'
+import gallery3Img from '../assets/art/gallery-3.jpg'
 
 export interface Artwork {
   id: string;
-  src: string | null;
-  alt: LocalizedText;
-  width: number;                // 原始像素宽 —— 渲染为 <img width/height>，让浏览器**预留空间**（CLS 归零）
-  height: number;               // 与 CSS 的 `w-full` + preflight `height:auto` 配合得出宽高比
-  orientation: 'horizontal' | 'vertical';
-  captionZh?: string;           // 题跋：两种语言下均显示原繁体（spec §5）
+  src: string;
+  alt: LocalizedText;           // 双语 alt（无障碍硬约束）
+  width: number;                // 文件实际像素 —— 写进 <img width/height> 防 CLS
+  height: number;
+  tone: 'light' | 'dark';       // 该幅作品的画框底色（跟作品纸底走）
 }
 
 export const artworksTitle: LocalizedText = { en: 'Calligraphy', zh: '書法' }
@@ -32,57 +33,68 @@ export const artworksIntro: LocalizedText = {
 }
 
 export const artworksNote: LocalizedText = {
-  en: 'Four works · Cursive script',
-  zh: '四幅作品 · 行草',
+  en: 'Three works · Cursive script',
+  zh: '三幅作品 · 行草',
+}
+
+// 图集控件文案（WCAG 2.5.3：箭头 aria-label 必须含按钮上的可见字符 ← / →）
+export const artworksGalleryLabel: LocalizedText = {
+  en: 'Calligraphy gallery',
+  zh: '書法作品圖集',
+}
+
+export const artworksPrevLabel: LocalizedText = {
+  en: '← Previous work',
+  zh: '← 上一幅',
+}
+
+export const artworksNextLabel: LocalizedText = {
+  en: 'Next work →',
+  zh: '下一幅 →',
+}
+
+export const artworksSwipeHint: LocalizedText = {
+  en: 'Swipe sideways, or use the arrows',
+  zh: '左右滑動，或使用箭頭切換',
+}
+
+// 缩略图按钮的无障碍名（编号由组件传入，文案仍住数据层）
+export function artworksGoToLabel(index: number): LocalizedText {
+  return { en: `View work ${index + 1}`, zh: `查看第 ${index + 1} 幅` }
 }
 
 export const artworks: Artwork[] = [
   {
-    id: 'artwork-1',
-    src: artwork1Img,
+    id: 'gallery-1',
+    src: gallery1Img,
     alt: {
-      en: 'Cursive-script calligraphy — 花鳥一池書 · 風雲三尺劍',
-      zh: '行草書法作品 — 花鳥一池書 · 風雲三尺劍',
+      en: 'Calligraphy of lines from Su Shi’s “Butterfly Lovers: Spring Scene” (花去殘紅青杏小，燕子歸時，流水人家繞), with red quotation marks and a small green-apricot painting on the right.',
+      zh: '行草書法 — 蘇軾《蝶戀花·春景》句：花去殘紅青杏小，燕子歸時，流水人家繞；白底朱紅引號，右側配青杏小畫。',
     },
-    orientation: 'vertical',
-    width: 718,
-    height: 1920,
-    captionZh: '花鳥一池書 · 風雲三尺劍',
+    width: 1508,
+    height: 1060,
+    tone: 'light',
   },
   {
-    id: 'artwork-2',
-    src: artwork2Img,
+    id: 'gallery-2',
+    src: gallery2Img,
     alt: {
-      en: 'Cursive-script calligraphy — 大鵬一日同風起',
-      zh: '行草書法作品 — 大鵬一日同風起',
+      en: 'Calligraphy of Wen Tingyun’s “Early Autumn Mountain Dwelling” (山近覺寒早……), mounted on a white card over a black ground with a vertical note 「沒有章法就疊格子」.',
+      zh: '行草書法 — 溫庭筠《早秋山居》：山近覺寒早……；白色裝裱卡壓在黑底上，豎排小注「沒有章法就疊格子」。',
     },
-    orientation: 'vertical',
-    width: 566,
-    height: 1246,
-    captionZh: '大鵬一日同風起',
+    width: 1344,
+    height: 1086,
+    tone: 'dark',
   },
   {
-    id: 'artwork-3',
-    src: artwork3Img,
+    id: 'gallery-3',
+    src: gallery3Img,
     alt: {
-      en: 'Cursive-script calligraphy — 龍虎風雨，天下梟雄',
-      zh: '行草書法作品 — 龍虎風雨，天下梟雄',
+      en: 'White ink on black paper — lines from Xunzi (不誘於譽，不恐於誹，率道而行，端然正己), with red quotation marks and a vertical note 「專注自身」.',
+      zh: '黑紙白墨 — 《荀子·非十二子》句：不誘於譽，不恐於誹，率道而行，端然正己；朱紅引號與豎排小注「專注自身」。',
     },
-    orientation: 'horizontal',
-    width: 960,
-    height: 1270,
-    captionZh: '龍虎風雨，天下梟雄',
-  },
-  {
-    id: 'artwork-4',
-    src: artwork4Img,
-    alt: {
-      en: 'Cursive-script calligraphy — 明月清風酒 · 一邱高山流水',
-      zh: '行草書法作品 — 明月清風酒 · 一邱高山流水',
-    },
-    orientation: 'vertical',
-    width: 578,
-    height: 1230,
-    captionZh: '明月清風酒 · 一邱高山流水',
+    width: 1630,
+    height: 1114,
+    tone: 'dark',
   },
 ]

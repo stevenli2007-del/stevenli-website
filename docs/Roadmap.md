@@ -270,6 +270,26 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 
 **开工卡点：** 动笔前必须先向 Steven 确认事实，最关键三条 —— ① 那十天具体负责什么（几个学生、什么学段、每天在干嘛）；② **中间出过什么岔子**（这是整篇的骨头）；③ 接触角测量平台是不是他自己写的代码。
 
+## Phase 7 — Art 页改版为横向滑动图集（2026-11-06）
+
+**触发：** Steven 提供 PPT《书法作品集》三页，随后给出三张最终成品图，要求「原样展示、不做改动，做成能左右滑动的 photo gallery」。
+
+**已拍板（覆盖旧约定）：**
+
+| 项 | 决定 |
+|---|---|
+| 展示形态 | **横向滑动图集**（原生 overflow-x + CSS scroll-snap），不再两列 masonry |
+| 图片 | 三张成品图**字节级原样入库**，装裱 / 朱红引号 / 竖排小注 / 青杏配画都在图内；不裁切、不拆元素、不加配文 |
+| 覆盖条款 | `Design.md §9.5`（masonry、不轮播、占位框）与 `§9.7`（禁止轮播）——**均为用户主动横滑，仍禁止自动播放 / 视差 / 过渡动效** |
+| 视觉 | 每张 slide 自带画框底色（`tone`：白纸 → 纯白，黑纸白墨 → `#0B0B0C`）；超大低对比编号 `01/02/03`；细线进度段 + 数字计数 + 同步缩略图条 + 极简箭头（桌面浮于画面两侧、颜色随 tone 切换） |
+| 参考 | Swiper「Photo Gallery – Minimal」（近黑画框 + Mono 编号 + 弱化控件）、Bridget Baker（全屏主图 + 数字计数器）、摄影集 contact sheet（主图 + 同步缩略图条） |
+
+**范围：** `src/data/artworks.ts`（接口重写，`Artwork` 精简为 `{id, src, alt, width, height, tone}`，新增 4 项控件文案与 `artworksGoToLabel()`）、`src/components/Art.tsx`（重写）、`src/index.css`（`.art-gallery-scroll` 隐藏滚动条）、`src/assets/art/gallery-1~3.jpg`（共约 400KB）。旧四幅作品图与上一轮从 pptx 解出的四张中间素材留在 `src/assets/art/` 归档，不再 import。
+
+**验收：** `tsc --noEmit` + `npm run build` 零报错；产物 CSS 已核对低对比色 / 大字号 / `aspect-[4/3]` / snap / 滚动条隐藏全部生成；双语 alt、缩略图 `aria-current`、方向键导航、箭头 aria-label 含可见字符（WCAG 2.5.3）。
+
+**遗留：** 全设备走查与 Lighthouse 复测（Performance ≥ 90、Accessibility 100）待上线后补；自定义域名（3-8）仍是全站唯一长期遗留项。
+
 ---
 
 ## 进度追踪
