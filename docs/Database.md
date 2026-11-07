@@ -323,6 +323,17 @@ export interface DevLogPost {
 category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回答 → 整理成稿）。
 仍缺（后续可补）：岔子/翻车、腾讯参访细节、十天具体日期。
 
+**现有文章清单（截至 2026-11-06；数组顺序 = 索引页顺序，新文章插最前）：**
+
+| slug | date | category | 配图 | 来源 |
+|---|---|---|---|---|
+| `nvidia-ignite-oa-2026` | `2026-11` | `Notes` / 随笔 | 3 张正文插图（无封面） | Steven 中文成稿；Bud 只修错字 / 语句 / 删重复 / 专名，出功能对等英文版 |
+| `tempo-diagnosis-2026` | `2026-10` | `Dev` / 开发 | 4 张正文插图 + 1 封面 | Steven 撰写，Bud 只修错别字与专名拼写 |
+| `x-institute-ta-2026` | `2026` | `Lab` / 实验室 | 4 张正文插图 + 1 封面 | Steven 口述采访整理 |
+
+⚠️ `nvidia-ignite-oa-2026` 原稿「大幅拉低创业成本 OPC」中的 `OPC` 语义不明，暂按笔误省略，待 Steven 确认是否补回；
+另有一篇 Dev Log 新稿待 Steven 供稿，**不得代写**。
+
 ## 11. 通用规则
 - 所有 `id` 字段用 kebab-case（如 `"linkedin-ai"`），不是 camelCase——因为它可能被用作 HTML anchor / URL slug。
 - 所有其他变量名用 camelCase。
@@ -357,3 +368,8 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   （`Artwork` 精简为 `{id, src, alt, width, height, tone}`，新增 `artworksGoToLabel()` 与 4 项控件文案）；
   四幅旧作品与 `renderArtworkImages` 占位开关下线；三张成品图 `gallery-1~3.jpg` 原样入库。
   `Design.md §9.5` / `§9.7` 关于 masonry 与「禁止轮播」的约定由 Steven 本轮明确覆盖。
+- **2026-11-06（Bud，Dev Log 第三篇）：** 新增 `nvidia-ignite-oa-2026`（category `Notes` / 随笔）。
+  中文由 Steven 成稿，Bud 只做错字 / 语句通顺 / 删重复 / 专名大小写（**内容与说话方式未改**）；
+  英文按写作契约做功能对等而非直译。新增 3 张插图 `nvidia-ignite-oa-invite.jpg` /
+  `stevenli-website-hero-2026.jpg` / `ramesh-lab-berkeley.jpg`（880px / q80 / progressive，双语 alt + 实际像素）。
+  ⚠️ 原稿 `OPC` 一词待 Steven 确认；另有一篇新稿待供稿。

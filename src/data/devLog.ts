@@ -18,6 +18,9 @@ import imgGoogleMuse from '../assets/dev-log/google-muse.jpg'
 import imgTempoRoadmapDocs from '../assets/dev-log/tempo-roadmap-docs.jpg'
 import imgTempoMessagesParse from '../assets/dev-log/tempo-messages-parse.jpg'
 import imgTempoSettingsPrivacy from '../assets/dev-log/tempo-settings-privacy.jpg'
+import imgNvidiaIgniteOaInvite from '../assets/dev-log/nvidia-ignite-oa-invite.jpg'
+import imgStevenliWebsiteHero from '../assets/dev-log/stevenli-website-hero-2026.jpg'
+import imgRameshLab from '../assets/dev-log/ramesh-lab-berkeley.jpg'
 
 // Phase 6：正文块。段落用 p，小节标题用 h，图片用 img（双语 alt 必填）。
 export type DevLogBlock =
@@ -78,6 +81,129 @@ export const devLogFigureLabel: LocalizedText = {
 }
 
 export const devLogPosts: DevLogPost[] = [
+  {
+    // 第三篇（2026-11-06）：NVIDIA Ignite HWE/SWE OA + 对 AI 与方向的反思。
+    // 正文由 Steven 口述成稿，Bud 只做：错别字 / 语句通顺 / 删重复 / 专名大小写与空格，
+    //   **内容与说话方式均未改**。具体修正：梁文峰→梁文锋、Ai→AI、Nvidia→NVIDIA、Calhacks→Cal Hacks、
+    //   hackerank→HackerRank、Leetcode→LeetCode、累的→累得、的→地；删掉重复的「此外」「相信自己的判断」；
+    //   ⚠️ 原句「大幅拉低创业成本OPC」中的 OPC 语义不明，暂按笔误省略，待 Steven 确认是否补回。
+    // 英文版按 Roadmap「Dev Log 写作契约」做**功能对等**（各自母语的口语层、不直译）：
+    //   自嘲与短句保留，涉及 OA 内容 / 技术判断的句子一律平实。
+    // 插图 SOP：exif_transpose → 最长边 880 → JPEG q80 / progressive / optimize，双语 alt + 实际像素防 CLS。
+    id: 'nvidia-ignite-oa-2026',
+    date: '2026-11',
+    category: { en: 'Notes', zh: '随笔' },
+    title: {
+      en: 'NVIDIA Ignite HWE & SWE Intern OA',
+      zh: '英伟达 Ignite 实习 OA 与 AI 浅谈',
+    },
+    summary: {
+      en: 'Two HackerRank OAs in one weekend, a hard check on my CS fundamentals, and why I am not switching majors just because AI is loud.',
+      zh: '一个周末两场 HackerRank OA，一次对 CS 基本功的当头棒喝，以及我为什么没因为 AI 风大就转专业。',
+    },
+    body: [
+      {
+        type: 'p',
+        text: {
+          en: 'Freshman year had barely started and I was already applying to internships like crazy — partly Berkeley, partly everyone around me doing the same. Then, out of nowhere, I saw on Xiaohongshu that NVIDIA had opened Ignite, an internship track for first- and second-years: HWE and SWE. Figured I’d throw in an application. They actually sent the OA. Both of them — SWE and HWE.',
+          zh: '进入大一，受伯克利的氛围和身边同龄人的影响，我第一个学期就开始疯狂找实习。鬼使神差在小红书上刷到 NVIDIA 开了面向大一大二的低龄实习项目——Ignite HWE/SWE Intern，就想着投一下试试，没想到真的给我发来了 OA。SWE 和 HWE 都发了。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgNvidiaIgniteOaInvite,
+        width: 880,
+        height: 604,
+        alt: {
+          en: 'NVIDIA Ignite Hardware Engineering Intern (2027) HackerRank assessment invitation email, with a seven-day completion window and HackerRank tips.',
+          zh: 'NVIDIA Ignite Hardware Engineering Intern (2027) 的 HackerRank 测评邀请邮件，写着 7 天内完成，附了几条答题提示。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'The second that email landed, I was already writing fanfiction in my head: Jensen spots me, one thing leads to another, and suddenly I’m in the inner circle of the AI giant.',
+          zh: '收到 OA 的那一刻毋庸置疑心潮澎湃啊，脑中都已经想好一些神奇剧情：比如突然被 Jensen 看中，然后一路高升走进 AI 巨头的圈子。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Reality, of course. The OA window landed right on top of Cal Hacks, which made it the most stressful weekend of freshman year so far: hacking Friday through Sunday (absolutely wiped), the NVIDIA OA on Sunday night, and R4A project 2 somewhere in the gaps.',
+          zh: '当然现实是残酷的。这个 OA 的时间非常不巧地和我的 Cal Hacks 撞了，于是我度过了大一最最 stressful 的一个周末：周五六日搞 Cal Hacks（累得半死），周日晚上考 NVIDIA 的 OA，然后还要做英语 R4A 的 project 2。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'SWE OA in one line: HackerRank, hard. Mostly algorithms, LeetCode medium-to-hard. My fundamentals just aren’t there yet.',
+          zh: '一句话总结 SWE 的 OA：HackerRank，题目很难，大概考的是一些算法问题。我的功底还是不够扎实，这些题目大概是 LeetCode medium 到 hard 的难度。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'HWE OA in one line: HackerRank, just as hard, maybe harder. I’d assumed it would lean on signals or circuits, which I’m stronger at. It was mostly foundational computer architecture instead — also not where my depth is.',
+          zh: '一句话总结 HWE 的 OA：HackerRank，题目同样很难甚至更难。我原本以为会考一些我擅长的 signals 或者 circuits 之类的，但考的还是基础 CS architecture 偏多，这方面我的积累还是不够。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'So what did I get out of it? Honestly, I don’t think these OAs go anywhere. But I’m still glad I got the shot, and now I know how HackerRank works and what a big-tech OA loop looks like — that’s worth something. The bigger win was rebuilding my resume from scratch: a CV I can actually send people, and this site. That matters. I’ve also decided to treat LeetCode the way I treat Cantonese on Duolingo — a little every day, slowly stacking up the coding and algorithms base.',
+          zh: '说说我的收获。总而言之，这次 OA 我觉得希望不大，但至少被给了这次机会，我还是开心的。另外熟悉了 HackerRank 以及这些 big tech 公司 OA 的大致流程，还是比较赚的。更大的收获是我重新整理了自己的履历，产出了一份能用的 CV 以及个人网站，这个很重要。还有，我打算把刷 LeetCode 当成多邻国学粤语，每天一点点，慢慢攒 coding 和算法的底子。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgStevenliWebsiteHero,
+        width: 880,
+        height: 482,
+        alt: {
+          en: 'The hero section of this site in November 2026: “UC Berkeley 2030 / Software & Semiconductors”, a proof line, two buttons and a portrait over a faint calligraphy background.',
+          zh: '2026 年 11 月这个网站的 Hero：UC Berkeley 2030 / Software & Semiconductors，proof line、两个按钮和证件照头像，背后是淡书法纹样。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Now, AI. Living in the Bay Area means a nonstop feed of someone barely older than me raising eight figures, or some AI thing printing money. It’s genuinely disorienting. I was close to just majoring in CS. This OA pulled me back. My strength isn’t code; it’s actual research and putting it to work. Switching to CS right now because AI is loud would never get me anywhere. And I think the way you learn CS has changed anyway. Will I learn it? Definitely. How, exactly, still needs more thought. Rough plan for now: learn CS to understand the mechanism behind AI — same reason you study electricity in physics — plus the practical basics of building things.',
+          zh: '最后来讲讲 AI。身处湾区，铺天盖地的消息都是某某又年少成名融资上千万、某某 AI 又赚了多少钱，搞得人迷失方向，我差点就想去 major 计算机了——这个 OA 算是给我拉回来了。我的强项并不在代码，而在于真正的科学研究与应用。所以我现在要是只因为 AI 风大就转 CS，是无论如何也无法有所建树的。再加上，我认为现在学习 CS 的方式变了。我会不会学 CS 呢？答案是一定的，但怎么学，这个还需要我更细致地探索。目前大概想的是：学 CS 去了解 AI 的技术机理（就跟你物理学电是一样的），了解一些开发的必备知识。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Don’t be impatient. If you want to start a company you need a real skill and a real moat; an AI tool isn’t one. Do the work in front of you first. That’s why Liang Wenfeng gets to me — the Xunzi line: don’t be swayed by praise, don’t be scared by criticism; walk the path straight, keep yourself upright. Trust your own read, stay on what’s in front of you, and don’t pile into whatever people are calling the next big thing. That’s no different from chasing a stock on the way up.',
+          zh: '人不能太浮躁。想要创业要有真本事，不是靠个 AI 就能上，要有自己的技术壁垒，要先专注眼前好好学习。这也是为什么梁文锋触动我：不诱于誉，不恐于诽。率道而行，端然正己。相信自己的判断，专注眼下，不要太浮躁，别搞得别人说什么有前景就去盲目投入，这和追涨杀跌、赌股票没区别。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'When the AI hype bubble pops, the real value shows up: it turns into cheap infrastructure, like electricity, and the cost of starting something drops a lot. You still need to know your stuff, though. You get me?',
+          zh: '未来 AI 的浮躁泡沫一破裂，它真正的价值就会显现：逐渐变成越来越低成本的基础设施，就例如电力，大幅拉低创业的成本——但还是需要你有技术，懂么？',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Next up: keep applying — 影视飓风, a PM role at DeepSeek (I really do admire Liang Wenfeng right now, and I’d like to contribute something back home). Actually ship LastCall. And join Ramesh’s lab.',
+          zh: '一些我的下一步：继续投递一些岗位申请，比如影视飓风、DeepSeek 的 PM（我现在真的很崇拜梁文锋，也希望能够为国内的发展作出点贡献）。把 LastCall 也落地。加入 Ramesh 的课题组。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgRameshLab,
+        width: 880,
+        height: 480,
+        alt: {
+          en: 'The Ramesh Lab group page at Berkeley Lab: a team photo under the heading “A Team Approach at the Crossroads of Science & Engineering”.',
+          zh: 'Berkeley Lab 的 Ramesh Lab 课题组主页：团队合影，标题是「A Team Approach at the Crossroads of Science & Engineering」。',
+        },
+      },
+    ],
+  },
   {
     // 第二篇（2026-10-18）：Tempo 开发受阻的复盘。正文由 Steven 本人撰写，Bud 只修错别字与专名拼写，内容未改动。
     id: 'tempo-diagnosis-2026',

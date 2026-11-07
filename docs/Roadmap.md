@@ -305,3 +305,9 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 | Phase 5.5 | ✅ **已完成并上线（8/8）** | 2026-10-09 | 上线前内容微调（Steven 逐条口述，Bud 实现并直接 push）。含 Hero 换行修复与两行标题、proof 重排、title/meta 同步、About 首卡换 Tempo、Education 加校标、**Experience 扩至 8 条并全部配图**。详见上方 Phase 5.5 章节。 |
 
 > 每 Phase 签收后由 Bud 更新此表。
+
+### Dev Log 文章进度（卡 6-3，截至 2026-11-06）
+
+已上线 3 篇：`nvidia-ignite-oa-2026`（`Notes` / 随笔）、`tempo-diagnosis-2026`（`Dev`）、`x-institute-ta-2026`（`Lab`）。
+索引页顺序 = `devLogPosts` 数组顺序，新文章插最前；每篇仍须满足「叙事做皮、四问当骨 / 双语功能对等 / 技术论断平实」契约。
+**仍有 1 篇待 Steven 供稿，不得代写。** 文章清单与插图规格见 `docs/Database.md` §10。
