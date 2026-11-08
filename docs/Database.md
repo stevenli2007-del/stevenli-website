@@ -325,11 +325,11 @@ export interface DevLogPost {
 category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回答 → 整理成稿）。
 仍缺（后续可补）：岔子/翻车、腾讯参访细节、十天具体日期。
 
-**现有文章清单（截至 2026-11-06；数组顺序 = 索引页顺序，新文章插最前）：**
+**现有文章清单（截至 2026-11-08；数组顺序 = 索引页顺序，新文章插最前）：**
 
 | slug | date | category | 配图 | 来源 |
 |---|---|---|---|---|
-| `nvidia-ignite-oa-2026` | `2026-11` | `Notes` / 随笔 | 3 张正文插图（无封面） | Steven 中文成稿；Bud 只修错字 / 语句 / 删重复 / 专名，出功能对等英文版 |
+| `nvidia-ignite-oa-2026` | `2026-11` | `Notes` / 随笔 | 4 张正文插图（无封面） | Steven 中文成稿；Bud 只修错字 / 语句 / 删重复 / 专名，出功能对等英文版 |
 | `tempo-diagnosis-2026` | `2026-10` | `Dev` / 开发 | 4 张正文插图 + 1 封面 | Steven 撰写，Bud 只修错别字与专名拼写 |
 | `x-institute-ta-2026` | `2026` | `Lab` / 实验室 | 4 张正文插图 + 1 封面 | Steven 口述采访整理 |
 
@@ -380,3 +380,7 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   `artworksNote` 由「三幅」改为「四幅作品 · 行草」/ `Four works · Cursive script`。
   `Art.tsx` **零逻辑改动** —— 编号、计数、进度段、缩略图、箭头边界全部由 `artworks.length` 驱动，仅校准两处注释。
   `Design.md §9.5` 素材清单 / 计数文案同步。
+- **2026-11-08（Bud，NVIDIA 篇补图）：** `nvidia-ignite-oa-2026` 正文在 SWE / HWE 两段 OA 总结之后、
+  收获段之前插入第 4 张 `img` 块 —— `nvidia-ignite-hwe-oa-format.jpg`（880×480 / 34KB，
+  按 SOP `exif_transpose` / q80 / progressive，双语 alt + 实际像素防 CLS），内容为 HWE 测评格式页
+  （75 分钟 / 1 Coding / 4 MCQ / 2 True-False）。**正文文字一字未改**，仅新增插图；文章配图数 3 → 4。

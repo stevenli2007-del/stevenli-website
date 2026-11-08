@@ -19,6 +19,7 @@ import imgTempoRoadmapDocs from '../assets/dev-log/tempo-roadmap-docs.jpg'
 import imgTempoMessagesParse from '../assets/dev-log/tempo-messages-parse.jpg'
 import imgTempoSettingsPrivacy from '../assets/dev-log/tempo-settings-privacy.jpg'
 import imgNvidiaIgniteOaInvite from '../assets/dev-log/nvidia-ignite-oa-invite.jpg'
+import imgNvidiaIgniteHweOaFormat from '../assets/dev-log/nvidia-ignite-hwe-oa-format.jpg'
 import imgStevenliWebsiteHero from '../assets/dev-log/stevenli-website-hero-2026.jpg'
 import imgRameshLab from '../assets/dev-log/ramesh-lab-berkeley.jpg'
 
@@ -90,6 +91,8 @@ export const devLogPosts: DevLogPost[] = [
     // 英文版按 Roadmap「Dev Log 写作契约」做**功能对等**（各自母语的口语层、不直译）：
     //   自嘲与短句保留，涉及 OA 内容 / 技术判断的句子一律平实。
     // 插图 SOP：exif_transpose → 最长边 880 → JPEG q80 / progressive / optimize，双语 alt + 实际像素防 CLS。
+    //   现有 4 张：OA 邀请邮件（开头）、HWE 测评格式页（SWE/HWE 两段总结之后，2026-11-08 追加）、
+    //   网站 Hero（收获段后）、Ramesh Lab（末段）。
     id: 'nvidia-ignite-oa-2026',
     date: '2026-11',
     category: { en: 'Notes', zh: '随笔' },
@@ -145,6 +148,17 @@ export const devLogPosts: DevLogPost[] = [
         text: {
           en: 'HWE OA in one line: HackerRank, just as hard, maybe harder. I’d assumed it would lean on signals or circuits, which I’m stronger at. It was mostly foundational computer architecture instead — also not where my depth is.',
           zh: '一句话总结 HWE 的 OA：HackerRank，题目同样很难甚至更难。我原本以为会考一些我擅长的 signals 或者 circuits 之类的，但考的还是基础 CS architecture 偏多，这方面我的积累还是不够。',
+        },
+      },
+      {
+        // 2026-11-08 追加：接在两张 OA 的总结之后，展示 HWE 测评的题型与时长（Steven 提供截图）
+        type: 'img',
+        src: imgNvidiaIgniteHweOaFormat,
+        width: 880,
+        height: 480,
+        alt: {
+          en: 'The HackerRank test-format page for the NVIDIA Ignite Hardware Engineering Intern (2027) OA: a 75-minute timed test with one coding question, four multiple-choice questions and two true/false questions.',
+          zh: 'NVIDIA Ignite Hardware Engineering Intern (2027) 的 HackerRank 测评格式页：限时 75 分钟，1 道 Coding、4 道选择题、2 道判断题。',
         },
       },
       {
