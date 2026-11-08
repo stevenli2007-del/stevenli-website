@@ -1,7 +1,9 @@
 // Database.md §3 — Artwork interface
 // Phase 7（2026-11-06，Steven 口述）—— Art 页最终形态 = 编辑式图集（editorial photo gallery）。
-//   三张成品图由 Steven 直接给出（装裱、引号、竖排小注、配画全部已在图内），
+//   成品图由 Steven 直接给出（装裱、引号、竖排小注、配画 / 题注全部已在图内），
 //   **照片本身不做任何改动**：不裁切、不拆元素、不加配文，字节级原样入库。
+//   初版三张（2026-11-06）；2026-11-07 追加第四张 gallery-4.jpg（黑底横幅，狼毫小蘭竹题注）。
+//   组件全部由 artworks.length 驱动，新增作品只需在数组末尾追加，无需改 Art.tsx。
 //   ⚠️ 这是 Steven 对既有两个约定的明确覆盖：
 //      ① Design.md §9.5「两列 masonry、不轮播」；② §9.7「禁止轮播」。
 // 第二版视觉（参考 Swiper Minimal Photo Gallery / Bridget Baker / 摄影集 contact sheet）：
@@ -15,6 +17,7 @@ import type { LocalizedText } from './locales'
 import gallery1Img from '../assets/art/gallery-1.jpg'
 import gallery2Img from '../assets/art/gallery-2.jpg'
 import gallery3Img from '../assets/art/gallery-3.jpg'
+import gallery4Img from '../assets/art/gallery-4.jpg'
 
 export interface Artwork {
   id: string;
@@ -33,8 +36,8 @@ export const artworksIntro: LocalizedText = {
 }
 
 export const artworksNote: LocalizedText = {
-  en: 'Three works · Cursive script',
-  zh: '三幅作品 · 行草',
+  en: 'Four works · Cursive script',
+  zh: '四幅作品 · 行草',
 }
 
 // 图集控件文案（WCAG 2.5.3：箭头 aria-label 必须含按钮上的可见字符 ← / →）
@@ -95,6 +98,17 @@ export const artworks: Artwork[] = [
     },
     width: 1630,
     height: 1114,
+    tone: 'dark',
+  },
+  {
+    id: 'gallery-4',
+    src: gallery4Img,
+    alt: {
+      en: 'A white horizontal scroll mounted on a near-black ground, flanked by red quotation marks: two lines of running-cursive script on clouds, still mountain streams and quiet leisure, with a small red seal. The caption below notes that the only wolf-hair Xiaolanzhu brush that travelled abroad with him has reached the end of its life.',
+      zh: '黑底白紙橫幅行草 — 兩行寫雲山閒靜之趣，鈐一方朱印；兩側朱紅引號，下方題注「至此，隨我一同來到異國他鄉的這唯一狼毫小蘭竹坐化了」。',
+    },
+    width: 1920,
+    height: 1131,
     tone: 'dark',
   },
 ]

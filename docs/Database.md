@@ -127,8 +127,10 @@ export interface Artwork {
 `Artwork` 现为 `{ id, src, alt: LocalizedText, width, height, tone: 'light' | 'dark' }`；
 `renderArtworkImages` / `orientation` / `captionZh` / 四幅旧作品均已下线（旧图留在 `src/assets/art/` 归档）。
 新增控件文案 `artworksGalleryLabel` / `artworksPrevLabel` / `artworksNextLabel` / `artworksSwipeHint`
-与 `artworksGoToLabel(index)`，一律住数据层；组件零硬编码文案。三张成品图在 `src/assets/art/gallery-1~3.jpg`，
-字节级原样入库、不裁切。详见 `docs/Roadmap.md` Phase 7。
+与 `artworksGoToLabel(index)`，一律住数据层；组件零硬编码文案。成品图在 `src/assets/art/gallery-1~4.jpg`
+（2026-11-06 三张 + 2026-11-07 追加第四张 `gallery-4.jpg` 1920×1131 / 114KB / `tone: 'dark'`），
+字节级原样入库、不裁切。`artworksNote` 随数量更新为「四幅作品 · 行草」/ `Four works · Cursive script`。
+新增作品只需在 `artworks[]` 末尾追加，组件全部由数组长度驱动、无需改动。详见 `docs/Roadmap.md` Phase 7。
 
 ## 4. `contact.ts`
 
@@ -373,3 +375,8 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   英文按写作契约做功能对等而非直译。新增 3 张插图 `nvidia-ignite-oa-invite.jpg` /
   `stevenli-website-hero-2026.jpg` / `ramesh-lab-berkeley.jpg`（880px / q80 / progressive，双语 alt + 实际像素）。
   ⚠️ 原稿 `OPC` 一词待 Steven 确认；另有一篇新稿待供稿。
+- **2026-11-07（Bud，Art 图集追加第四幅）：** `artworks[]` 末尾新增 `gallery-4`
+  （`gallery-4.jpg` 1920×1131 / 114KB / `tone: 'dark'`，黑底白纸横幅 + 狼毫小蘭竹题注，字节级原样入库）；
+  `artworksNote` 由「三幅」改为「四幅作品 · 行草」/ `Four works · Cursive script`。
+  `Art.tsx` **零逻辑改动** —— 编号、计数、进度段、缩略图、箭头边界全部由 `artworks.length` 驱动，仅校准两处注释。
+  `Design.md §9.5` 素材清单 / 计数文案同步。

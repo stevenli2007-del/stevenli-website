@@ -18,14 +18,15 @@ import { useLocale } from '../lib/router'
 // 本页的具体做法：
 //   ① 每张 slide 自带画框底色（tone）：白纸作品 → 纯白，黑纸白墨 → #0B0B0C，
 //      画布随横滑自然推进（无 JS 改色、无淡入），图边界与画布融合，像挂在展墙上；
-//   ② 超大低对比编号 01/02/03 压在角落，纯装饰（aria-hidden）；
+//   ② 超大低对比编号 01/02/… 压在角落（由 artworks.map 生成，纯装饰 aria-hidden）；
 //   ③ 图集下方：细线进度段 → 数字计数 / 缩略图条 / 极简箭头；桌面端箭头浮在画面两侧。
 //   ④ 原生 overflow-x + CSS scroll-snap（触摸横滑 / 触控板 / 惯性滚动），零依赖、无自动播放、
 //      无视差、无过渡动效。高级感靠画布、留白与层级，不靠动画。
 // 图片：不裁切，width/height 写文件实际像素（防 CLS）；首图 eager + high，其余 lazy。
 // 无障碍：可聚焦 region（方向键切换）、每张图双语 alt、缩略图按钮有 aria-label 与 aria-current、
 //   箭头 aria-label 含可见字符 ← / →（WCAG 2.5.3）；滚动条隐藏用组件上的 Tailwind 任意属性类，
-//   不写进 index.css —— 该文件当前另有其它工作流的未提交改动，本轮不碰。
+//   不写进 index.css —— 避免与全站样式耦合。
+// 2026-11-07 追加第四幅作品：仅 artworks.ts 数组末尾加一条，本组件零改动（全部控件由数组长度驱动）。
 
 function pad(index: number): string {
   return String(index + 1).padStart(2, '0')

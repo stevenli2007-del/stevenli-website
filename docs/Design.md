@@ -210,22 +210,22 @@ font-family: "Noto Serif SC", serif;
 
 > 本节为**现行规范**。早期的「两列 masonry + 原图比例 + 占位框」已被 Steven 明确推翻，历史见文末。
 
-- 页面 `bg-[#faf9f5]`；标题 / intro / 小注在 `max-w-6xl px-6 pt-16 md:pt-20` 容器内，小注 `mt-3 text-sm text-[#6E6E73]`（`artworksNote`：`三幅作品 · 行草` / `Three works · Cursive script`）
-- 素材：`src/assets/art/gallery-1~3.jpg`，三张成品图**字节级原样展示** —— 装裱、朱红引号、竖排小注、青杏配画全在图内；网页**不拆元素、不裁切主图、不加配文、不加题跋**
+- 页面 `bg-[#faf9f5]`；标题 / intro / 小注在 `max-w-6xl px-6 pt-16 md:pt-20` 容器内，小注 `mt-3 text-sm text-[#6E6E73]`（`artworksNote`：`四幅作品 · 行草` / `Four works · Cursive script`）
+- 素材：`src/assets/art/gallery-1~4.jpg`，四张成品图**字节级原样展示** —— 装裱、朱红引号、竖排小注 / 题注、青杏配画全在图内；网页**不拆元素、不裁切主图、不加配文、不加题跋**。第四张（2026-11-07 追加）为黑底白纸横幅 + 狼毫小蘭竹题注，`tone: 'dark'`
 - 数据层：`Artwork = { id, src, alt: LocalizedText, width, height, tone: 'light' | 'dark' }`；
   `tone` 决定该 slide 的画框底色（白纸 → `bg-white`，黑纸白墨 → `bg-[#0B0B0C]`）。横滑时整块画布随作品推进，**无 JS 改色、无淡入**
 - 主舞台：track `flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-webkit-overflow-scrolling:touch]`；
   slide `relative flex w-full flex-none snap-start items-center justify-center overflow-hidden px-0 py-8 sm:px-8 md:px-16 md:py-14`
 - 主图：`relative h-auto max-h-[62vh] w-auto max-w-full object-contain md:max-h-[68vh]`；`width`/`height` 写文件实际像素防 CLS；首图 `loading="eager"` + `fetchPriority="high"`，其余 `lazy` + `decoding="async"`
-- 角落超大编号 `01/02/03`：`md:block text-[88px] lg:text-[140px]`，浅画布 `text-[#1D1D1F]/[0.06]`、深画布 `text-white/10`，`aria-hidden`（**画框装饰，不叠在作品图上**）
-- 控制区：细线进度段（`h-px flex-1`，走过的 `bg-[#1D1D1F]`）→ `01 / 03` 计数 → 同步缩略图条（`aspect-[4/3] object-cover`，仅缩略图裁切；当前 `border-[#1D1D1F] opacity-100`，其余 `opacity-50`）→ 极简圆形箭头
+- 角落超大编号 `01/02/…`：`md:block text-[88px] lg:text-[140px]`，浅画布 `text-[#1D1D1F]/[0.06]`、深画布 `text-white/10`，`aria-hidden`（**画框装饰，不叠在作品图上**）
+- 控制区：细线进度段（`h-px flex-1`，走过的 `bg-[#1D1D1F]`）→ `01 / 04` 计数 → 同步缩略图条（`aspect-[4/3] object-cover`，仅缩略图裁切；当前 `border-[#1D1D1F] opacity-100`，其余 `opacity-50`）→ 极简圆形箭头
   - 桌面箭头浮在画面两侧，颜色随当前 `tone` 切换；移动端收回控制区，主要靠手指横滑
 - 交互：原生 `overflow-x` + CSS scroll-snap，支持触摸横滑 / 触控板 / 缩略图跳转 / 方向键；**零依赖、无自动播放、无视差、无过渡动效**
 - 无障碍：`role="region"` + `tabIndex=0` + 方向键导航；每图双语 `alt`；缩略图 `aria-current` 与双语 `aria-label`；箭头 `aria-label` 含可见字符 `←` / `→`（WCAG 2.5.3）；全部控件文案住 `artworks.ts`
 - 滚动条隐藏**写在组件上的 Tailwind 任意属性类**，不写进 `src/index.css`（该文件已有全站配色规则，避免耦合）
 - **禁止**：自动播放、视差、淡入缩放、阴影、位移/缩放动效；仅 hover 的 color / opacity 微变化
 
-> 历史沿革：Phase 4~5.5 的规范是 `columns-1 gap-4 md:columns-2` 两列 masonry、题跋 `mt-3 text-right` 原繁体、以及 `renderArtworkImages = false` 的等比占位框（曾因真图拖慢移动端 Lighthouse 到 87 而启用）。2026-11-06 Steven 明确覆盖：改为三幅成品图的横向图集，`renderArtworkImages` 开关删除，`orientation` / `captionZh` / `artwork-1~4` 均下线（旧图留仓库归档）。参考形态：Swiper「Photo Gallery – Minimal」、Bridget Baker 摄影集、contact sheet 缩略图条。实现细节见 `src/components/Art.tsx` 顶部注释。
+> 历史沿革：Phase 4~5.5 的规范是 `columns-1 gap-4 md:columns-2` 两列 masonry、题跋 `mt-3 text-right` 原繁体、以及 `renderArtworkImages = false` 的等比占位框（曾因真图拖慢移动端 Lighthouse 到 87 而启用）。2026-11-06 Steven 明确覆盖：改为三幅成品图的横向图集（**2026-11-07 追加第四幅，现为四幅**），`renderArtworkImages` 开关删除，`orientation` / `captionZh` / `artwork-1~4` 均下线（旧图留仓库归档）。参考形态：Swiper「Photo Gallery – Minimal」、Bridget Baker 摄影集、contact sheet 缩略图条。实现细节见 `src/components/Art.tsx` 顶部注释。
 
 ### 9.6 无障碍硬约束（Phase 4 新增）
 

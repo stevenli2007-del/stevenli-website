@@ -311,3 +311,10 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 已上线 3 篇：`nvidia-ignite-oa-2026`（`Notes` / 随笔）、`tempo-diagnosis-2026`（`Dev`）、`x-institute-ta-2026`（`Lab`）。
 索引页顺序 = `devLogPosts` 数组顺序，新文章插最前；每篇仍须满足「叙事做皮、四问当骨 / 双语功能对等 / 技术论断平实」契约。
 **仍有 1 篇待 Steven 供稿，不得代写。** 文章清单与插图规格见 `docs/Database.md` §10。
+
+### Art 图集增补（2026-11-07）
+
+Steven 追加第四幅成品图，**仍按 Phase 7 契约：字节级原样、不拆元素、不加配文**。
+`artworks[]` 末尾加 `gallery-4`（1920×1131 / 114KB / `tone: 'dark'`，黑底白纸横幅 + 朱红引号 + 「狼毫小蘭竹」题注），
+`artworksNote` 改为「四幅作品 · 行草」/ `Four works · Cursive script`。组件零逻辑改动 —— 图集所有控件由数组长度驱动。
+现行规范见 `docs/Design.md §9.5`、数据字典见 `docs/Database.md §3`。
