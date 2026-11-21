@@ -325,16 +325,17 @@ export interface DevLogPost {
 category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回答 → 整理成稿）。
 仍缺（后续可补）：岔子/翻车、腾讯参访细节、十天具体日期。
 
-**现有文章清单（截至 2026-11-08；数组顺序 = 索引页顺序，新文章插最前）：**
+**现有文章清单（截至 2026-11-21；数组顺序 = 索引页顺序，新文章插最前）：**
 
 | slug | date | category | 配图 | 来源 |
 |---|---|---|---|---|
+| `octave-pedal-2026` | `2026-11` | `Dev` / 开发 | 6 张正文插图（无封面） | Steven 中文成稿；Bud 少许修改（错字 / 通顺 / 专名 / 空格）+ 功能对等英文版 |
 | `nvidia-ignite-oa-2026` | `2026-11` | `Notes` / 随笔 | 4 张正文插图（无封面） | Steven 中文成稿；Bud 只修错字 / 语句 / 删重复 / 专名，出功能对等英文版 |
 | `tempo-diagnosis-2026` | `2026-10` | `Dev` / 开发 | 4 张正文插图 + 1 封面 | Steven 撰写，Bud 只修错别字与专名拼写 |
 | `x-institute-ta-2026` | `2026` | `Lab` / 实验室 | 4 张正文插图 + 1 封面 | Steven 口述采访整理 |
 
-⚠️ `nvidia-ignite-oa-2026` 原稿「大幅拉低创业成本 OPC」中的 `OPC` 语义不明，暂按笔误省略，待 Steven 确认是否补回；
-另有一篇 Dev Log 新稿待 Steven 供稿，**不得代写**。
+⚠️ `nvidia-ignite-oa-2026` 原稿「大幅拉低创业成本 OPC」中的 `OPC` 语义不明，暂按笔误省略，待 Steven 确认是否补回。
+4 篇均已上线、暂无待供稿文章；后续新稿仍须 Steven 提供，**不得代写**。
 
 ## 11. 通用规则
 - 所有 `id` 字段用 kebab-case（如 `"linkedin-ai"`），不是 camelCase——因为它可能被用作 HTML anchor / URL slug。
@@ -384,3 +385,9 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   收获段之前插入第 4 张 `img` 块 —— `nvidia-ignite-hwe-oa-format.jpg`（880×480 / 34KB，
   按 SOP `exif_transpose` / q80 / progressive，双语 alt + 实际像素防 CLS），内容为 HWE 测评格式页
   （75 分钟 / 1 Coding / 4 MCQ / 2 True-False）。**正文文字一字未改**，仅新增插图；文章配图数 3 → 4。
+- **2026-11-21（Bud，Dev Log 第四篇）：** 新增 `octave-pedal-2026`（category `Dev` / 开发，插在数组最前）。
+  中文成稿由 Steven 提供，Bud 只做少许修改 —— 错字与搭配（与我→对我 / 本身→本来 / 负电极→负电压 /
+  该品→这个音 / 给他→把它）、语句通顺、专名（wawa- effect→wah-wah）、数字与单位空格，
+  ⚠️ 「频率翻倍的驻波」→「频率翻倍的波形」（此处得到的是 2 倍频信号，非驻波）；英文按写作契约做功能对等。
+  6 张插图按原稿 @ 位置落段（`guitar-pedal-*.jpg`，原图均 ≤880px 故只转格式不缩放，q80 / progressive，
+  双语 alt + 实际像素防 CLS），无封面；组件与路由零改动。§10 文章清单 3 → 4 篇，「待供稿」状态解除。
