@@ -89,175 +89,6 @@ export const devLogFigureLabel: LocalizedText = {
 
 export const devLogPosts: DevLogPost[] = [
   {
-    // 第四篇（2026-11-21）：吉他八度泛音效果器。中文成稿由 Steven 提供，Bud 只做少许修改：
-    //   错字与搭配（与我→对我、本身→本来、负电极→负电压、该品→这个音、给他→把它）、
-    //   语句通顺、专名（wawa- effect→wah-wah）、数字与单位空格；「频率翻倍的驻波」→「频率翻倍的波形」
-    //   （这里得到的是 2 倍频信号，不是驻波）。内容与口吻未动。
-    // 英文按 Roadmap「Dev Log 写作契约」做功能对等：口语层与自嘲保留，电路 / 信号链描述一律平实。
-    // 插图 6 张按原稿 @image#1~#6 的位置落段，SOP 同前（最长边 880 / JPEG q80 / progressive / 双语 alt / 实际像素）。
-    id: 'octave-pedal-2026',
-    date: '2026-11',
-    category: { en: 'Dev', zh: '开发' },
-    title: { en: 'Building an Octave Pedal', zh: '做一台泛音效果器' },
-    summary: {
-      en: 'I wanted to skip practicing pinch harmonics; I ended up taking my guitar apart, building two boards, and learning that a single 9V supply quietly turns full-wave rectification into half-wave.',
-      zh: '想偷懒不练人工泛音，结果拆了吉他、做了两版板子，最后发现问题出在电池只有正电压。',
-    },
-    body: [
-      {
-        type: 'p',
-        text: {
-          en: 'The world runs on lazy people — I somehow buy that now. This whole thing started with one problem: pinch harmonics. It’s that electric-guitar trick where a note suddenly jumps up an octave mid-solo, and it’s really catchy. But I’d just moved from acoustic guitar to electric guitar, and I could not land it. So I started wondering if there was some other way to get there.',
-          zh: '世界科技由懒人推动，这句话我现在 somehow 认可了。吉他泛音效果器这个项目始于一个难题：人工泛音（Pinch Harmonic）。作为一种电吉他的加花技巧，它能让吉他 solo 在弹奏某个音的时候瞬间升调，很 catchy。但是作为一个刚从 acoustic guitar 转 electric guitar 的人，这个技巧对我而言实在是太难掌握，于是我开始想有没有别的什么方法可以解决。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'The idea came from pedals. At the end of the day an electric guitar just puts out an electrical signal (in wave form), and a pedal reshapes that signal into whatever effect you want — fuzz, wah-wah, that sort of thing. I’d also just finished sound and waves in physics. So the pinch harmonic problem turned into: how do you rectify the guitar’s output signal to get a waveform at double the frequency?',
-          zh: '解决这个问题的灵感来源于效果器。因为说到底，电吉他的输出就是一连串的电信号（in wave form），而效果器就是通过整流电信号从而实现各种各样的声音效果，比如 Fuzz、wah-wah 之类的。恰巧物理刚学完 sound and waves，所以，Pinch Harmonic 的问题也就变成了：怎么整流电吉他输出的电信号，得到频率翻倍的波形。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'First thing I did: took my guitar apart.',
-          zh: '我做的第一件事就是把我的电吉他给拆了：',
-        },
-      },
-      {
-        type: 'img',
-        src: imgGuitarPedalTeardown,
-        width: 520,
-        height: 692,
-        alt: {
-          en: 'The disassembled yellow electric guitar: the whole pickup assembly lifted out, with its wiring, potentiometers and switch still connected.',
-          zh: '拆开的黄色电吉他：整块拾音器总成被拎了出来，线缆、电位器和开关还连着。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'The principle behind the signal is honestly simple: metal strings cut the pickup’s magnetic field and induce a current. Different vibration frequencies give you different signal frequencies, which is where the notes come from. The guitar just adds a few filters and amplifiers on top so the signal is easier to pick up.',
-          zh: '其实电吉他输出电信号的原理特简单：金属琴弦切割拾音器的磁场，从而产生电流。又因为琴弦震动频率不一，产出电信号的频率就跟着这个音走，由此产生不同音符。电吉他就是加了几个滤波器和放大器，从而让电信号更好被识别。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'With that clear, I wanted to put a scope on the waveform right away — but the signal from strings cutting magnetic field lines is still way too weak. So I added four little amplifier modules:',
-          zh: '清楚信号产生原理后，我本来想直接上示波器抓波形的，但是琴弦切割磁场线产生的电信号还是太微弱了，所以我又加了 4 个放大波形的模块：',
-        },
-      },
-      {
-        type: 'img',
-        src: imgGuitarPedalAmpScope,
-        width: 568,
-        height: 426,
-        alt: {
-          en: 'Four small amplifier boards wired up to a handheld oscilloscope on the bench, which finally shows the guitar’s waveform.',
-          zh: '实验台上四块小放大板接到手持示波器，终于看到了吉他输出的波形。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'Once the waveform was actually on screen, I drew the schematic. Then I threw together a prototype from whatever was lying around, just to see if it could filter and full-wave rectify.',
-          zh: '成功观察到波形后我开始设计原理图。设计完后我先用现成材料搭了一个模型，看看能不能起到滤波 + 全波整流的效果。',
-        },
-      },
-      {
-        type: 'img',
-        src: imgGuitarPedalBreadboard,
-        width: 522,
-        height: 392,
-        alt: {
-          en: 'The bench prototype built out of loose resistors, diodes and blue and white jumper wires, used to test filtering and full-wave rectification.',
-          zh: '用零散电阻、二极管和蓝白跳线搭出来的实验模型，用来验证滤波和全波整流。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'Per the scope, the little model did work. But once I actually assembled the JLCPCB board, the guitar signal stopped making any sound at all, and the noise was huge.',
-          zh: '根据示波器的输出呢，这个小模型是起效了，但是等我把嘉立创打样的 PCB 真正焊好装起来，才发现吉他的电信号没办法再发声了，且杂波非常大。',
-        },
-      },
-      {
-        type: 'img',
-        src: imgGuitarPedalSoldering,
-        width: 402,
-        height: 616,
-        alt: {
-          en: 'Soldering the first PCB at the workbench, with the schematic open on the laptop behind it.',
-          zh: '在工作台上焊第一版 PCB，背后笔记本上开着原理图。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'I worked out why soon enough. The battery only gives me 0V and up — there is no negative rail. So what I called full-wave rectification quietly turned into half-wave after the caps and diodes: the negative half of the waveform was just wiped out. I redrew the schematic.',
-          zh: '我分析了一下原因，因为电池只有 0V 以上，没有负电压，所以所谓的全波整流其实在经过电容和二极管后变成了半波整流（波形的 negative 部分被直接抹掉了）。所以我重新设计了一个原理图：',
-        },
-      },
-      {
-        type: 'img',
-        src: imgGuitarPedalSchematicV2,
-        width: 548,
-        height: 294,
-        alt: {
-          en: 'The revised schematic: a small op-amp circuit generating a negative rail / virtual ground at top right, and the input buffer, precision full-wave rectifier and low-pass output stage along the bottom.',
-          zh: '重画后的原理图：右上角是产生负电压 / 虚地的小电路，下方是输入缓冲、精密全波整流和低通输出级。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'In this version, the top-right corner is a small circuit built from two op-amps, diodes, a 10k resistor and a 100nF cap. It pulls a negative rail, or virtual ground, out of the single supply. Now the downstream op-amps reference a center voltage that can swing both ways instead of the 0V floor, so the negative half of the waveform no longer gets clipped by the supply rail before rectification.',
-          zh: '在这个版本里，我先在右上角加了一个由两个运放、二极管、10k 电阻和 100nF 电容组成的小电路，用来从单电源里“拆”出一路负电压 / 虚地。这样后级运放的参考点就不再是 0V 底线，而是可以上下摆动的中心电压，波形的 negative 部分也就不会在整流前被电源轨直接截掉。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'On the main signal path, the input goes through a 1M input impedance and a 1nF coupling cap into a voltage follower, then a 100nF cap and two 100k resistors bias it up to 9V. Two op-amps with 10k, 5k and 22k feedback form a precision full-wave rectifier, turning the input into its absolute value — the frequency doubles on its own. After rectification, 110nF blocks DC, a 10k resistor limits current, anti-parallel diodes clip once, and a first-order low-pass (1k with 100nF feedback) smooths the pulses into a reasonably clean 2× sine output.',
-          zh: '主信号链这边，输入先经过 1M 输入阻抗和 1nF 耦合进入电压跟随器，再通过 100nF 和两个 100k 分压抬到 9V 偏置；随后两个运放配合 10k、5k 电阻和 22k 反馈构成精密全波整流，把输入信号变成绝对值波形，频率自然翻倍。整流后先用 110nF 隔直、10k 限流，反并联二极管做一次限幅，最后交给 1k 加 100nF 反馈的一阶低通，把脉动波平滑成比较干净的 2 倍频正弦输出。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'Compared with v1, this one mostly fixes the “single positive supply turns full-wave into half-wave” problem. The whole cycle survives, so in theory the octave harmonic should be steadier and a bit fuller.',
-          zh: '和上一版相比，这一版主要解决了“只有正电源导致全波整流变半波”的问题，完整周期的信息保留下来了，所以理论上八度泛音会更稳定、也更饱满一些。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'Then off to JLCPCB for fabrication, and the finished board:',
-          zh: '然后就是送去嘉立创打样封装，最后成品 PCB 板：',
-        },
-      },
-      {
-        type: 'img',
-        src: imgGuitarPedalPcbFinal,
-        width: 472,
-        height: 354,
-        alt: {
-          en: 'The finished purple PCB from JLCPCB, populated with three op-amp ICs, resistors, diodes and four yellow film capacitors.',
-          zh: '嘉立创打样的成品紫色 PCB，三颗运放、电阻、二极管和四个黄色电容都焊好了。',
-        },
-      },
-      {
-        type: 'p',
-        text: {
-          en: 'I 3D-printed a case and put it in there. A few things still to do: 1. It needs a footswitch-type control, so the board only rectifies when I actually want the harmonic and passes the original waveform through the rest of the time. 2. The processed sound comes out quieter and pretty distorted. My guess is something in the coupling part.',
-          zh: '我 3D 打印了个外壳把它装起来。后续需要处理的几件事：1. 应该有个踏板一样的装置，控制效果器的开关。如此一来，只有在我需要泛音的时候，PCB 板才会整流电路，其他时间则放原波形通过。2. 处理完的声音会变小，且很失真。我觉得应该是耦合的部分出了问题。',
-        },
-      },
-    ],
-  },
-  {
     // 第三篇（2026-11-06）：NVIDIA Ignite HWE/SWE OA + 对 AI 与方向的反思。
     // 正文由 Steven 口述成稿，Bud 只做：错别字 / 语句通顺 / 删重复 / 专名大小写与空格，
     //   **内容与说话方式均未改**。具体修正：梁文峰→梁文锋、Ai→AI、Nvidia→NVIDIA、Calhacks→Cal Hacks、
@@ -779,6 +610,178 @@ export const devLogPosts: DevLogPost[] = [
         text: {
           en: 'When it settled, the pay came out to ¥3,232. Honestly, that felt like a lot.',
           zh: '最后结算下来，3232 块。讲真，我觉得超级多。',
+        },
+      },
+    ],
+  },
+  {
+    // 第四篇（2026-11-21 上线）：吉他八度泛音效果器。
+    // ⚠️ 2026-11-21 订正：项目实际完成于 2025-12，date 由 2026-11 改为 2025-12，
+    //    并从数组最前移到末尾（索引页顺序 = 数组顺序，按 date 倒序）。勿按「新文章插最前」挪回。
+    // 中文成稿由 Steven 提供，Bud 只做少许修改：
+    //   错字与搭配（与我→对我、本身→本来、负电极→负电压、该品→这个音、给他→把它）、
+    //   语句通顺、专名（wawa- effect→wah-wah）、数字与单位空格；「频率翻倍的驻波」→「频率翻倍的波形」
+    //   （这里得到的是 2 倍频信号，不是驻波）。内容与口吻未动。
+    // 英文按 Roadmap「Dev Log 写作契约」做功能对等：口语层与自嘲保留，电路 / 信号链描述一律平实。
+    // 插图 6 张按原稿 @image#1~#6 的位置落段，SOP 同前（最长边 880 / JPEG q80 / progressive / 双语 alt / 实际像素）。
+    id: 'octave-pedal-2026',
+    date: '2025-12',
+    category: { en: 'Dev', zh: '开发' },
+    title: { en: 'Building an Octave Pedal', zh: '做一台泛音效果器' },
+    summary: {
+      en: 'I wanted to skip practicing pinch harmonics; I ended up taking my guitar apart, building two boards, and learning that a single 9V supply quietly turns full-wave rectification into half-wave.',
+      zh: '想偷懒不练人工泛音，结果拆了吉他、做了两版板子，最后发现问题出在电池只有正电压。',
+    },
+    body: [
+      {
+        type: 'p',
+        text: {
+          en: 'The world runs on lazy people — I somehow buy that now. This whole thing started with one problem: pinch harmonics. It’s that electric-guitar trick where a note suddenly jumps up an octave mid-solo, and it’s really catchy. But I’d just moved from acoustic guitar to electric guitar, and I could not land it. So I started wondering if there was some other way to get there.',
+          zh: '世界科技由懒人推动，这句话我现在 somehow 认可了。吉他泛音效果器这个项目始于一个难题：人工泛音（Pinch Harmonic）。作为一种电吉他的加花技巧，它能让吉他 solo 在弹奏某个音的时候瞬间升调，很 catchy。但是作为一个刚从 acoustic guitar 转 electric guitar 的人，这个技巧对我而言实在是太难掌握，于是我开始想有没有别的什么方法可以解决。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'The idea came from pedals. At the end of the day an electric guitar just puts out an electrical signal (in wave form), and a pedal reshapes that signal into whatever effect you want — fuzz, wah-wah, that sort of thing. I’d also just finished sound and waves in physics. So the pinch harmonic problem turned into: how do you rectify the guitar’s output signal to get a waveform at double the frequency?',
+          zh: '解决这个问题的灵感来源于效果器。因为说到底，电吉他的输出就是一连串的电信号（in wave form），而效果器就是通过整流电信号从而实现各种各样的声音效果，比如 Fuzz、wah-wah 之类的。恰巧物理刚学完 sound and waves，所以，Pinch Harmonic 的问题也就变成了：怎么整流电吉他输出的电信号，得到频率翻倍的波形。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'First thing I did: took my guitar apart.',
+          zh: '我做的第一件事就是把我的电吉他给拆了：',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGuitarPedalTeardown,
+        width: 520,
+        height: 692,
+        alt: {
+          en: 'The disassembled yellow electric guitar: the whole pickup assembly lifted out, with its wiring, potentiometers and switch still connected.',
+          zh: '拆开的黄色电吉他：整块拾音器总成被拎了出来，线缆、电位器和开关还连着。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'The principle behind the signal is honestly simple: metal strings cut the pickup’s magnetic field and induce a current. Different vibration frequencies give you different signal frequencies, which is where the notes come from. The guitar just adds a few filters and amplifiers on top so the signal is easier to pick up.',
+          zh: '其实电吉他输出电信号的原理特简单：金属琴弦切割拾音器的磁场，从而产生电流。又因为琴弦震动频率不一，产出电信号的频率就跟着这个音走，由此产生不同音符。电吉他就是加了几个滤波器和放大器，从而让电信号更好被识别。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'With that clear, I wanted to put a scope on the waveform right away — but the signal from strings cutting magnetic field lines is still way too weak. So I added four little amplifier modules:',
+          zh: '清楚信号产生原理后，我本来想直接上示波器抓波形的，但是琴弦切割磁场线产生的电信号还是太微弱了，所以我又加了 4 个放大波形的模块：',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGuitarPedalAmpScope,
+        width: 568,
+        height: 426,
+        alt: {
+          en: 'Four small amplifier boards wired up to a handheld oscilloscope on the bench, which finally shows the guitar’s waveform.',
+          zh: '实验台上四块小放大板接到手持示波器，终于看到了吉他输出的波形。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Once the waveform was actually on screen, I drew the schematic. Then I threw together a prototype from whatever was lying around, just to see if it could filter and full-wave rectify.',
+          zh: '成功观察到波形后我开始设计原理图。设计完后我先用现成材料搭了一个模型，看看能不能起到滤波 + 全波整流的效果。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGuitarPedalBreadboard,
+        width: 522,
+        height: 392,
+        alt: {
+          en: 'The bench prototype built out of loose resistors, diodes and blue and white jumper wires, used to test filtering and full-wave rectification.',
+          zh: '用零散电阻、二极管和蓝白跳线搭出来的实验模型，用来验证滤波和全波整流。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Per the scope, the little model did work. But once I actually assembled the JLCPCB board, the guitar signal stopped making any sound at all, and the noise was huge.',
+          zh: '根据示波器的输出呢，这个小模型是起效了，但是等我把嘉立创打样的 PCB 真正焊好装起来，才发现吉他的电信号没办法再发声了，且杂波非常大。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGuitarPedalSoldering,
+        width: 402,
+        height: 616,
+        alt: {
+          en: 'Soldering the first PCB at the workbench, with the schematic open on the laptop behind it.',
+          zh: '在工作台上焊第一版 PCB，背后笔记本上开着原理图。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'I worked out why soon enough. The battery only gives me 0V and up — there is no negative rail. So what I called full-wave rectification quietly turned into half-wave after the caps and diodes: the negative half of the waveform was just wiped out. I redrew the schematic.',
+          zh: '我分析了一下原因，因为电池只有 0V 以上，没有负电压，所以所谓的全波整流其实在经过电容和二极管后变成了半波整流（波形的 negative 部分被直接抹掉了）。所以我重新设计了一个原理图：',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGuitarPedalSchematicV2,
+        width: 548,
+        height: 294,
+        alt: {
+          en: 'The revised schematic: a small op-amp circuit generating a negative rail / virtual ground at top right, and the input buffer, precision full-wave rectifier and low-pass output stage along the bottom.',
+          zh: '重画后的原理图：右上角是产生负电压 / 虚地的小电路，下方是输入缓冲、精密全波整流和低通输出级。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'In this version, the top-right corner is a small circuit built from two op-amps, diodes, a 10k resistor and a 100nF cap. It pulls a negative rail, or virtual ground, out of the single supply. Now the downstream op-amps reference a center voltage that can swing both ways instead of the 0V floor, so the negative half of the waveform no longer gets clipped by the supply rail before rectification.',
+          zh: '在这个版本里，我先在右上角加了一个由两个运放、二极管、10k 电阻和 100nF 电容组成的小电路，用来从单电源里“拆”出一路负电压 / 虚地。这样后级运放的参考点就不再是 0V 底线，而是可以上下摆动的中心电压，波形的 negative 部分也就不会在整流前被电源轨直接截掉。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'On the main signal path, the input goes through a 1M input impedance and a 1nF coupling cap into a voltage follower, then a 100nF cap and two 100k resistors bias it up to 9V. Two op-amps with 10k, 5k and 22k feedback form a precision full-wave rectifier, turning the input into its absolute value — the frequency doubles on its own. After rectification, 110nF blocks DC, a 10k resistor limits current, anti-parallel diodes clip once, and a first-order low-pass (1k with 100nF feedback) smooths the pulses into a reasonably clean 2× sine output.',
+          zh: '主信号链这边，输入先经过 1M 输入阻抗和 1nF 耦合进入电压跟随器，再通过 100nF 和两个 100k 分压抬到 9V 偏置；随后两个运放配合 10k、5k 电阻和 22k 反馈构成精密全波整流，把输入信号变成绝对值波形，频率自然翻倍。整流后先用 110nF 隔直、10k 限流，反并联二极管做一次限幅，最后交给 1k 加 100nF 反馈的一阶低通，把脉动波平滑成比较干净的 2 倍频正弦输出。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Compared with v1, this one mostly fixes the “single positive supply turns full-wave into half-wave” problem. The whole cycle survives, so in theory the octave harmonic should be steadier and a bit fuller.',
+          zh: '和上一版相比，这一版主要解决了“只有正电源导致全波整流变半波”的问题，完整周期的信息保留下来了，所以理论上八度泛音会更稳定、也更饱满一些。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Then off to JLCPCB for fabrication, and the finished board:',
+          zh: '然后就是送去嘉立创打样封装，最后成品 PCB 板：',
+        },
+      },
+      {
+        type: 'img',
+        src: imgGuitarPedalPcbFinal,
+        width: 472,
+        height: 354,
+        alt: {
+          en: 'The finished purple PCB from JLCPCB, populated with three op-amp ICs, resistors, diodes and four yellow film capacitors.',
+          zh: '嘉立创打样的成品紫色 PCB，三颗运放、电阻、二极管和四个黄色电容都焊好了。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'I 3D-printed a case and put it in there. A few things still to do: 1. It needs a footswitch-type control, so the board only rectifies when I actually want the harmonic and passes the original waveform through the rest of the time. 2. The processed sound comes out quieter and pretty distorted. My guess is something in the coupling part.',
+          zh: '我 3D 打印了个外壳把它装起来。后续需要处理的几件事：1. 应该有个踏板一样的装置，控制效果器的开关。如此一来，只有在我需要泛音的时候，PCB 板才会整流电路，其他时间则放原波形通过。2. 处理完的声音会变小，且很失真。我觉得应该是耦合的部分出了问题。',
         },
       },
     ],

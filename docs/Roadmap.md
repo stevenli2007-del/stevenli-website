@@ -308,8 +308,8 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 
 ### Dev Log 文章进度（卡 6-3，截至 2026-11-21）
 
-已上线 4 篇：`octave-pedal-2026`（`Dev` / 开发）、`nvidia-ignite-oa-2026`（`Notes` / 随笔）、`tempo-diagnosis-2026`（`Dev`）、`x-institute-ta-2026`（`Lab`）。
-索引页顺序 = `devLogPosts` 数组顺序，新文章插最前；每篇仍须满足「叙事做皮、四问当骨 / 双语功能对等 / 技术论断平实」契约。
+已上线 4 篇（按索引页顺序）：`nvidia-ignite-oa-2026`（`Notes` / 随笔）、`tempo-diagnosis-2026`（`Dev` / 开发）、`x-institute-ta-2026`（`Lab` / 实验室）、`octave-pedal-2026`（`Dev` / 开发，项目实际为 2025-12，故置末尾）。
+索引页顺序 = `devLogPosts` 数组顺序，按 `date` 倒序；新增文章一般插最前，但须按项目实际时间定位。每篇仍须满足「叙事做皮、四问当骨 / 双语功能对等 / 技术论断平实」契约。
 4 篇均由 Steven 供稿、暂无待补文章；后续新稿仍**不得代写**。文章清单与插图规格见 `docs/Database.md` §10。
 
 ### Art 图集增补（2026-11-07）
