@@ -127,10 +127,12 @@ export interface Artwork {
 `Artwork` 现为 `{ id, src, alt: LocalizedText, width, height, tone: 'light' | 'dark' }`；
 `renderArtworkImages` / `orientation` / `captionZh` / 四幅旧作品均已下线（旧图留在 `src/assets/art/` 归档）。
 新增控件文案 `artworksGalleryLabel` / `artworksPrevLabel` / `artworksNextLabel` / `artworksSwipeHint`
-与 `artworksGoToLabel(index)`，一律住数据层；组件零硬编码文案。成品图在 `src/assets/art/gallery-1~4.jpg`
-（2026-11-06 三张 + 2026-11-07 追加第四张 `gallery-4.jpg` 1920×1131 / 114KB / `tone: 'dark'`），
-字节级原样入库、不裁切。`artworksNote` 随数量更新为「四幅作品 · 行草」/ `Four works · Cursive script`。
-新增作品只需在 `artworks[]` 末尾追加，组件全部由数组长度驱动、无需改动。详见 `docs/Roadmap.md` Phase 7。
+与 `artworksGoToLabel(index)`，一律住数据层；组件零硬编码文案。成品图在 `src/assets/art/gallery-1~7.jpg`
+（2026-11-06 三张 + 2026-11-07 第四张 + 2026-11-21 三张实拍 `gallery-5~7.jpg`：
+1440×1080 / 1440×1920 ×2，共约 942KB，`tone: 'dark'`），
+字节级原样入库、不裁切。`artworksNote` 随数量更新为「七幅作品 · 行草」/ `Seven works · Cursive script`。
+新增作品只需在 `artworks[]` 末尾追加，主舞台全部由数组长度驱动、无需改动；
+⚠️ 七幅起缩略图条在窄屏需横滚，`Art.tsx` 已给该容器加 `min-w-0 overflow-x-auto`（2026-11-21）。详见 `docs/Roadmap.md` Phase 7。
 
 ## 4. `contact.ts`
 
@@ -395,3 +397,9 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   `octave-pedal-2026` 的 `date` 由 `2026-11` → `2025-12`，并从 `devLogPosts` 数组最前移到末尾
   （索引页顺序 = 数组顺序，改按 `date` 倒序）；`devLog.ts` 内加订正注释，防止按「新文章插最前」挪回。
   §10 清单表格顺序与 Roadmap 进度表同步；**slug 未改** —— 改 slug 会更换线上 URL，待 Steven 决定。
+- **2026-11-21（Bud，Art 图集追加三幅实拍）：** `artworks[]` 末尾新增 `gallery-5~7`
+  （微信原图，**字节级原样复制、不裁切不重编码**；1440×1080 / 1440×1920 / 1440×1920，共约 942KB，
+  三张均为木桌 + 白纸行草 + 墨碟，`tone: 'dark'`）。`artworksNote` 由「四幅」改为
+  「七幅作品 · 行草」/ `Seven works · Cursive script`；§3 素材清单同步。
+  ⚠️ 幅数 4 → 7 后缩略图条会在 375px 窄屏撑出横向溢出，故 `Art.tsx` 缩略图容器加
+  `min-w-0 overflow-x-auto` + 任意属性类隐藏滚动条；主舞台 / 计数 / 进度段 / 箭头仍由数组长度驱动、逻辑零改动。

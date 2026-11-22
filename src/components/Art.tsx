@@ -27,6 +27,8 @@ import { useLocale } from '../lib/router'
 //   箭头 aria-label 含可见字符 ← / →（WCAG 2.5.3）；滚动条隐藏用组件上的 Tailwind 任意属性类，
 //   不写进 index.css —— 避免与全站样式耦合。
 // 2026-11-07 追加第四幅作品：仅 artworks.ts 数组末尾加一条，本组件零改动（全部控件由数组长度驱动）。
+// 2026-11-21 追加至七幅：主舞台逻辑仍零改动；仅给缩略图条加 min-w-0 + overflow-x-auto，
+//   避免 7 个缩略图在 375px 窄屏把控制区撑出横向溢出（滚动条沿用任意属性类隐藏，不进 index.css）。
 
 function pad(index: number): string {
   return String(index + 1).padStart(2, '0')
@@ -167,7 +169,7 @@ export default function Art() {
             {pad(active)} <span className="text-[#A1A1A6]">/</span> {String(artworks.length).padStart(2, '0')}
           </p>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex min-w-0 items-center gap-2 overflow-x-auto [scrollbar-width:none] sm:gap-3 [&::-webkit-scrollbar]:hidden">
             {artworks.map((artwork, index) => (
               <button
                 key={artwork.id}

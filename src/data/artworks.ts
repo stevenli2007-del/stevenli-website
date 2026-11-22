@@ -2,8 +2,10 @@
 // Phase 7（2026-11-06，Steven 口述）—— Art 页最终形态 = 编辑式图集（editorial photo gallery）。
 //   成品图由 Steven 直接给出（装裱、引号、竖排小注、配画 / 题注全部已在图内），
 //   **照片本身不做任何改动**：不裁切、不拆元素、不加配文，字节级原样入库。
-//   初版三张（2026-11-06）；2026-11-07 追加第四张 gallery-4.jpg（黑底横幅，狼毫小蘭竹题注）。
-//   组件全部由 artworks.length 驱动，新增作品只需在数组末尾追加，无需改 Art.tsx。
+//   初版三张（2026-11-06）；2026-11-07 追加第四张 gallery-4.jpg（黑底横幅，狼毫小蘭竹题注）；
+//   2026-11-21 追加三张木桌实拍 gallery-5~7.jpg（白纸行草 + 墨碟），同样字节级原样、不裁切、不加配文。
+//   组件全部由 artworks.length 驱动，新增作品只需在数组末尾追加，无需改主舞台逻辑
+//   （⚠️ 2026-11-21 起缩略图条加了 min-w-0 overflow-x-auto：幅数变多后窄屏需要可横滚，见 Art.tsx）。
 //   ⚠️ 这是 Steven 对既有两个约定的明确覆盖：
 //      ① Design.md §9.5「两列 masonry、不轮播」；② §9.7「禁止轮播」。
 // 第二版视觉（参考 Swiper Minimal Photo Gallery / Bridget Baker / 摄影集 contact sheet）：
@@ -18,6 +20,9 @@ import gallery1Img from '../assets/art/gallery-1.jpg'
 import gallery2Img from '../assets/art/gallery-2.jpg'
 import gallery3Img from '../assets/art/gallery-3.jpg'
 import gallery4Img from '../assets/art/gallery-4.jpg'
+import gallery5Img from '../assets/art/gallery-5.jpg'
+import gallery6Img from '../assets/art/gallery-6.jpg'
+import gallery7Img from '../assets/art/gallery-7.jpg'
 
 export interface Artwork {
   id: string;
@@ -36,8 +41,8 @@ export const artworksIntro: LocalizedText = {
 }
 
 export const artworksNote: LocalizedText = {
-  en: 'Four works · Cursive script',
-  zh: '四幅作品 · 行草',
+  en: 'Seven works · Cursive script',
+  zh: '七幅作品 · 行草',
 }
 
 // 图集控件文案（WCAG 2.5.3：箭头 aria-label 必须含按钮上的可见字符 ← / →）
@@ -109,6 +114,40 @@ export const artworks: Artwork[] = [
     },
     width: 1920,
     height: 1131,
+    tone: 'dark',
+  },
+  {
+    // 2026-11-21 追加：微信实拍，字节级原样入库；木桌深棕背景 → dark 画框
+    id: 'gallery-5',
+    src: gallery5Img,
+    alt: {
+      en: 'Two sheets of running-cursive calligraphy photographed on a wooden table: a short horizontal scroll reading 明德惟馨 above, two lines of larger characters below, with an inkstone and a paperweight.',
+      zh: '木桌上實拍兩幅行草：上方短橫幅書「明德惟馨」，下方兩行大字；旁置墨碟與紙鎮。',
+    },
+    width: 1440,
+    height: 1080,
+    tone: 'dark',
+  },
+  {
+    id: 'gallery-6',
+    src: gallery6Img,
+    alt: {
+      en: 'A narrow vertical strip of white paper on a wooden table carrying three large running-cursive characters, 逍遙遊 (“Free and Easy Wandering”), with an inkstone at the upper left.',
+      zh: '木桌上窄長宣紙豎寫三個大字「逍遙遊」，左上角一只墨碟。',
+    },
+    width: 1440,
+    height: 1920,
+    tone: 'dark',
+  },
+  {
+    id: 'gallery-7',
+    src: gallery7Img,
+    alt: {
+      en: 'Two vertical strips of running-cursive calligraphy side by side on a wooden table — 山高萬仞 on the right, 只登一步 on the left — with an inkstone and a round paperweight.',
+      zh: '木桌上並列兩條豎幅行草：右「山高萬仞」、左「只登一步」，旁有墨碟與圓形紙鎮。',
+    },
+    width: 1440,
+    height: 1920,
     tone: 'dark',
   },
 ]

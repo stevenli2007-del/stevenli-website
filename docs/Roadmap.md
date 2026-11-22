@@ -318,3 +318,11 @@ Steven 追加第四幅成品图，**仍按 Phase 7 契约：字节级原样、�
 `artworks[]` 末尾加 `gallery-4`（1920×1131 / 114KB / `tone: 'dark'`，黑底白纸横幅 + 朱红引号 + 「狼毫小蘭竹」题注），
 `artworksNote` 改为「四幅作品 · 行草」/ `Four works · Cursive script`。组件零逻辑改动 —— 图集所有控件由数组长度驱动。
 现行规范见 `docs/Design.md §9.5`、数据字典见 `docs/Database.md §3`。
+### Art 图集增补（2026-11-21）
+
+Steven 追加三张微信实拍书法照，**仍按 Phase 7 契约：字节级原样、不裁切、不拆元素、不加配文**。
+`artworks[]` 末尾加 `gallery-5~7`（1440×1080 / 1440×1920 / 1440×1920，共约 942KB；
+木桌 + 白纸行草，`tone: 'dark'`），`artworksNote` 改为「七幅作品 · 行草」/ `Seven works · Cursive script`。
+⚠️ 幅数 4 → 7 后缩略图条在 375px 窄屏会撑出横向溢出，故 `Art.tsx` 给缩略图容器加
+`min-w-0 overflow-x-auto` + 任意属性类隐藏滚动条；主舞台、计数、进度段、箭头仍全部由数组长度驱动、逻辑零改动。
+现行规范见 `docs/Design.md §9.5`、数据字典见 `docs/Database.md §3`。
