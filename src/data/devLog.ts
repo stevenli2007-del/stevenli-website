@@ -241,8 +241,8 @@ export const devLogPosts: DevLogPost[] = [
     category: { en: 'Dev', zh: '开发' },
     title: { en: 'Cal Hacks 13.0 and LastCall', zh: 'Cal Hacks 13.0 和 LastCall' },
     summary: {
-      en: 'I didn’t make the Tech Team, made it to the demo round, and then missed judging anyway by entering the wrong track — with an offline iOS app for my mom’s convenience store.',
-      zh: 'Tech Team 没进，路演进了，却因为赛道选错没能进最终评选；顺便做了个给我妈的便利店用的离线 iOS App。',
+      en: 'From the Tech Team interviews to the Cal Hacks demo round — and an offline iOS app for my mom’s convenience store that actually ran on a phone.',
+      zh: '从 Tech Team 面试走到 Cal Hacks 路演，最后留下一个给我妈便利店做的离线 iOS App：LastCall。',
     },
     body: [
       {
