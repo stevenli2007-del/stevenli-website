@@ -307,6 +307,8 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 
 **验证：** `./node_modules/.bin/tsc --noEmit` + `npm run build` 通过；产物 `index-DBYL4YS8.js` 含 `Six builds` / `六个成果` / 两条项目 id 与 GitHub 链接。
 
+**同日顺序调整（Steven：「LastCall 和 CVMaster 排在 linkedin ai assistant 和 Calhacks 门户前面」）：** 上表「位置」是初版记录，已被本次调整取代 —— 最终展示顺序 **IEEE 论文 → Tempo → LastCall → CVMaster → Cal Hacks 门户 → LinkedIn AI Assistant**（`order` 1~6）。Cal Hacks 与 LinkedIn 的相对先后保持不变，仅顺延为 5/6。仅改 `src/data/projects.ts` 的数组顺序与 `order`，组件与数据接口零改动。
+
 ---
 
 ## 进度追踪

@@ -3,7 +3,7 @@
 // spec §4：outcome（一句话成果）置于标题下，description 随后，Stack 置底。
 //
 // Phase 5（2026-10-09）改写：事实基准 = Steven 的 NVIDIA 申请版简历。
-//   展示顺序（Steven 2026-10-09 拍板）：IEEE 论文 → Tempo → Cal Hacks 门户 → LinkedIn AI Assistant。
+//   展示顺序（Steven 2026-10-09 拍板，2026-11-24 调整）：IEEE 论文 → Tempo → LastCall → CVMaster → Cal Hacks 门户 → LinkedIn AI Assistant。
 //   新增两个 status：beta（Tempo，公开测试 + 持续开发）/ submission（Cal Hacks，个人项目已提交）。
 //   ⚠️ Tempo 是**持续项目**（Steven 2026-10-09 确认），故 description 按简历把功能写全：
 //      学习计划（整学期 + 每日）、交互式学习笔记、考试复习总结、真题自测卷 —— 
@@ -13,6 +13,7 @@
 //   ⚠️ Moyu 已于 2026-09-01 从全站移除，本文件不再有条目。
 // 2026-11-24 内容增补：追加 LastCall（原生 iOS 临期库存 App）与 CVMaster（证据驱动的简历工作台）。
 //   两条均为进行中项目，事实取自各自仓库的 PRD / ROADMAP；只给 GitHub 链接，不臆造 demo 或 App Store 链接。
+//   2026-11-24 Steven 追加指示：这两条排在 Cal Hacks 门户与 LinkedIn AI Assistant 前面（原 5/6 位 → 3/4 位，后两条顺延为 5/6）。
 
 import type { LocalizedText } from './locales'
 
@@ -113,6 +114,48 @@ export const projects: Project[] = [
     order: 2,
   },
   {
+    id: 'lastcall',
+    title: { en: 'LastCall', zh: 'LastCall' },
+    status: 'in-development',
+    outcome: {
+      en: 'A native iOS demo built for Cal Hacks 13.0',
+      zh: '为 Cal Hacks 13.0 做的原生 iOS demo',
+    },
+    description: {
+      en: 'A native iOS app that gives convenience-store staff a live map of what is on each shelf and when it expires. Staff scan barcodes to register items with production dates, shelf life, and a physical slot (container → cell → depth), see near-expiry items first, and scan the full barcode again before removing anything so the shelf map stays in sync. SwiftData keeps everything on the device; VisionKit barcode scanning works offline, and the demo runs on a real iPhone.',
+      zh: '为 Cal Hacks 13.0 做的原生 iOS App，帮便利店店员实时掌握货架上每件商品的位置和临期状态。上架时扫码录入条码、生产日期、保质期与物理格位（容器 → 格子 → 纵深），首页优先显示临期商品；下架时必须再扫一次完整条码核对，同格商品自动前移补位。SwiftData 做本地存储，VisionKit 扫码完全离线，demo 已在真机跑通。',
+    },
+    techStack: ['Swift', 'SwiftUI', 'SwiftData', 'VisionKit'],
+    links: [
+      {
+        label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
+        href: 'https://github.com/stevenli2007-del/LastCall',
+      },
+    ],
+    order: 3,
+  },
+  {
+    id: 'cvmaster',
+    title: { en: 'CVMaster', zh: 'CVMaster' },
+    status: 'in-development',
+    outcome: {
+      en: 'CP1 interactive prototype · evidence-first résumé workflow',
+      zh: 'CP1 交互原型 · 以证据为中心的简历工作流',
+    },
+    description: {
+      en: 'An evidence-first job-application workbench, now at its CP1 prototype stage. Each experience becomes a “star” that gathers links, notes, images, files, and voice as source material; the planned workflow extracts structured facts that stay traceable to their source until the user confirms them, then builds an editable LaTeX résumé from only those confirmed facts for a given job description. CP1 is a working 3D star map with an in-browser preview of material drops; accounts, storage, AI extraction, and PDF export come in later checkpoints.',
+      zh: '一个以证据为中心的求职工作台，目前处于 CP1 原型阶段。目标是让每段经历成为一颗「星球」，收集链接、笔记、图片、文件与语音素材；系统提取可回溯到来源的结构化事实，经用户确认后才用于生成针对职位描述的可编辑 LaTeX 简历。CP1 已实现可交互的 3D 星图与素材投放的内存态预览；账号、存储、AI 提取与 PDF 导出留待后续 checkpoint。',
+    },
+    techStack: ['Next.js', 'React', 'TypeScript', 'React Three Fiber', 'Three.js'],
+    links: [
+      {
+        label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
+        href: 'https://github.com/stevenli2007-del/CVMaster',
+      },
+    ],
+    order: 4,
+  },
+  {
     id: 'cal-hacks-portal',
     title: { en: 'Cal Hacks FA26 Application Portal', zh: 'Cal Hacks FA26 申请门户' },
     status: 'submission',
@@ -135,7 +178,7 @@ export const projects: Project[] = [
         href: 'https://hackportal-tempo-70da.vercel.app',
       },
     ],
-    order: 3,
+    order: 5,
   },
   {
     id: 'linkedin-ai',
@@ -162,48 +205,6 @@ export const projects: Project[] = [
       {
         label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
         href: 'https://github.com/stevenli2007-del/Linkedin-AI-Assistant',
-      },
-    ],
-    order: 4,
-  },
-  {
-    id: 'lastcall',
-    title: { en: 'LastCall', zh: 'LastCall' },
-    status: 'in-development',
-    outcome: {
-      en: 'A native iOS demo built for Cal Hacks 13.0',
-      zh: '为 Cal Hacks 13.0 做的原生 iOS demo',
-    },
-    description: {
-      en: 'A native iOS app that gives convenience-store staff a live map of what is on each shelf and when it expires. Staff scan barcodes to register items with production dates, shelf life, and a physical slot (container → cell → depth), see near-expiry items first, and scan the full barcode again before removing anything so the shelf map stays in sync. SwiftData keeps everything on the device; VisionKit barcode scanning works offline, and the demo runs on a real iPhone.',
-      zh: '为 Cal Hacks 13.0 做的原生 iOS App，帮便利店店员实时掌握货架上每件商品的位置和临期状态。上架时扫码录入条码、生产日期、保质期与物理格位（容器 → 格子 → 纵深），首页优先显示临期商品；下架时必须再扫一次完整条码核对，同格商品自动前移补位。SwiftData 做本地存储，VisionKit 扫码完全离线，demo 已在真机跑通。',
-    },
-    techStack: ['Swift', 'SwiftUI', 'SwiftData', 'VisionKit'],
-    links: [
-      {
-        label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
-        href: 'https://github.com/stevenli2007-del/LastCall',
-      },
-    ],
-    order: 5,
-  },
-  {
-    id: 'cvmaster',
-    title: { en: 'CVMaster', zh: 'CVMaster' },
-    status: 'in-development',
-    outcome: {
-      en: 'CP1 interactive prototype · evidence-first résumé workflow',
-      zh: 'CP1 交互原型 · 以证据为中心的简历工作流',
-    },
-    description: {
-      en: 'An evidence-first job-application workbench, now at its CP1 prototype stage. Each experience becomes a “star” that gathers links, notes, images, files, and voice as source material; the planned workflow extracts structured facts that stay traceable to their source until the user confirms them, then builds an editable LaTeX résumé from only those confirmed facts for a given job description. CP1 is a working 3D star map with an in-browser preview of material drops; accounts, storage, AI extraction, and PDF export come in later checkpoints.',
-      zh: '一个以证据为中心的求职工作台，目前处于 CP1 原型阶段。目标是让每段经历成为一颗「星球」，收集链接、笔记、图片、文件与语音素材；系统提取可回溯到来源的结构化事实，经用户确认后才用于生成针对职位描述的可编辑 LaTeX 简历。CP1 已实现可交互的 3D 星图与素材投放的内存态预览；账号、存储、AI 提取与 PDF 导出留待后续 checkpoint。',
-    },
-    techStack: ['Next.js', 'React', 'TypeScript', 'React Three Fiber', 'Three.js'],
-    links: [
-      {
-        label: { en: 'Source on GitHub', zh: 'GitHub 源代码' },
-        href: 'https://github.com/stevenli2007-del/CVMaster',
       },
     ],
     order: 6,

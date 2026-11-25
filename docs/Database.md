@@ -73,6 +73,7 @@ export interface Project {
 - LastCall：Cal Hacks 13.0 的原生 iOS 临期库存 demo；SwiftUI / SwiftData / VisionKit，本地存储 + 设备端扫码，真机跑通。仓库无 App Store 页面，不臆造链接。
 - CVMaster：以证据为中心的求职工作台，**CP1 只实现 3D 星图与内存态素材预览**；账号 / 存储 / AI 提取 / PDF 导出是后续 checkpoint，文案不得写成已实现。仓库无公开 demo 链接，仅给 GitHub。
 - `projectsIntro` 四→六：英文「Six builds across … native / AI-assisted tools」/ 中文「六个成果……原生与 AI 辅助工具」。
+- **同日顺序调整（Steven：「LastCall 和 CVMaster 排在 linkedin ai assistant 和 Calhacks 门户前面」）：** 最终 `order` 1 = `ieee-paper`、2 = `tempo`、3 = `lastcall`、4 = `cvmaster`、5 = `cal-hacks-portal`、6 = `linkedin-ai`。数组顺序与 `order` 同步；Cal Hacks 与 LinkedIn 的相对先后未动，仅由 3/4 顺延为 5/6。
 
 ## 2. `experience.ts`
 
