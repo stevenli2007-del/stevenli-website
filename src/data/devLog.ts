@@ -28,6 +28,10 @@ import imgGuitarPedalBreadboard from '../assets/dev-log/guitar-pedal-breadboard.
 import imgGuitarPedalSoldering from '../assets/dev-log/guitar-pedal-soldering.jpg'
 import imgGuitarPedalSchematicV2 from '../assets/dev-log/guitar-pedal-schematic-v2.jpg'
 import imgGuitarPedalPcbFinal from '../assets/dev-log/guitar-pedal-pcb-final.jpg'
+import imgCalHacksHackportalRepo from '../assets/dev-log/cal-hacks-hackportal-repo.jpg'
+import imgCalHacksVenue from '../assets/dev-log/cal-hacks-venue.jpg'
+import imgLastcallXcodeIphone from '../assets/dev-log/lastcall-xcode-iphone.jpg'
+import imgLastcallDevpost from '../assets/dev-log/lastcall-devpost.jpg'
 
 // Phase 6：正文块。段落用 p，小节标题用 h，图片用 img（双语 alt 必填）。
 export type DevLogBlock =
@@ -220,6 +224,153 @@ export const devLogPosts: DevLogPost[] = [
         alt: {
           en: 'The Ramesh Lab group page at Berkeley Lab: a team photo under the heading “A Team Approach at the Crossroads of Science & Engineering”.',
           zh: 'Berkeley Lab 的 Ramesh Lab 课题组主页：团队合影，标题是「A Team Approach at the Crossroads of Science & Engineering」。',
+        },
+      },
+    ],
+  },
+  {
+    // 第五篇（2026-11-24 上线）：Cal Hacks 13.0 + LastCall。
+    // 来源：Steven 2026-11-24 口述原稿 + LastCall 仓库 docs/PRD.md、DEVPOST.md、TECHSTACK.md、源码，
+    //   以及 Devpost 项目页（https://devpost.com/software/lastcall-nswo04）。
+    // ⚠️ 口述里的队友（大二，Kevin）按 Roadmap 写作契约「文章内不点名学生」处理，只写「大二的同学」。
+    // 技术细节只写已实现：SwiftUI / SwiftData / VisionKit DataScanner、本地存储、Calendar 日期归一、
+    //   条码字符串存储、移除事务 + 同格补位；临期挂牌卡已有，但支付 / 线上售卖仍是计划，不写成已实现。
+    // 四张图按 Steven @image#1~#4 落段。#1 实际是 HackPortal 仓库截图，图注如实说明是当时交的 take-home。
+    id: 'lastcall-cal-hacks-2026',
+    date: '2026-10',
+    category: { en: 'Dev', zh: '开发' },
+    title: { en: 'Cal Hacks 13.0 and LastCall', zh: 'Cal Hacks 13.0 和 LastCall' },
+    summary: {
+      en: 'I didn’t make the Tech Team, made it to the demo round, and then missed judging anyway by entering the wrong track — with an offline iOS app for my mom’s convenience store.',
+      zh: 'Tech Team 没进，路演进了，却因为赛道选错没能进最终评选；顺便做了个给我妈的便利店用的离线 iOS App。',
+    },
+    body: [
+      {
+        type: 'p',
+        text: {
+          en: 'Cal Hacks was the first club I wanted to join after I got to Berkeley. Getting on the Tech Team is hard — it seems they take only one or two people a year. I made it to the final interview round and submitted the take-home, but still didn’t get in. The Tech Director told me to come as a hacker this year and apply again next year.',
+          zh: 'Cal Hacks 是我到伯克利之后第一个想进的社团。Tech Team 不好进，好像一年只招一两个。我一路进了最后一轮面试，take-home 也交了，最后还是没选上。Tech Director 的意思是：今年先作为 hacker 来参加 Cal Hacks，明年再申请。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgCalHacksHackportalRepo,
+        width: 880,
+        height: 482,
+        alt: {
+          en: 'GitHub page for the public hackportal repo, described as a Cal Hacks take-home miniature hackathon application portal, with a live demo link and recent commits.',
+          zh: '公开的 hackportal 仓库页面，简介写着 Cal Hacks take-home、简化版黑客松申请门户，右侧有在线演示链接和最近提交。',
+        },
+        caption: {
+          en: 'The take-home I submitted: a miniature hackathon application portal.',
+          zh: '当时交的 take-home：一个简化版黑客松申请门户。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Anyway, I went to “the world’s largest collegiate hackathon”. The vibe: absolutely wrecked. I’d been thinking about doing TreeHacks too, but Cal Hacks killed that idea fast. Nothing burns quite like watching a big chunk of code fall apart all at once, and the venue was loud enough to turn it into a two-front attack — brain and body.',
+          zh: 'Anyway，我就来参加这个「世界上最大的大学生黑客松」了。体感就一个词：超级无敌累。我本来还想接着去 TreeHacks，Cal Hacks 一趟下来直接打消了这个念头。代码大批量跑崩的时候尤其烧心，会场又人声嘈杂，精神和身体双重攻击。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgCalHacksVenue,
+        width: 495,
+        height: 880,
+        alt: {
+          en: 'The hackathon venue: long rows of shared tables packed with hackers and laptops under a high, dark steel-truss ceiling.',
+          zh: '黑客松现场：高高的深色钢桁架天花板下，一长排一长排的共享桌上坐满了人和笔记本电脑。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'My teammate was a sophomore, and really easy to work with. We built LastCall. The idea came from a small headache my mom has: she runs a convenience store, and with a shelf full of nearly identical products, she needed a fast way to catch the ones going out of date before a customer picked them up.',
+          zh: '这次的队友是一个大二的同学，人特别好。我们做的东西叫 LastCall，灵感来自我妈的一个小麻烦：她开着一家便利店，店里有海量长得差不多的商品，她需要一个够快的方法把临期和过期的找出来，别让顾客买到。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'I built it as a native iOS app in SwiftUI. We thought about a web version, but native won mostly because of scanning: VisionKit’s DataScannerViewController is built into the system, runs on-device, and works fully offline. SwiftUI handled the UI, SwiftData handled persistence, and the whole demo — register, check what’s near expiry, remove — ran in airplane mode with zero third-party dependencies.',
+          zh: '我这次用 SwiftUI 做原生 iOS。前面纠结过要不要做网页版，最后选原生，主要是扫码：VisionKit 的 DataScannerViewController 是系统自带的，设备端就能跑，完全离线；SwiftUI 负责界面，SwiftData 做本地存储，整个 demo 飞行模式下也能走完上架、查临期、下架的全流程，一个第三方依赖都没引。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'The biggest takeaway was Apple’s dev ecosystem: once Developer Mode is on, Xcode runs the app straight onto the phone. No SDK wrangling, no server, and the scanner comes with the OS. Getting a real device to run it felt like a big deal beforehand; in the end the signing setup was the main thing to get through.',
+          zh: '最大的收获还得是 Apple 的开发生态：iPhone 打开开发者模式以后，Xcode 里点 Run，App 就直接跑到手机上。不用配 SDK，不用搭服务器，扫码能力也是系统免费给的。真机能跑起来这件事，以前觉得挺遥远，做完发现主要卡在签名那一步。',
+        },
+      },
+      {
+        type: 'img',
+        src: imgLastcallXcodeIphone,
+        width: 880,
+        height: 542,
+        alt: {
+          en: 'Xcode with an iPhone device selected, showing the CellBox SwiftUI view and shelf-slot logic in the editor while the Canvas is paused.',
+          zh: 'Xcode 里选中了 iPhone 设备，编辑器中是 CellBox 这个 SwiftUI 视图和货架格子的逻辑，右侧 Canvas 处于暂停状态。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'The hard part wasn’t deciding whether something was expired — it was keeping the digital record aligned with the physical shelf. Each item gets a container → slot → depth position, like A1 or A2. Scan the barcode, enter the production date and shelf life, and the app derives the expiry date. Taking something off requires scanning the full barcode again; the removal is recorded and the items behind it shift forward in the same slot. Date math uses Calendar with start-of-day normalization, because adding 86,400 seconds breaks across daylight-saving changes. Barcodes are stored as strings, otherwise a code like 0641234567 quietly loses its leading zero.',
+          zh: '真正麻烦的不是判断「过期了没」，而是让数字地址和货架对得上。我们把每件商品记到容器 → 格子 → 纵深，比如 A1、A2；上架扫条码、填生产日期和保质期，过期日期自动算；下架要再扫一次完整条码核对，移除记录写进去，同格后面的商品自动往前补位。日期不能用 86400 秒硬加，夏令时会出错，全部走 Calendar 并按当天 00:00 归一；条码也必须按字符串存，不然 0641234567 这种前导零会直接掉。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Then we submitted on Devpost, and this was my biggest mistake of the event: to be judged, you have to enter the main Cal Hacks track first; only then are you also considered for sponsor tracks. I only entered Anthropic’s “Best Hack for Humanity” and skipped the main track. So even though we made it to the demo round, we were out of judging. Devpost: https://devpost.com/software/lastcall-nswo04',
+          zh: '做完之后我们上传了 Devpost。这里是本次最大的失误：想被评选，必须先投 Cal Hacks 主赛道，之后才会同时被赞助商赛道考虑。我只投了 Anthropic 的「Best Hack for Humanity」，没投主赛道。结果就是，项目即使进了路演 round，最后也没进评选。Devpost 在这：https://devpost.com/software/lastcall-nswo04',
+        },
+      },
+      {
+        type: 'img',
+        src: imgLastcallDevpost,
+        width: 880,
+        height: 481,
+        alt: {
+          en: 'The LastCall Devpost submission page: a demo video at the top, submitted to Cal Hacks 13.0, with Youcheng Li listed as a creator and the Inspiration section below.',
+          zh: 'LastCall 的 Devpost 提交页：上方是演示视频，Submitted to 写着 Cal Hacks 13.0，创作者列表里有 Youcheng Li，下方是 Inspiration 段落。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'Anyway, the next part matters more. Apple’s Swift Student Challenge is coming up, and I’m going to use it to keep working on LastCall. Three things I want to push over winter break:',
+          zh: 'Anyway，说一下我接下来的安排，这个最重要：苹果的 Swift Student Challenge 马上要开了，我打算参加，继续打磨 LastCall。寒假期间主要想推三个方向：',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '1. Cut the input cost. Right now you scan one item, then type in its production date and shelf life, one by one. That’s tedious enough to kill adoption. What I want next: keep the API key on the server, call a model to read the date off a package photo, and leave the user with a quick confirmation. On-device Vision OCR is another path that needs no cloud. Either way, scanning shouldn’t be followed by a wall of typing.',
+          zh: '1. 把输入成本砍下来。现在是扫一个商品、再手动填生产日期和保质期，一件一件来，成本高到会直接把使用意愿压下去。下一步想的是：站内放 API key 调 AI，让它从包装照片里把日期读出来，人只需要确认一下；用 Apple 的 Vision 在设备上做 OCR 也是一条不用上云的路。总之扫码之后别再让我手打一堆字。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '2. Bring in hardware. The first idea is generating and printing QR stickers: one on each item or slot, so scanning takes you straight to that exact product instead of guessing which of ten identical bottles is the one you scanned. The Cal Hacks demo proved the software loop works; next I want to make finding things cheaper.',
+          zh: '2. 逐步安排硬件。初步想的是配套二维码的生成和打印：每件商品或每个格位贴一张码，想知道单个商品的信息，扫一下就跳到那一件，而不是对着一排长得一样的商品猜哪瓶是哪瓶。Cal Hacks 的 demo 证明纯软件链路能跑，下一步是把查找成本再压低。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: '3. Actually sell the near-expiry stock. There’s already a Deals tab in the app that turns a near-expiry item into a card with a discounted price and its shelf location, but the actual selling part isn’t there — no checkout, no online orders, no transfers between stores. I want to close that loop: get the stock discounted and sold early instead of writing it off on expiry day.',
+          zh: '3. 临期产品二次售卖。现在 App 里已经有个临期专区，能把快过期的商品挂成一张带折后价和取货位置的卡片；但真正的售卖还没有，支付、线上下单、门店之间调货都没接。想把它做成一条完整的链路：卖不掉的临期货，早点折价卖出去，而不是到点直接报损。',
+        },
+      },
+      {
+        type: 'p',
+        text: {
+          en: 'I didn’t get into the Tech Team and I didn’t get judged at Cal Hacks. But LastCall came out of a real problem my mom has, and it ran on a real phone. I’ll take that.',
+          zh: 'Cal Hacks 这趟，Tech Team 没进，奖也没评上。但 LastCall 是从我妈的真实麻烦里长出来的东西，而且已经在真机上跑通了。这个我认。',
         },
       },
     ],
