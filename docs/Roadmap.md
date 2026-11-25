@@ -292,6 +292,23 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 
 ---
 
+## Projects 增补：LastCall + CVMaster（2026-11-24）
+
+**触发：** Steven「把 LastCall 和 CVMaster 这两个项目也推到我个人网站的项目里」。
+
+| 项 | 决定 |
+|---|---|
+| 位置 | `projects[]` 末尾追加，`order` 5 = `lastcall`，6 = `cvmaster`；展示顺序仍是 IEEE → Tempo → Cal Hacks 门户 → LinkedIn → LastCall → CVMaster |
+| 状态 | 两条均用既有 `in-development`（原生 iOS demo 真机跑通但未上架；CVMaster 仅 CP1 原型），不新增 status |
+| 链接 | 两条都只给 GitHub 源码，不臆造 App Store / demo 链接 |
+| 文案事实 | LastCall 取自其 `docs/PRD.md` / `DEVPOST.md` / `ROADMAP.md`；CVMaster 取自 `docs/PRD.md`（v0.1，明确 CP1 不上传、不持久化、不调用 AI）与 `package.json` |
+
+`projectsIntro` 由四→六；`docs/Database.md` §1 同步记录增补口径与「不得把后续 checkpoint 写成已实现」的护栏。组件与数据接口零改动。
+
+**验证：** `./node_modules/.bin/tsc --noEmit` + `npm run build` 通过；产物 `index-DBYL4YS8.js` 含 `Six builds` / `六个成果` / 两条项目 id 与 GitHub 链接。
+
+---
+
 ## 进度追踪
 
 | Phase | 状态 | 完成时间 |

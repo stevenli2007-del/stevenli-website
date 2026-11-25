@@ -18,7 +18,7 @@ export interface Project {
   description: LocalizedText;   // 卡片详细描述（PRD 4.3 的英文长句）
   techStack: string[];          // 技术栈（专有名词，不翻译）
   links: ProjectLink[];         // **具名链接数组**（替代原 links 对象）
-  order: number;                // 展示顺序，1-4（Phase 5 起四张卡）
+  order: number;                // 展示顺序，1-6（Phase 5 起四张卡；2026-11-24 追加至六张）
 }
 ```
 
@@ -66,6 +66,13 @@ export interface Project {
 - Venue：2025 IEEE 53rd Photovoltaic Specialists Conference (PVSC)，Montreal, QC, Canada
 - 会议日期：2025-06-08 ~ 06-13（Montreal）；**发表日期以 IEEE Xplore 官方「Date Added to Xplore」为准：2025-08-29**
   - 注：PRD 原记 2025-09-03，2026-08-30 经 Steven 确认以官方日期为准，已统一为 2025-08-29
+
+**2026-11-24 内容增补（Steven：「把 LastCall 和 CVMaster 也推到项目里」）：**
+- 条目 4 → **6**，`order` 5 = `lastcall`，6 = `cvmaster`；两条均沿用既有 `in-development` 状态，不新增字段 / 状态。
+- 事实来源：两个项目本地仓库的 `docs/PRD.md`、`docs/ROADMAP.md`、`docs/DEVPOST.md`（LastCall）与 `package.json`（CVMaster）。
+- LastCall：Cal Hacks 13.0 的原生 iOS 临期库存 demo；SwiftUI / SwiftData / VisionKit，本地存储 + 设备端扫码，真机跑通。仓库无 App Store 页面，不臆造链接。
+- CVMaster：以证据为中心的求职工作台，**CP1 只实现 3D 星图与内存态素材预览**；账号 / 存储 / AI 提取 / PDF 导出是后续 checkpoint，文案不得写成已实现。仓库无公开 demo 链接，仅给 GitHub。
+- `projectsIntro` 四→六：英文「Six builds across … native / AI-assisted tools」/ 中文「六个成果……原生与 AI 辅助工具」。
 
 ## 2. `experience.ts`
 
