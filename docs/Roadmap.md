@@ -311,6 +311,19 @@ Tempo `docs/Database.md` 里被标为 **Phase 2**，Bud 起初以「无实现证
 
 ---
 
+## 简历 PDF 上线（2026-11-25）
+
+**触发：** Steven 给 `~/Desktop/Steven CV.pdf`，「把我的简历也推送到网站上」。
+
+| 项 | 决定 |
+|---|---|
+| 文件 | 原样复制到 `public/steven-li-resume.pdf`（2 页英文，102KB，SHA-256 `e090da67…aa5bb63a`），不重排、不翻译、不生成新 PDF |
+| 入口 | `/contact` 邮箱下方一行内联链接；中英分别 `Résumé (PDF)` / `简历（PDF）`，新标签页打开 |
+| 边界 | 不改六项导航、不加第七条路由、Hero 仍是双 CTA；文案住 `src/data/contact.ts` 的 `resumeLink`，组件零硬编码 |
+| 验收 | 构建后 `dist/steven-li-resume.pdf` 与源文件字节一致；线上 GET 200 且 `content-type: application/pdf` |
+
+---
+
 ## 进度追踪
 
 | Phase | 状态 | 完成时间 |

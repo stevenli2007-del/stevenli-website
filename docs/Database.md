@@ -159,8 +159,9 @@ export interface ContactLink {
 }
 ```
 
-同文件另导出：`contactTitle` / `contactIntro` / `emailAction` / `projectLabel` / `contactLinks`。
+同文件另导出：`contactTitle` / `contactIntro` / `emailAction` / `projectLabel` / `contactLinks` / `resumeLink`。
 
+- **2026-11-25 简历入口：** `resumeLink: { label: LocalizedText; href: string }` 是独立的 PDF 链接数据，不属于 `ContactLink`（不混进 profile / project 分组）。PDF 原样放 `public/steven-li-resume.pdf`（源：`~/Desktop/Steven CV.pdf`，2 页英文，SHA-256 `e090da67…aa5bb63a`），Contact 页在邮箱下方渲染为内联链接；**不新增路由、不改六项导航、不动 Hero 双 CTA**。文案零硬编码。
 - **Task 4-9 变更：** `group` 是 spec §4（P1）「Chrome Web Store 挂在 Project 标签下」的落地方式 ——
   分组语义必须住数据层，因为**组件不得硬编码「项目」二字**（`projectLabel` 同理）
 - 组件据此 `filter` 成两组：`profile` → 内联文字链接；`project` → muted 标签行
@@ -414,3 +415,4 @@ category `Lab`，全文由 Steven 口述采访整理（Bud 提问 → Steven 回
   「七幅作品 · 行草」/ `Seven works · Cursive script`；§3 素材清单同步。
   ⚠️ 幅数 4 → 7 后缩略图条会在 375px 窄屏撑出横向溢出，故 `Art.tsx` 缩略图容器加
   `min-w-0 overflow-x-auto` + 任意属性类隐藏滚动条；主舞台 / 计数 / 进度段 / 箭头仍由数组长度驱动、逻辑零改动。
+- **2026-11-25（Bud，简历 PDF 上线）：** `public/steven-li-resume.pdf`（由 `~/Desktop/Steven CV.pdf` 原样复制，2 页英文，SHA-256 `e090da67…aa5bb63a`）；`contact.ts` 新增 `resumeLink`（LocalizedText 文案 + href），`Contact.tsx` 在邮箱下方渲染新标签页打开的内联链接。不新增路由 / 导航项、Hero 双 CTA 不变。

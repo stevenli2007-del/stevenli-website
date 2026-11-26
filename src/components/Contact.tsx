@@ -5,6 +5,7 @@ import {
   contactIntro,
   emailAction,
   projectLabel,
+  resumeLink,
 } from '../data/contact'
 import { useLocale } from '../lib/router'
 import type { Locale } from '../data/locales'
@@ -17,6 +18,7 @@ import type { ContactLink } from '../data/contact'
 // 外部链接一律 `target="_blank" rel="noreferrer"`。
 // 分组：GitHub / LinkedIn 是联系方式；Chrome Web Store 是项目入口，按 spec §4（P1）
 // 挂在 muted 的「项目」标签下，与联系方式区分。
+// 2026-11-25：邮箱下追加简历 PDF 内联链接（resumeLink），不新增路由 / 导航项。
 
 function OutboundLink({ link, locale }: { link: ContactLink; locale: Locale }) {
   return (
@@ -50,6 +52,13 @@ export default function Contact() {
         </a>
 
         <p className="mt-3 text-sm text-[#6E6E73]">{contactInfo.email}</p>
+
+        {/* 2026-11-25：简历 PDF 入口。文案与 href 都在数据层，组件不硬编码；不新增导航项。 */}
+        <p className="mt-4 text-sm font-medium text-[#0071E3]">
+          <a href={resumeLink.href} target="_blank" rel="noreferrer" className="hover:underline">
+            {resumeLink.label[locale]}
+          </a>
+        </p>
 
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[#0071E3]">
           {profiles.map((link) => (

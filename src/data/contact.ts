@@ -29,6 +29,13 @@ export const emailAction: LocalizedText = { en: 'Email Youcheng', zh: '发送邮
 // spec §4 Contact（P1）：Chrome Web Store 属「项目」而非联系方式，需挂在 Project 标签之下
 export const projectLabel: LocalizedText = { en: 'Project', zh: '项目' }
 
+// 2026-11-25：简历 PDF 放 public/ 根目录，构建时原样复制到 dist/。
+// 文案住数据层（组件零硬编码）；不新增路由、不动六项导航与 Hero 双 CTA。
+export const resumeLink: { label: LocalizedText; href: string } = {
+  label: { en: 'Résumé (PDF)', zh: '简历（PDF）' },
+  href: '/steven-li-resume.pdf',
+}
+
 export const contactInfo: ContactInfo = {
   email: 'stevenli2007@berkeley.edu',
   github: 'https://github.com/stevenli2007-del',
